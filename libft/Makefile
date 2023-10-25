@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+         #
+#    By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 19:33:37 by andre-da          #+#    #+#              #
-#    Updated: 2023/10/21 15:28:51 by andre-da         ###   ########.fr        #
+#    Updated: 2023/10/25 19:56:18 by andrealbuqu      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ $(NAME): $(OBJS)
 		ar rs $(NAME) $(OBJS)
 
 clean:
-		rm -f $(OBJS) $(BONUS_OBJS)
+		rm -rf $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-		rm -f $(NAME)
+		rm -rf $(NAME)
 
 re: fclean $(NAME)
 
