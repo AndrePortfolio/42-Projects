@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+         #
+#    By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 19:33:37 by andre-da          #+#    #+#              #
-#    Updated: 2023/10/25 19:56:18 by andrealbuqu      ###   ########.fr        #
+#    Updated: 2023/10/26 22:12:30 by andre-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-FLAGS = -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 			ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
 			ft_memset.c ft_strchr.c ft_strchr.c ft_strdup.c ft_strlcat.c ft_strlcpy.c \
@@ -28,7 +29,6 @@ BONUS_OBJS = $(BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		cc -c $(FLAGS) $(FILES)
 		ar rs $(NAME) $(OBJS)
 
 clean:

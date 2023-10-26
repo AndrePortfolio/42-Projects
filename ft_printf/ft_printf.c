@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/25 17:57:47 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/10/26 21:53:12 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	ft_format(const char *format, va_list args, int i, int j);
+static int	ft_print_char(int c, int i);
+static int	ft_print_string(char *str, int i);
+static int	ft_print_number(int nbr, int i);
+static int	ft_print_unumber(int nbr, int i);
+static int	ft_print_hexnumber(int nbr, int i, char c);
+static int	ft_print_hex_pnumber(long nbr, int i);
+static int	ft_print_address(void	*address, int i);
 
 int	ft_printf(const char *format, ...)
 {
@@ -33,6 +42,7 @@ int	ft_printf(const char *format, ...)
 		j++;
 	}
 	va_end(args);
+	// printf("%d\n", i);
 	return (i);
 }
 
@@ -50,8 +60,8 @@ static int	ft_format(const char *format, va_list args, int i, int j)
 		i = ft_print_hexnumber(va_arg(args, int), i, 'x');
 	if (format[j] == 'X')
 		i = ft_print_hexnumber(va_arg(args, int), i, 'X');
-	/* if (format[j] == 'p')
-		i = ft_print_address(va_arg(args, void *), i); */
+	if (format[j] == 'p')
+		i = ft_print_address(va_arg(args, void *), i);
 	if (format[j] == '%')
 	{
 		write(1, &format[j], 1);
@@ -146,10 +156,40 @@ static int	ft_print_hexnumber(int nbr, int i, char c)
 	return (i);
 }
 
-/* static int	ft_print_address(void	*address, int i)
+static int	ft_print_hex_pnumber(long nbr, int i)
 {
+	unsigned long	x;
 
-} */
+	x = nbr;
+	if (x >= 16)
+	{
+		i = ft_print_hex_pnumber(x / 16, i);
+		i = ft_print_hex_pnumber(x % 16, i);
+	}
+	else
+	{
+		if (x <= 9)
+			i = ft_print_char(x + '0', i);
+		else
+			i = ft_print_char(x + 'a' - 10, i);
+	}
+	return (i);
+}
+
+static int	ft_print_address(void	*address, int i)
+{
+	if (address == NULL)
+	{
+		i = ft_print_string("(nil)", i);
+		return (i);
+	}
+	else
+	{
+		write(1, "0x", 2);
+		i = ft_print_hex_pnumber((long)(uintptr_t)address, i);
+		return (i + 2);
+	}
+}
 
 /* int	main(void)
 {
@@ -159,7 +199,15 @@ static int	ft_print_hexnumber(int nbr, int i, char c)
 	char	name[] = "ndré";
 	int		age = 23;
 	char	c = 'A';
+	int		r, t;
 
-	printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-	ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-} */
+	r = printf(" %p \n", 16);
+	printf("%d\n", r);
+	t = ft_printf(" %p \n", 16);
+	printf("%d\n", t);
+
+
+	//printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+	//ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+}
+ */

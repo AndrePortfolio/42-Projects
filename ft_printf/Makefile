@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+         #
+#    By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/21 17:32:01 by andre-da          #+#    #+#              #
-#    Updated: 2023/10/25 17:44:12 by andrealbuqu      ###   ########.fr        #
+#    Created: 2023/10/26 22:12:51 by andre-da          #+#    #+#              #
+#    Updated: 2023/10/26 22:12:52 by andre-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,13 @@ OBJS = $(FILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		make -C ./libft
-		cp libft/libft.a $(NAME)
 		cc -c $(FLAGS) $(FILES)
-		ar rs $(NAME) $(OBJS)
+		ar rcs $(NAME) $(OBJS)
 
 clean:
-		$(MAKE) clean -C ./libft
 		rm -rf $(OBJS)
 
 fclean: clean
-		$(MAKE) fclean -C ./libft
 		rm -rf $(NAME)
 
 re: fclean $(NAME)

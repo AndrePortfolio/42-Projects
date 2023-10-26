@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/25 17:58:55 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/10/26 21:00:58 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
+# include <stdint.h>
 
-int			ft_printf(const char *, ...);
-static int	ft_format(const char *format, va_list args, int i, int j);
-static int	ft_print_char(int c, int i);
-static int	ft_print_string(char *str, int i);
-static int	ft_print_number(int nbr, int i);
-static int	ft_print_unumber(int nbr, int i);
-static int	ft_print_hexnumber(int nbr, int i, char c);
-// static int	ft_print_address(void	*address, int i);
+int	ft_printf(const char *format, ...);
 
 #endif
