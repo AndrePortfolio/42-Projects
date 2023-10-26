@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/26 21:53:12 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:16:21 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ft_printf(const char *format, ...)
 		j++;
 	}
 	va_end(args);
-	// printf("%d\n", i);
 	return (i);
 }
 
