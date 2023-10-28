@@ -13,7 +13,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = ft_printf.c
+FILES = ft_printf.c ft_help.c
 
 OBJS = $(FILES:.c=.o)
 
