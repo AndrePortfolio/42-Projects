@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/05 19:33:37 by andre-da          #+#    #+#              #
-#    Updated: 2023/10/28 15:49:59 by andre-da         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libft.a
 
 CC = cc
@@ -44,6 +32,6 @@ fclean: clean
 re: fclean $(NAME)
 
 bonus: $(OBJS) $(BONUS_OBJS)
-		ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+		ar rcs $(NAME) $(BONUS_OBJS)
 
 .PHONY: all clean fclean re bonus
