@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 16:28:54 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:51:26 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ int	ft_print_hexnumber(int nbr, int i, char c)
 	unsigned int	x;
 
 	x = nbr;
-	if (x == 0)
-		i = ft_print_char('0', i);
-	else if (x >= 16)
+	if (x >= 16)
 	{
 		i = ft_print_hexnumber(x / 16, i, c);
 		i = ft_print_hexnumber(x % 16, i, c);

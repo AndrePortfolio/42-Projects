@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 16:26:47 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:51:14 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	j = 0;
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	while (format[j])
 	{
@@ -117,13 +119,12 @@ int	ft_print_number(int nbr, int i)
 	char	c = 'A';
 	int		r, t;
 
-	r = printf(" %p \n", 16);
-	printf("%d\n", r);
-	t = ft_printf(" %p \n", 16);
-	printf("%d\n", t);
+	r = printf("", 0);
+	printf("\nFunction: %d\n", r);
+	t = ft_printf("", 0);
+	ft_printf("\nMy Function: %d\n", t);
 
 
 	//printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
 	//ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-}
- */
+} */

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 18:52:28 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 21:29:45 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:14:24 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ char	*get_next_line(int fd)
 	return (buffer);
 }
 
-#include <stdio.h>
-
-int	main(void)
+/* int	main(void)
 {
 	int		fd;
 	char	path[] = "test.txt";
@@ -58,10 +56,10 @@ int	main(void)
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		printf("line%i: %s\n", i, str);
+		printf("%s", str);
 		free(str);
 		i++;
 	}
 	close(fd);
 	return (0);
-}
+} */
