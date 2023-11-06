@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 18:52:26 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 18:52:27 by andre-da         ###   ########.fr       */
+/*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
+/*   Updated: 2023/11/06 15:57:23 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

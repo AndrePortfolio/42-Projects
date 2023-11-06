@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 18:52:28 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 21:29:45 by andre-da         ###   ########.fr       */
+/*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
+/*   Updated: 2023/11/06 15:58:26 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
+#include <get_next_line.h>
 
 char	*get_next_line(int fd)
 {
@@ -43,9 +38,7 @@ char	*get_next_line(int fd)
 	return (buffer);
 }
 
-#include <stdio.h>
-
-int	main(void)
+/* int	main(void)
 {
 	int		fd;
 	char	path[] = "test.txt";
@@ -58,10 +51,10 @@ int	main(void)
 		str = get_next_line(fd);
 		if (str == NULL)
 			break ;
-		printf("line%i: %s\n", i, str);
+		printf("%s", str);
 		free(str);
 		i++;
 	}
 	close(fd);
 	return (0);
-}
+} */

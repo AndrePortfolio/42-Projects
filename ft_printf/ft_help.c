@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/06 15:28:41 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
+/*   Updated: 2023/11/06 15:57:05 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ int	ft_print_hexnumber(int nbr, int i, char c)
 	unsigned int	x;
 
 	x = nbr;
-	if (x == 0)
-		i = ft_print_char('0', i);
-	else if (x >= 16)
+	if (x >= 16)
 	{
 		i = ft_print_hexnumber(x / 16, i, c);
 		i = ft_print_hexnumber(x % 16, i, c);
