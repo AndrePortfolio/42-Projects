@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 16:26:47 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:49:31 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,14 @@ int	ft_print_number(int nbr, int i)
 	char	name[] = "ndré";
 	int		age = 23;
 	char	c = 'A';
-	int		r, t;
 
-	r = printf(" %p \n", 16);
-	printf("%d\n", r);
-	t = ft_printf(" %p \n", 16);
-	printf("%d\n", t);
+	printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+	ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+	ft_printf("\n");
+	int		r = 0;
 
-
-	//printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-	//ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-}
- */
+	printf("function: %", r);
+	printf("\n%d\n", r);
+	ft_printf("mine: %", r);
+	ft_printf("\n%d\n", r);
+} */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_help.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:54 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/28 16:28:54 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:28:41 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_print_address(void	*address, int i)
 {
 	if (address == NULL)
 	{
-		i = ft_print_string("(nil)", i);
+		i = ft_print_string("0x0", i);
 		return (i);
 	}
 	else
