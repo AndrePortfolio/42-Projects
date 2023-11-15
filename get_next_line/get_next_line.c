@@ -6,55 +6,59 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/06 15:58:26 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/11/15 15:04:55 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
+
+static char	*get_line(char **rest);
 
 char	*get_next_line(int fd)
 {
-	int		bytes;
-	char	*buffer;
-	int		i;
-	int		c;
+	static char	*rest_line;
+	char		buffer[BUFFER_SIZE + 1];
+	char		*temp;
+	ssize_t		bytes_read;
 
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	bytes = read(fd, &c, 1);
-	i = 0;
-	while (bytes > 0)
-	{
-		buffer[i] = c;
-		if (c == '\n' || c == '\0')
-			break ;
-		bytes = read(fd, &c, 1);
-		i++;
-	}
-	if (i == 0 || bytes < 0)
-	{
-		free(buffer);
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	temp = ft_strchr(rest_line, '\n');
+	bytes_read = 1;
+	while (!rest_line || !temp)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		rest_line = ft_strjoin(rest_line, buffer);
 	}
-	return (buffer);
+	if (bytes_read == 0 && !rest_line)
+		return (NULL);
+	return (get_line(&rest_line));
 }
 
-/* int	main(void)
+static char	*get_line(char **rest)
 {
-	int		fd;
-	char	path[] = "test.txt";
-	char	*str;
-	int		i = 0;
+	char	*line;
+	char	*temp;
+	size_t	len;
 
-	fd = open(path, O_RDONLY);
-	while (i < 10)
+	len = 0;
+	while ((*rest)[len] != '\0' && (*rest)[len] != '\n')
+		len++;
+	line = ft_strdup(*rest);
+	if ((*rest)[len] == '\n')
 	{
-		str = get_next_line(fd);
-		if (str == NULL)
-			break ;
-		printf("%s", str);
-		free(str);
-		i++;
+		temp = ft_strdup(*rest + len + 1);
+		free(*rest);
+		*rest = temp;
 	}
-	close(fd);
-	return (0);
-} */
+	else
+	{
+		free(*rest);
+		*rest = NULL;
+	}
+	return (line);
+}
+
