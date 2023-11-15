@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/15 15:18:17 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/11/15 15:19:33 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	j = 0;
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	while (format[j])
 	{
@@ -106,7 +108,6 @@ int	ft_print_number(int nbr, int i)
 	}
 	return (i);
 }
-
 /* int	main(void)
 {
 	char	block1[] = "Hello my name is";
@@ -121,8 +122,8 @@ int	ft_print_number(int nbr, int i)
 	ft_printf("\n");
 	int		r = 0;
 
-	printf("function: %", r);
+	printf(NULL);
 	printf("\n%d\n", r);
-	ft_printf("mine: %", r);
+	ft_printf(NULL);
 	ft_printf("\n%d\n", r);
 } */
