@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/15 12:23:41 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/11/15 18:09:51 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	tlenght = ft_strlen(s1) + ft_strlen(s2) + 1;
 	n_str = (char *)malloc(sizeof(char) * tlenght);
-	if (n_str == NULL)
+	if (!n_str)
 		return (NULL);
 	while (s1[i])
 	{
@@ -58,12 +60,12 @@ char	*ft_strdup(const char *s)
 	while (s[i])
 		i++;
 	dup = malloc(sizeof(char) * (i + 1));
-	if (dup == NULL)
+	if (!dup)
 		return (NULL);
 	i = 0;
 	while (s[i])
 	{
-		((unsigned char *)dup)[i] = ((unsigned char *)s)[i];
+		dup[i] = ((unsigned char *)s)[i];
 		i++;
 	}
 	dup[i] = '\0';
@@ -75,6 +77,8 @@ char	*ft_strchr(const char *s, int c)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (i <= ft_strlen(s))
 	{
 		if (s[i] == (char)c)
