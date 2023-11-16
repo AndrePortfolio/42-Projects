@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/15 17:59:46 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/11/16 12:14:12 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_next_line(int fd)
 	char		*temp;
 	ssize_t		bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !rest_line)
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	temp = ft_strchr(rest_line, '\n');
 	bytes_read = 1;
