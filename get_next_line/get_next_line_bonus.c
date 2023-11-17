@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/17 19:52:20 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/17 20:08:57 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
@@ -36,26 +36,36 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* #include <fcntl.h>
+#include <fcntl.h>
 #include <stdio.h>
 
 int	main(int	argc, char	**argv)
 {
-	int		fd;
+	int		fd[argc - 1];
 	char	*line;
+	int		i = 0;
 
-	if (argc != 2)
+	if (argc <= 1)
 	{
-		write(1, "Write just one argument\n", 24);
+		write(1, "Write some arguments\n", 21);
 		return (1);
 	}
-	fd = open(argv[1], O_RDONLY);
-	line = get_next_line(fd);
+	while (i < (argc - 1))
+	{
+		fd[i] = open(argv[i + 1], O_RDONLY);
+		i++;
+	}
+	i = 0;
+	line = get_next_line(fd[i]);
 	while (line)
 	{
+		printf("i: %d\n", i);
 		printf("Line: %s", line);
-		line = get_next_line(fd);
+		line = get_next_line(fd[i++]);
+		if (i == (argc - 1))
+			i = 0;
 	}
-	close(fd);
+	while (!i)
+		close(fd[i--]);
 	return (0);
-} */
+}
