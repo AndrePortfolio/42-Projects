@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/17 19:52:20 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:38:51 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		while (fd >= 0 && BUFFER_SIZE > i)
+		while (BUFFER_SIZE > i)
 			buffer[i++] = '\0';
 		return (NULL);
 	}
@@ -36,26 +36,26 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* #include <fcntl.h>
-#include <stdio.h>
+// #include <fcntl.h>
+// #include <stdio.h>
 
-int	main(int	argc, char	**argv)
-{
-	int		fd;
-	char	*line;
+// int	main(int	argc, char	**argv)
+// {
+// 	int		fd;
+// 	char	*line;
 
-	if (argc != 2)
-	{
-		write(1, "Write just one argument\n", 24);
-		return (1);
-	}
-	fd = open(argv[1], O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		printf("Line: %s", line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
-} */
+// 	if (argc != 2)
+// 	{
+// 		write(1, "Write just one argument\n", 24);
+// 		return (1);
+// 	}
+// 	fd = open(argv[1], O_RDONLY);
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		printf("Line: %s", line);
+// 		line = get_next_line(fd);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
