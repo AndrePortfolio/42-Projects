@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/20 20:38:51 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:42:15 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*get_next_line(int fd)
 	{
 		line = ft_strjoin(line, buffer);
 		ft_free(&nl_finder, buffer);
+		if (line == NULL)
+			return (NULL);
 	}
 	return (line);
 }

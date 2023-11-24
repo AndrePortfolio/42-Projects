@@ -2,6 +2,8 @@
 	"C_Cpp.errorSquiggles": "disabled",
 	"files.associations": {
 		"ft_printf.h": "c",
-		"get_next_line_bonus.h": "c"
+		"get_next_line_bonus.h": "c",
+		"get_next_line.h": "c",
+		"unistd.h": "c"
 	}
 }

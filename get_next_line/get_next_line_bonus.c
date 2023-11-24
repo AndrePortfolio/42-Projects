@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/20 20:38:21 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:44:52 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || FILE_NBR <= fd)
 	{
 		if (fd > 0 && fd < FILE_NBR && read(fd, 0, 0) >= 0)
-		{
 			while (BUFFER_SIZE > i)
 				buffer[fd][i++] = '\0';
-		}
 		return (NULL);
 	}
 	while (nl_finder && (buffer[fd][0] || read(fd, buffer[fd], BUFFER_SIZE)))
 	{
 		line = ft_strjoin(line, buffer[fd]);
 		ft_free(&nl_finder, buffer[fd]);
+		if (!line)
+			return (NULL);
 	}
 	return (line);
 }

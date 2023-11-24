@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/17 18:18:11 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:24:17 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	tlenght = ft_strlen(s1) + ft_strlen(s2) + 1;
 	n_str = (char *)malloc(sizeof(char) * tlenght);
 	if (!n_str)
-		return (NULL);
+		return (free(s1), NULL);
 	while (s1 && s1[i])
 	{
 		n_str[i] = s1[i];
