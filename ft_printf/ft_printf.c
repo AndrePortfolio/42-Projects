@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:27:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/11/15 15:19:33 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/11/27 15:36:09 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,22 @@ int	ft_print_number(int nbr, int i)
 	}
 	return (i);
 }
-/* int	main(void)
-{
-	char	block1[] = "Hello my name is";
-	char	block2[] = "and I am";
-	char	block3[] = "years old!";
-	char	name[] = "ndré";
-	int		age = 23;
-	char	c = 'A';
+// int	main(void)
+// {
+// 	char	block1[] = "Hello my name is";
+// 	char	block2[] = "and I am";
+// 	char	block3[] = "years old!";
+// 	char	name[] = "ndré";
+// 	int		age = 23;
+// 	char	c = 'A';
 
-	printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-	ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-	ft_printf("\n");
-	int		r = 0;
+// 	printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+// 	ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+// 	ft_printf("\n");
+// 	int		r = 0;
 
-	printf(NULL);
-	printf("\n%d\n", r);
-	ft_printf(NULL);
-	ft_printf("\n%d\n", r);
-} */
+// 	printf(NULL);
+// 	printf("\n%d\n", r);
+// 	ft_printf(NULL);
+// 	ft_printf("\n%d\n", r);
+// }
