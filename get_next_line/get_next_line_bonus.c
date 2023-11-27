@@ -22,9 +22,9 @@ char	*get_next_line(int fd)
 	i = 0;
 	nl_finder = 1;
 	line = NULL;
-	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || FILE_NBR <= fd)
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd >= FILE_NBR)
 	{
-		if (fd > 0 && fd < FILE_NBR && read(fd, 0, 0) >= 0)
+		if (fd > 0 && read(fd, 0, 0) >= 0 && fd < FILE_NBR)
 			while (BUFFER_SIZE > i)
 				buffer[fd][i++] = '\0';
 		return (NULL);
