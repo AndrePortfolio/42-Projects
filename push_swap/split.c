@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 18:38:27 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/18 14:50:56 by andre-da         ###   ########.fr       */
+/*   Created: 2023/12/06 20:34:38 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/12/06 20:36:11 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static int	ft_cwords(const char	*str, char c);
 static void	*ft_putstring(const char	*str, char c, char **tstr);
@@ -105,18 +105,3 @@ static void	*ft_putstring(const char *str, char c, char **tstr)
 	tstr[f] = NULL;
 	return (tstr);
 }
-
-/* int	main(void)
-{
-	int		i = 0;
-	char	string[] = "   Hello   d  world !";
-	char	**strings;
-
-	strings = ft_split(string, ' ');
-	while (strings[i])
-	{
-		printf("%s\n", strings[i]);
-		i++;
-	}
-	return (0);
-} */

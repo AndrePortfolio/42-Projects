@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = push_swap.c push_swap_utils.c main.c
+FILES = utils.c main.c
 
 OBJS = $(FILES:.c=.o)
 
