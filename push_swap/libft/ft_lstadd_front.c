@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/07 12:51:40 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/10/18 16:47:20 by andre-da          #+#    #+#             */
+/*   Updated: 2023/10/20 12:58:27 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-
-typedef struct s_stack
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int				nbr;
-	int				index;
-	bool			above_medium;
-	bool			cheapest;
-	struct s_stack	*target;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
+	if (new == NULL)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}
 
-// Error handling
+/* int	main(void)
+{
+	int		data = 42;
+	t_list *new_node = ft_lstnew(&data);
+	t_list *my_list = NULL;
 
-// Stack initialization
-void	init_stack_a(t_stack	**a, char **argv);
-
-// Nodes initialization
-
-// Stack utils
-
-// Commands
-
-// Algorithm
-
-#endif
+	ft_lstadd_front(&my_list, new_node);
+	printf("%d\n", *(int *)(my_list->content));
+	return (0);
+} */

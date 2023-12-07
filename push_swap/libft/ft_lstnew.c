@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/07 12:51:40 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/10/18 15:38:16 by andre-da          #+#    #+#             */
+/*   Updated: 2023/10/25 19:45:48 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-
-typedef struct s_stack
+t_list	*ft_lstnew(void *content)
 {
-	int				nbr;
-	int				index;
-	bool			above_medium;
-	bool			cheapest;
-	struct s_stack	*target;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
+	t_list	*nbr;
 
-// Error handling
+	nbr = (t_list *)malloc(sizeof(t_list));
+	if (nbr == NULL)
+		return (NULL);
+	nbr->content = content;
+	nbr->next = NULL;
+	return (nbr);
+}
 
-// Stack initialization
-void	init_stack_a(t_stack	**a, char **argv);
+/* int	main(void)
+{
+	int	data = 42;
 
-// Nodes initialization
-
-// Stack utils
-
-// Commands
-
-// Algorithm
-
-#endif
+	t_list *new_node = ft_lstnew(&data);
+	printf("%d\n", *(int *)(new_node->content));
+	free(new_node);
+	return (0);
+} */

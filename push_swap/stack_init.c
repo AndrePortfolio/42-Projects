@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   init_stack_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/07 12:51:40 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/12/07 11:09:50 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/12/07 12:01:43 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-#include "../libft/libft.h"
-
-typedef struct s_stack
+void	init_stack_a(t_stack	**a, char **argv)
 {
-	int				nbr;
-	int				index;
-	bool			above_medium;
-	bool			cheapest;
-	struct s_stack	*target;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
+	int		i;
+	long	n;
 
-// Error handling
-
-// Stack initialization
-void	init_stack_a(t_stack	**a, char **argv);
-
-// Nodes initialization
-
-// Stack utils
-
-// Commands
-
-// Algorithm
-
-#endif
+	i = 0;
+	while (argv[i])
+	{
+		if (syntax_error(argv[i]))
+			free_errors(a);
+		n = ft_atol(argv[i])
+		if (n > INT_MAX || n < INT_MIN)
+			free_errors(a);
+		if (duplicate(*a, (int)n))
+			free_errors(a);
+		append_node(a, (int)n);
+		i++;
+	}
+}
