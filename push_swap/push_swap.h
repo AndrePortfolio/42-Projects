@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/07 12:51:40 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/07 22:45:35 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,18 @@ typedef struct s_stack
 }	t_stack;
 
 // Error handling
+int		check_syntax(char *str);
+int		check_duplicate(t_stack *a, int n);
+void	free_stack(t_stack **a);
 
 // Stack initialization
-void	init_stack_a(t_stack	**a, char **argv);
+void	init_stack_a(t_stack **a, char **argv);
 
 // Nodes initialization
+void	append_node(t_stack **stack, int n);
 
 // Stack utils
+t_stack *find_last(t_stack *stack);
 
 // Commands
 

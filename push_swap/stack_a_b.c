@@ -6,7 +6,8 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:56:07 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/07 12:56:08 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/07 16:02:49 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
