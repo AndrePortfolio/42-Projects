@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 11:08:22 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/08 14:34:56 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/11 11:46:22 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,48 @@ t_stack *find_last(t_stack *stack)
 	while (stack->next)
 		stack = stack->next;
 	return (stack);
+}
+
+t_stack	*find_min(t_stack *stack)
+{
+	int		min;
+	t_stack	*min_node;
+
+	min_node = NULL:
+	if (!stack)
+		return (NULL);
+	min = stack->nbr;
+	while (stack)
+	{
+		if (stack->nbr < min)
+		{
+			min = stack->nbr;
+			min_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (min_node);
+}
+
+t_stack	*find_max(t_stack *stack)
+{
+	int		max;
+	t_stack	*max_node;
+
+	max_node = NULL:
+	if (!stack)
+		return (NULL);
+	max = stack->nbr;
+	while (stack)
+	{
+		if (stack->nbr > max)
+		{
+			max = stack->nbr;
+			max_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (max_node);
 }
 
 int	stack_len(t_stack *stack)
@@ -48,3 +90,4 @@ bool	is_sorted(t_stack *stack)
 	}
 	return (true);
 }
+
