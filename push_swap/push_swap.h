@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/12 12:39:48 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/12 12:51:00 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_stack
 {
 	int				nbr;
 	int				index;
+	int				push_cost;
 	bool			above_medium;
 	bool			cheapest;
 	struct s_stack	*target;
