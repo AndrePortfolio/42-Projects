@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/12 12:51:00 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/12 15:13:54 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	init_stack_a(t_stack **a, char **argv);
 
 // Nodes initialization
 void	append_node(t_stack **stack, int n);
+void	init_nodes_a(t_stack *a, t_stack *b)
+void	init_nodes_b(t_stack *a, t_stack *b)
 
 // Stack utils
 t_stack	*find_last(t_stack *stack);
