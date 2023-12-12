@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:45:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/11 11:13:00 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/12 12:41:14 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	push(t_stack **dst, t_stack **src)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*src)
 		return ;

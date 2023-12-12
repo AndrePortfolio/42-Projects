@@ -6,13 +6,13 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 11:08:22 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/11 11:46:22 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/12 12:42:06 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *find_last(t_stack *stack)
+t_stack	*find_last(t_stack *stack)
 {
 	if (!stack)
 		return (NULL);
@@ -26,7 +26,7 @@ t_stack	*find_min(t_stack *stack)
 	int		min;
 	t_stack	*min_node;
 
-	min_node = NULL:
+	min_node = NULL;
 	if (!stack)
 		return (NULL);
 	min = stack->nbr;
@@ -47,7 +47,7 @@ t_stack	*find_max(t_stack *stack)
 	int		max;
 	t_stack	*max_node;
 
-	max_node = NULL:
+	max_node = NULL;
 	if (!stack)
 		return (NULL);
 	max = stack->nbr;
@@ -90,4 +90,3 @@ bool	is_sorted(t_stack *stack)
 	}
 	return (true);
 }
-

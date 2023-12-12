@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:09:50 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/07 22:40:53 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/12 12:40:55 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_stack_a(t_stack **a, char **argv)
 	{
 		if (check_syntax(argv[i]))
 			free_stack(a);
-		n = ft_atol(argv[i])
+		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
 			free_stack(a);
 		if (check_duplicate(*a, (int)n))
@@ -60,7 +60,7 @@ static long	ft_atol(const char *str)
 void	append_node(t_stack **stack, int n)
 {
 	t_stack	*node;
-	t_stack *last_node;
+	t_stack	*last_node;
 
 	if (!stack)
 		return ;
