@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:19:21 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/12 12:36:03 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 02:22:37 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,5 @@ int	ft_print_number(int nbr, int i)
 
 // 	printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
 // 	ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
-// 	ft_printf("\n");
-// 	int		r = 0;
-
-// 	printf(NULL);
-// 	printf("\n%d\n", r);
-// 	ft_printf(NULL);
-// 	ft_printf("\n%d\n", r);
+// 	return (0);
 // }

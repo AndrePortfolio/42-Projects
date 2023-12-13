@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:34:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/10/10 18:14:40 by andre-da         ###   ########.fr       */
+/*   Updated: 2023/12/13 02:12:20 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,4 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	printf("My Function: %s\n", (char*)ft_memmove(dest, src, 13));
 	printf("Function:    %s\n", (char*)memmove(dest, src, 13));
 	return (0);
-}*/
+} */

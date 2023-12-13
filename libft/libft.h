@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:13:05 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/12 12:35:06 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:21:07 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,13 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
+int		ft_format(const char *format, va_list args, int i, int j);
+int		ft_print_char(int c, int i);
+int		ft_print_string(char	*str, int i);
+int		ft_print_number(int nbr, int i);
+int		ft_print_unumber(int nbr, int i);
+int		ft_print_hexnumber(int nbr, int i, char c);
+int		ft_print_hex_pnumber(long nbr, int i);
+int		ft_print_address(void	*address, int i);
 
 #endif

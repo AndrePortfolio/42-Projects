@@ -6,14 +6,14 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/13 00:59:51 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 02:13:48 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct s_stack
 {
