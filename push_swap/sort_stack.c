@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:53:56 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/13 00:33:43 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:17:17 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	sort_stacks(t_stack **a, t_stack **b)
 {
 	int	a_lenght;
 
-	a_lenght = stack_len(a);
+	a_lenght = stack_len(*a);
 	if (!*a || !*b)
 		return ;
-	if (a_lenght-- > 3 && !is_sorted(a))
+	if (a_lenght-- > 3 && !is_sorted(*a))
 		pb(b, a);
-	if (a_lenght-- > 3 && !is_sorted(a))
+	if (a_lenght-- > 3 && !is_sorted(*a))
 		pb(b, a);
-	while (a_lenght-- > 3 && !is_sorted(a))
+	while (a_lenght-- > 3 && !is_sorted(*a))
 	{
 		init_nodes_a(*a, *b);
-		move_a_b(a, b);
+		move_a_to_b(a, b);
 	}
 	sort_three(a);
 	while (*b)
 	{
 		init_nodes_b(*a, *b);
-		move_b_a(a, b);
+		move_b_to_a(a, b);
 	}
 	current_index(*a);
 	min_to_top(a);

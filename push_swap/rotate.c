@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:57:39 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/08 17:36:42 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:15:12 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	rotate(t_stack	**stack)
 
 	if (!*stack || !(*stack)->next)
 		return ;
-	last_node = find_last(last_node);
+	last_node = find_last(*stack);
 	last_node->next = *stack;
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;

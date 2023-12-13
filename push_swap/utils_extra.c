@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:52:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/13 00:44:09 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:06:59 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_stack	*get_cheapest(t_stack *stack)
 		return (NULL);
 	while (stack)
 	{
-		if (stack->cheapest = true)
+		if (stack->cheapest == true)
 			return (stack);
 		stack = stack->next;
 	}

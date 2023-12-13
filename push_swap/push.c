@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:45:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/12 23:30:05 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:12:55 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	push(t_stack **dst, t_stack **src)
 	if (!*dst)
 	{
 		*dst = tmp;
-		dst->prev = NULL;
-		dst->next = NULL;
+		(*dst)->prev = NULL;
+		(*dst)->next = NULL;
 	}
 	else
 	{

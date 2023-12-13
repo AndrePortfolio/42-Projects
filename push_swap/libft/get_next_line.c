@@ -6,15 +6,15 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:25:16 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/07 12:29:39 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:24:34 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static void		ft_free(int *nl_finder, char *buffer);
-static size_t	ft_strlen(const char *s);
-static char		*ft_strjoin(char *s1, char *s2);
+static size_t	ft_stringlen(const char *s);
+static char		*ft_stringjoin(char *s1, char *s2);
 
 char	*get_next_line(int fd)
 {
@@ -35,7 +35,7 @@ char	*get_next_line(int fd)
 	}
 	while (nl_finder && (buffer[fd][0] || read(fd, buffer[fd], BUFFER_SIZE)))
 	{
-		line = ft_strjoin(line, buffer[fd]);
+		line = ft_stringjoin(line, buffer[fd]);
 		ft_free(&nl_finder, buffer[fd]);
 		if (!line)
 			return (NULL);
@@ -60,7 +60,7 @@ static void	ft_free(int *nl_finder, char *buffer)
 	}
 }
 
-static size_t	ft_strlen(const char *s)
+static size_t	ft_stringlen(const char *s)
 {
 	size_t	i;
 
@@ -74,7 +74,7 @@ static size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-static char	*ft_strjoin(char *s1, char *s2)
+static char	*ft_stringjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -83,7 +83,7 @@ static char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	tlenght = ft_strlen(s1) + ft_strlen(s2) + 1;
+	tlenght = ft_stringlen(s1) + ft_stringlen(s2) + 1;
 	n_str = (char *)malloc(sizeof(char) * tlenght);
 	if (!n_str)
 		return (free(s1), NULL);

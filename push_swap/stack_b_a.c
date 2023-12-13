@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:56:25 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/12 15:13:31 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:08:04 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	set_target_b(t_stack *a, t_stack *b)
 	int		best_match;
 
 	if (!a || !b)
-		return;
+		return ;
 	while (b)
 	{
 		best_match = INT_MAX;

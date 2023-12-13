@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:24:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/12 12:42:31 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:09:20 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (argc <= 1 || argc == 2 && !argv[1])
+	if (argc <= 1 || (argc == 2 && !argv[1]))
 		return (1);
 	else if (argc == 2)
 		argv = ft_split(argv[1], ' ');
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	if (!is_sorted(a))
 	{
 		if (stack_len(a) == 2)
-			sa(&a, false);
+			sa(&a);
 		else if (stack_len(a) == 3)
 			sort_three(&a);
 		else

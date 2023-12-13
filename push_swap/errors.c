@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:42:23 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/12 12:42:46 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 01:08:31 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_syntax(char *str)
 	i = 0;
 	if (!str)
 		return (1);
-	if (str[i] == '+' || str[i] == '-' && str[1] != '\0')
+	if (str[i] == '+' || (str[i] == '-' && str[1] != '\0'))
 		i++;
 	while (ft_isdigit(str[i]))
 		i++;
