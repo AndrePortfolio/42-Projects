@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:45:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/12 12:41:14 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/12 23:30:05 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static void	push(t_stack **dst, t_stack **src)
 	}
 }
 
-void	pa(t_stack **a)
+void	pa(t_stack **a, t_stack **b)
 {
-	push(a);
+	push(a, b);
 	ft_printf("pa\n");
 }
 
-void	pb(t_stack **b)
+void	pb(t_stack **b, t_stack **a)
 {
-	push(b);
+	push(b, a);
 	ft_printf("pb\n");
 }
