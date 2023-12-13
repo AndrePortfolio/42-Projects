@@ -4,8 +4,9 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = commands.c handle_errors.c push_swap_utils.c push_swap.c stack_a_b.c /
-		stack_b_a.c stack_init.c
+FILES = errors.c push_swap.c push.c rev_rotate.c rotate.c sort_stack_utils.c /
+		sort_stack.c stack_a_b.c stack_b_a.c stack_init.c swap.c utils_extra.c /
+		utils.c
 
 OBJS = $(FILES:.c=.o)
 
