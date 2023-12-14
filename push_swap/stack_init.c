@@ -6,15 +6,13 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:09:50 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/13 21:54:25 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/14 16:55:27 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long	ft_atol(const char *str);
-
-void	init_stack_a(t_stack **a, char **argv)
+void	init_stack(t_stack **stack, char **argv)
 {
 	int		i;
 	long	n;
@@ -23,38 +21,15 @@ void	init_stack_a(t_stack **a, char **argv)
 	while (argv[i])
 	{
 		if (check_syntax(argv[i]))
-			free_errors(a);
+			free_errors(stack);
 		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			free_errors(a);
-		if (check_duplicate(*a, (int)n))
-			free_errors(a);
-		append_node(a, (int)n);
+			free_errors(stack);
+		if (check_duplicate(*stack, (int)n))
+			free_errors(stack);
+		append_node(stack, (int)n);
 		i++;
 	}
-}
-
-static long	ft_atol(const char *str)
-{
-	int		i;
-	int		sign;
-	long	nbr;
-
-	i = 0;
-	sign = 1;
-	nbr = 0;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (ft_isdigit(str[i]))
-	{
-		nbr = nbr * 10 + (str[i] - '0');
-		i++;
-	}
-	return (nbr * sign);
 }
 
 void	append_node(t_stack **stack, int n)

@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 11:08:22 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/14 00:50:31 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/14 17:04:29 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,4 @@ t_stack	*find_max(t_stack *stack)
 		stack = stack->next;
 	}
 	return (max_node);
-}
-
-int	stack_len(t_stack *stack)
-{
-	int	lenght;
-
-	lenght = 0;
-	if (!stack)
-		return (0);
-	while (stack)
-	{
-		stack = stack->next;
-		lenght++;
-	}
-	return (lenght);
-}
-
-bool	is_sorted(t_stack *stack)
-{
-	if (!stack)
-		return (1);
-	while (stack->next)
-	{
-		if (stack->nbr > stack->next->nbr)
-			return (false);
-		stack = stack->next;
-	}
-	return (true);
 }

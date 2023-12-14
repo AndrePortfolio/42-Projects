@@ -1,17 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_stack_utils.c                                 :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 13:12:31 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 01:04:00 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/12/14 17:04:13 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/12/14 17:06:19 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+bool	is_sorted(t_stack *stack)
+{
+	if (!stack)
+		return (1);
+	while (stack->next)
+	{
+		if (stack->nbr > stack->next->nbr)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
+}
 void	sort_three(t_stack **stack)
 {
 	t_stack	*biggest;
@@ -25,26 +37,6 @@ void	sort_three(t_stack **stack)
 		rra(stack);
 	if ((*stack)->nbr > (*stack)->next->nbr)
 		sa(stack);
-}
-
-void	move_a_to_b(t_stack **a, t_stack **b)
-{
-	t_stack	*cheapest;
-
-	cheapest = get_cheapest(*a);
-	if (cheapest->above_medium && cheapest->target->above_medium)
-		rotate_both(a, b, cheapest);
-	else if (!(cheapest->above_medium) && !(cheapest->target->above_medium))
-		rev_rotate_both(a, b, cheapest);
-	prep_for_push(a, cheapest, 'a');
-	prep_for_push(b, cheapest->target, 'b');
-	pb(b, a);
-}
-
-void	move_b_to_a(t_stack **a, t_stack **b)
-{
-	prep_for_push(a, (*b)->target, 'a');
-	pa(a, b);
 }
 
 void	min_to_top(t_stack **a)

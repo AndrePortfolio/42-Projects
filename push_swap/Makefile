@@ -6,9 +6,8 @@ EXECUTABLE = push_swap
 
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = errors.c push.c rev_rotate.c rotate.c sort_stack_utils.c utils.c\
-		sort_stack.c stack_a_b.c stack_b_a.c stack_init.c swap.c utils_extra.c \
-		main.c
+FILES = make_push.c make_r_rotate.c make_rotate.c make_swap.c nodes_find.c nodes_init.c \
+		push_swap.c stack_init.c stack_move.c stack_sort.c utils_errors.c utils_sort.c
 
 OBJ_DIR = objects
 

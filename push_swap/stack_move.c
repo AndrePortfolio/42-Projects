@@ -1,80 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_extra.c                                      :+:      :+:    :+:   */
+/*   stack_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 12:52:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 01:05:45 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/12/14 17:02:38 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/12/14 17:03:46 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	current_index(t_stack *stack)
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-	int	i;
-	int	median;
-
-	if (!stack)
+	if (!*a || !*b || !cheapest_node)
 		return ;
-	i = 0;
-	median = stack_len(stack) / 2;
-	while (stack)
-	{
-		stack->index = i;
-		if (i <= median)
-			stack->above_medium = true;
-		else
-			stack->above_medium = false;
-		i++;
-		stack = stack->next;
-	}
+	while (*a != cheapest_node && *b != cheapest_node->target)
+		rr(a, b);
+	current_index(*a);
+	current_index(*b);
 }
 
-void	cost_analysis(t_stack *a, t_stack *b)
+void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
-	int	a_lenght;
-	int	b_lenght;
-
-	if (!a || !b)
+	if (!*a || !*b || !cheapest_node)
 		return ;
-	a_lenght = stack_len(a);
-	b_lenght = stack_len(b);
-	while (a)
-	{
-		a->push_cost = a->index;
-		if (!(a->above_medium))
-			a->push_cost = a_lenght - (a->index);
-		if (a->target->above_medium)
-			a->push_cost += a->target->index;
-		else
-			a->push_cost += b_lenght - (a->target->index);
-		a = a->next;
-	}
+	while (*a != cheapest_node && *b != cheapest_node->target)
+		rrr(a, b);
+	current_index(*a);
+	current_index(*b);
 }
-
-void	set_cheapest(t_stack *stack)
-{
-	int		cheapest_value;
-	t_stack	*cheapest_node;
-
-	if (!stack)
-		return ;
-	cheapest_value = INT_MAX;
-	while (stack)
-	{
-		if (stack->push_cost < cheapest_value)
-		{
-			cheapest_value = stack->push_cost;
-			cheapest_node = stack;
-		}
-		stack = stack->next;
-	}
-	cheapest_node->cheapest = true;
-}
-
 t_stack	*get_cheapest(t_stack *stack)
 {
 	if (!stack)

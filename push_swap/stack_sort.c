@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_stack.c                                       :+:      :+:    :+:   */
+/*   stack_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 14:53:56 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 01:06:08 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/12/14 16:58:08 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/12/14 17:34:04 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,36 @@ void	sort_stacks(t_stack **a, t_stack **b)
 	current_index(*a);
 	min_to_top(a);
 }
-
-void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+void	init_nodes_a(t_stack *a, t_stack *b)
 {
-	if (!*a || !*b || !cheapest_node)
-		return ;
-	while (*a != cheapest_node && *b != cheapest_node->target)
-		rr(a, b);
-	current_index(*a);
-	current_index(*b);
+	current_index(a);
+	current_index(b);
+	set_target_a(a, b);
+	cost_analysis(a, b);
+	set_cheapest(a);
+}
+void	init_nodes_b(t_stack *a, t_stack *b)
+{
+	current_index(a);
+	current_index(b);
+	set_target_b(a, b);
+}
+void	move_a_to_b(t_stack **a, t_stack **b)
+{
+	t_stack	*cheapest;
+
+	cheapest = get_cheapest(*a);
+	if (cheapest->above_medium && cheapest->target->above_medium)
+		rotate_both(a, b, cheapest);
+	else if (!(cheapest->above_medium) && !(cheapest->target->above_medium))
+		rev_rotate_both(a, b, cheapest);
+	prep_for_push(a, cheapest, 'a');
+	prep_for_push(b, cheapest->target, 'b');
+	pb(b, a);
 }
 
-void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+void	move_b_to_a(t_stack **a, t_stack **b)
 {
-	if (!*a || !*b || !cheapest_node)
-		return ;
-	while (*a != cheapest_node && *b != cheapest_node->target)
-		rrr(a, b);
-	current_index(*a);
-	current_index(*b);
+	prep_for_push(a, (*b)->target, 'a');
+	pa(a, b);
 }

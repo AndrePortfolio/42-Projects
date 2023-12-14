@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   stack_len.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 23:17:00 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:31:38 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/12/14 17:31:26 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/12/14 17:35:07 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list	*lst)
+int	stack_len(t_stack	*stack)
 {
 	int	lenght;
 
-	if (lst == NULL)
+	lenght = 0;
+	if (!stack)
 		return (0);
-	lenght = 1;
-	while (lst->next != NULL)
+	while (stack)
 	{
-		lst = lst->next;
+		stack = stack->next;
 		lenght++;
 	}
 	return (lenght);
 }
-
-/* int main(void)
-{
-	int	data = 42;
-
-	t_list *new_node = ft_lstnew(&data);
-	printf("%d\n", ft_lstsize(new_node));
-	free(new_node);
-	return (0);
-} */
