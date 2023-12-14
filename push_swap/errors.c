@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:42:23 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/13 01:08:31 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 19:01:10 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,28 @@ int	check_syntax(char *str)
 	return (1);
 }
 
-int	check_duplicate(t_stack *a, int n)
+int	check_duplicate(t_stack *stack, int n)
 {
-	if (!a)
+	if (!stack)
 		return (0);
-	while (a)
+	while (stack)
 	{
-		if (n == a->nbr)
+		if (n == stack->nbr)
 			return (1);
-		a = a->next;
+		stack = stack->next;
 	}
 	return (0);
 }
 
-void	free_stack(t_stack **a)
+void	free_stack(t_stack **stack)
 {
 	t_stack	*current;
 	t_stack	*tmp;
 
-	if (!*a)
+	if (!*stack)
 		return ;
-	current = *a;
+	current = *stack;
+	tmp = NULL;
 	while (current)
 	{
 		tmp = current->next;
@@ -56,7 +57,12 @@ void	free_stack(t_stack **a)
 		free(current);
 		current = tmp;
 	}
-	*a = NULL;
+	*stack = NULL;
+}
+
+void	free_errors(t_stack **stack)
+{
+	free_stack(stack);
 	ft_printf("Error\n");
 	exit(1);
 }

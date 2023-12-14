@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:53:56 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/13 01:17:17 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/14 01:06:08 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	sort_stacks(t_stack **a, t_stack **b)
 	int	a_lenght;
 
 	a_lenght = stack_len(*a);
-	if (!*a || !*b)
-		return ;
 	if (a_lenght-- > 3 && !is_sorted(*a))
 		pb(b, a);
 	if (a_lenght-- > 3 && !is_sorted(*a))

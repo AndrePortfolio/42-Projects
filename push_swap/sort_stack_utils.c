@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:12:31 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/13 01:07:50 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/14 01:04:00 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	move_a_to_b(t_stack **a, t_stack **b)
 	else if (!(cheapest->above_medium) && !(cheapest->target->above_medium))
 		rev_rotate_both(a, b, cheapest);
 	prep_for_push(a, cheapest, 'a');
-	prep_for_push(a, cheapest->target, 'b');
+	prep_for_push(b, cheapest->target, 'b');
 	pb(b, a);
 }
 

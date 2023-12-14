@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:24:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/13 01:09:20 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/14 01:06:41 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,18 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	if (argc <= 1 || (argc == 2 && !argv[1]))
+	if (argc <= 1 || (argc == 2 && !argv[1][0]))
+	{
+		ft_printf("Write 2 or more numbers\n");
 		return (1);
+	}
 	else if (argc == 2)
+	{
 		argv = ft_split(argv[1], ' ');
-	init_stack_a(&a, argv + 1);
+		init_stack_a(&a, argv);
+	}
+	else
+		init_stack_a(&a, argv + 1);
 	if (!is_sorted(a))
 	{
 		if (stack_len(a) == 2)
@@ -33,6 +40,8 @@ int	main(int argc, char **argv)
 		else
 			sort_stacks(&a, &b);
 	}
+	else
+		ft_printf("Stack is already sorted\n");
 	free_stack(&a);
 	return (0);
 }

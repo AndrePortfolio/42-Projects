@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 18:34:52 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/13 17:14:28 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/13 18:19:23 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-/* int	main(void)
+/* int	main(void
 {
 	char	src[] = "Hello World!";
 	char	dest[1000] = "Hello";

@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:44:42 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/08 17:35:38 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2023/12/14 01:03:34 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ static void	swap(t_stack **stack)
 {
 	if (!*stack || !(*stack)->next)
 		return ;
-	(*stack)->prev = (*stack)->next;
-	if ((*stack)->next->next)
-	{
-		(*stack)->next = (*stack)->next->next;
-		(*stack)->next->next->prev = *stack;
-	}
-	else
-		(*stack)->next = NULL;
 	*stack = (*stack)->next;
+	(*stack)->prev->prev = *stack;
+	(*stack)->prev->next = (*stack)->next;
+	if ((*stack)->next)
+		(*stack)->next->prev = (*stack)->prev;
+	(*stack)->next = (*stack)->prev;
 	(*stack)->prev = NULL;
 }
 
