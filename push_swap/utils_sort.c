@@ -24,6 +24,7 @@ bool	is_sorted(t_stack *stack)
 	}
 	return (true);
 }
+
 void	sort_three(t_stack **stack)
 {
 	t_stack	*biggest;

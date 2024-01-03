@@ -40,6 +40,7 @@ void	set_target_a(t_stack *a, t_stack *b)
 		a = a->next;
 	}
 }
+
 void	set_target_b(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
@@ -68,6 +69,7 @@ void	set_target_b(t_stack *a, t_stack *b)
 		b = b->next;
 	}
 }
+
 void	current_index(t_stack *stack)
 {
 	int	i;
@@ -126,6 +128,7 @@ void	set_cheapest(t_stack *stack)
 			cheapest_value = stack->push_cost;
 			cheapest_node = stack;
 		}
+		stack->cheapest = false;
 		stack = stack->next;
 	}
 	cheapest_node->cheapest = true;

@@ -31,6 +31,7 @@ void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 	current_index(*a);
 	current_index(*b);
 }
+
 t_stack	*get_cheapest(t_stack *stack)
 {
 	if (!stack)

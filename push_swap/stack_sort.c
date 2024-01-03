@@ -35,6 +35,7 @@ void	sort_stacks(t_stack **a, t_stack **b)
 	current_index(*a);
 	min_to_top(a);
 }
+
 void	init_nodes_a(t_stack *a, t_stack *b)
 {
 	current_index(a);
@@ -43,12 +44,14 @@ void	init_nodes_a(t_stack *a, t_stack *b)
 	cost_analysis(a, b);
 	set_cheapest(a);
 }
+
 void	init_nodes_b(t_stack *a, t_stack *b)
 {
 	current_index(a);
 	current_index(b);
 	set_target_b(a, b);
 }
+
 void	move_a_to_b(t_stack **a, t_stack **b)
 {
 	t_stack	*cheapest;
