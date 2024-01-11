@@ -18,6 +18,8 @@ void	init_stack(t_stack **stack, char **argv)
 	long	n;
 
 	i = 0;
+	if (!*argv)
+		free_errors(stack);
 	while (argv[i])
 	{
 		if (check_syntax(argv[i]))

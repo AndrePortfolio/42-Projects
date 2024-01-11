@@ -17,7 +17,7 @@ int	ft_print_unumber(int nbr, int i)
 	unsigned int	nb;
 
 	nb = nbr;
-	if (nb >= 0 && nb < 10)
+	if (nb < 10)
 		i = ft_print_char(nb + '0', i);
 	else
 	{

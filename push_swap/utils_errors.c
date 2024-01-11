@@ -19,8 +19,10 @@ int	check_syntax(char *str)
 	i = 0;
 	if (!str)
 		return (1);
-	if (str[i] == '+' || (str[i] == '-' && str[1] != '\0'))
+	if ((str[0] == '+' || str[0] == '-') && str[1] != '\0')
 		i++;
+	if (str[0] == ' ')
+		return (1);
 	while (ft_isdigit(str[i]))
 		i++;
 	if (i >= 1 && str[i] == '\0')
