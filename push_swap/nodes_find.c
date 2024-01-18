@@ -29,13 +29,14 @@ t_stack	*find_min(t_stack *stack)
 	min_node = NULL;
 	if (!stack)
 		return (NULL);
-	min = stack->nbr;
+	min = INT_MAX;
 	while (stack)
 	{
 		if (stack->nbr < min)
 		{
 			min = stack->nbr;
 			min_node = stack;
+			min_node->nbr = stack->nbr;
 		}
 		stack = stack->next;
 	}

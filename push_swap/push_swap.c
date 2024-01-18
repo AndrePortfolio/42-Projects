@@ -12,6 +12,38 @@
 
 #include "push_swap.h"
 
+void	algo(t_stack *a, t_stack *b)
+{
+	if (!a)
+		return ;
+	if (stack_len(a) == 2)
+		sa(&a);
+	else if (stack_len(a) == 3)
+		sort_three(&a);
+	else
+		sort_stacks(&a, &b);
+	free_stack(&a);
+}
+
+void print_stack(t_stack *a)
+{
+	while (a)
+	{
+		ft_printf("%d\n", a->nbr);
+		a = a->next;
+	}
+}
+
+void free_split(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -28,18 +60,13 @@ int	main(int argc, char **argv)
 	{
 		argv = ft_split(argv[1], ' ');
 		init_stack(&a, argv);
+		free_split(argv);
 	}
 	else
 		init_stack(&a, argv + 1);
 	if (!is_sorted(a))
-	{
-		if (stack_len(a) == 2)
-			sa(&a);
-		else if (stack_len(a) == 3)
-			sort_three(&a);
-		else
-			sort_stacks(&a, &b);
-	}
-	free_stack(&a);
+		algo(a, b);
+	else
+		free_stack(&a);
 	return (0);
 }
