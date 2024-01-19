@@ -6,11 +6,24 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:58:08 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:34:04 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/01/19 12:18:25 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	algo(t_stack *a, t_stack *b)
+{
+	if (!a)
+		return ;
+	if (stack_len(a) == 2)
+		sa(&a);
+	else if (stack_len(a) == 3)
+		sort_three(&a);
+	else
+		sort_stacks(&a, &b);
+	free_stack(&a);
+}
 
 void	sort_stacks(t_stack **a, t_stack **b)
 {
@@ -50,24 +63,4 @@ void	init_nodes_b(t_stack *a, t_stack *b)
 	current_index(a);
 	current_index(b);
 	set_target_b(a, b);
-}
-
-void	move_a_to_b(t_stack **a, t_stack **b)
-{
-	t_stack	*cheapest;
-
-	cheapest = get_cheapest(*a);
-	if (cheapest->above_medium && cheapest->target->above_medium)
-		rotate_both(a, b, cheapest);
-	else if (!(cheapest->above_medium) && !(cheapest->target->above_medium))
-		rev_rotate_both(a, b, cheapest);
-	prep_for_push(a, cheapest, 'a');
-	prep_for_push(b, cheapest->target, 'b');
-	pb(b, a);
-}
-
-void	move_b_to_a(t_stack **a, t_stack **b)
-{
-	prep_for_push(a, (*b)->target, 'a');
-	pa(a, b);
 }

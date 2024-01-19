@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:25:01 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/14 17:38:58 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/01/19 12:20:23 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
+
+typedef struct s_stack
+{
+	int				nbr;
+	int				index;
+	int				push_cost;
+	bool			above_medium;
+	bool			cheapest;
+	struct s_stack	*target;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+}	t_stack;
 
 // Stack initialization
 void	init_stack(t_stack **stack, char **argv);
@@ -29,6 +41,7 @@ void	cost_analysis(t_stack *a, t_stack *b);
 void	set_cheapest(t_stack *stack);
 
 // Algorithm
+void	algo(t_stack *a, t_stack *b);
 void	sort_stacks(t_stack **a, t_stack **b);
 void	move_a_to_b(t_stack **a, t_stack **b);
 void	move_b_to_a(t_stack **a, t_stack **b);
@@ -61,7 +74,6 @@ t_stack	*find_last(t_stack *stack);
 t_stack	*find_min(t_stack *stack);
 t_stack	*find_max(t_stack *stack);
 bool	is_sorted(t_stack *stack);
-
-void print_stack(t_stack *a);
+int		stack_len(t_stack	*stack);
 
 #endif

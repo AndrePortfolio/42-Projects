@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:09:50 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 16:55:27 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/01/19 12:01:53 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,19 @@ void	append_node(t_stack **stack, int n)
 		last_node->next = node;
 		node->prev = last_node;
 	}
+}
+
+int	stack_len(t_stack	*stack)
+{
+	int	lenght;
+
+	lenght = 0;
+	if (!stack)
+		return (0);
+	while (stack)
+	{
+		stack = stack->next;
+		lenght++;
+	}
+	return (lenght);
 }

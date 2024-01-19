@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:13:05 by andre-da          #+#    #+#             */
-/*   Updated: 2023/12/14 17:35:58 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/01/19 12:07:28 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,11 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-typedef struct s_stack
-{
-	int				nbr;
-	int				index;
-	int				push_cost;
-	bool			above_medium;
-	bool			cheapest;
-	struct s_stack	*target;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
-
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_free_a_array(char **str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -103,7 +93,5 @@ int		ft_print_unumber(int nbr, int i);
 int		ft_print_hexnumber(int nbr, int i, char c);
 int		ft_print_hex_pnumber(long nbr, int i);
 int		ft_print_address(void	*address, int i);
-long	ft_atol(const char *str);
-int		stack_len(t_stack	*stack);
 
 #endif

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_len.c                                        :+:      :+:    :+:   */
+/*   ft_free_a_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 17:31:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:35:07 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/01/19 12:06:34 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/01/19 12:11:01 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	stack_len(t_stack	*stack)
+void	ft_free_a_array(char **str)
 {
-	int	lenght;
+	int	i;
 
-	lenght = 0;
-	if (!stack)
-		return (0);
-	while (stack)
-	{
-		stack = stack->next;
-		lenght++;
-	}
-	return (lenght);
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
 }

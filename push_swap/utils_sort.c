@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*   utils_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:04:13 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:06:19 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/01/19 12:18:34 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,24 @@ void	min_to_top(t_stack **a)
 		else
 			rra(a);
 	}
+}
+
+void	move_a_to_b(t_stack **a, t_stack **b)
+{
+	t_stack	*cheapest;
+
+	cheapest = get_cheapest(*a);
+	if (cheapest->above_medium && cheapest->target->above_medium)
+		rotate_both(a, b, cheapest);
+	else if (!(cheapest->above_medium) && !(cheapest->target->above_medium))
+		rev_rotate_both(a, b, cheapest);
+	prep_for_push(a, cheapest, 'a');
+	prep_for_push(b, cheapest->target, 'b');
+	pb(b, a);
+}
+
+void	move_b_to_a(t_stack **a, t_stack **b)
+{
+	prep_for_push(a, (*b)->target, 'a');
+	pa(a, b);
 }
