@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_free_a_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 23:17:00 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:31:38 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/01/19 12:06:34 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/01/19 12:11:01 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list	*lst)
+void	ft_free_a_array(char **str)
 {
-	int	lenght;
+	int	i;
 
-	if (lst == NULL)
-		return (0);
-	lenght = 1;
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-		lenght++;
-	}
-	return (lenght);
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
 }
-
-/* int main(void)
-{
-	int	data = 42;
-
-	t_list *new_node = ft_lstnew(&data);
-	printf("%d\n", ft_lstsize(new_node));
-	free(new_node);
-	return (0);
-} */

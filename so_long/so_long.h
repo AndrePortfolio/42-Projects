@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 23:17:00 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:31:38 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/01/22 16:44:25 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SO_LONG.H
+# define SO_LONG.h
 
-int	ft_lstsize(t_list	*lst)
-{
-	int	lenght;
+# include "libft/libft.h"
+# include "minilibx/mlx.h"
 
-	if (lst == NULL)
-		return (0);
-	lenght = 1;
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-		lenght++;
-	}
-	return (lenght);
-}
+# define PLAYER 'P'
+# define EXIT 'E'
+# define COLLECTIBLE 'C'
+# define WALL '1'
+# define EMPTY '0'
 
-/* int main(void)
-{
-	int	data = 42;
+# define ESC 65307
+# define RESTART 114
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define UP 65362
+# define LEFT 65361
+# define RIGHT 65364
+# define DOWN 65364
 
-	t_list *new_node = ft_lstnew(&data);
-	printf("%d\n", ft_lstsize(new_node));
-	free(new_node);
-	return (0);
-} */
+#endif

@@ -1,38 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 23:17:00 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2023/12/14 17:31:38 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/10/20 00:12:34 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2023/10/20 00:57:25 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list	*lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-	int	lenght;
-
 	if (lst == NULL)
-		return (0);
-	lenght = 1;
+		return (NULL);
 	while (lst->next != NULL)
 	{
 		lst = lst->next;
-		lenght++;
 	}
-	return (lenght);
+	return (lst);
 }
 
-/* int main(void)
+/* int	main(void)
 {
 	int	data = 42;
+	int	data1 = 43;
+	int	data2 = 44;
+	t_list *head = ft_lstnew(&data);
+	t_list *node1 = ft_lstnew(&data1);
+	t_list *node2 = ft_lstnew(&data2);
 
-	t_list *new_node = ft_lstnew(&data);
-	printf("%d\n", ft_lstsize(new_node));
-	free(new_node);
-	return (0);
+	head->next = node1;
+	node1->next = node2;
+	node2->next = NULL;
+	ft_lstlast(head);
+	printf("%d\n", *(int *)(node2->content));
+	free(head);
+	free(node1);
+	free(node2);
 } */
