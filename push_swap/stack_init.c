@@ -12,23 +12,23 @@
 
 #include "push_swap.h"
 
-void	init_stack(t_stack **stack, char **argv)
+void	init_stack(t_stack **stack, char **argv, bool flag)
 {
 	int		i;
 	long	n;
 
 	i = 0;
 	if (!*argv)
-		free_errors(stack);
+		free_errors(stack, argv, flag);
 	while (argv[i])
 	{
 		if (check_syntax(argv[i]))
-			free_errors(stack);
+			free_errors(stack, argv, flag);
 		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			free_errors(stack);
+			free_errors(stack, argv, flag);
 		if (check_duplicate(*stack, (int)n))
-			free_errors(stack);
+			free_errors(stack, argv, flag);
 		append_node(stack, (int)n);
 		i++;
 	}

@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
+
 	if (argc <= 1 || (argc == 2 && !argv[1][0]))
 	{
 		ft_printf("Error\n");
@@ -27,11 +28,11 @@ int	main(int argc, char **argv)
 	else if (argc == 2)
 	{
 		argv = ft_split(argv[1], ' ');
-		init_stack(&a, argv);
+		init_stack(&a, argv, true);
 		ft_free_a_array(argv);
 	}
 	else
-		init_stack(&a, argv + 1);
+		init_stack(&a, argv + 1, false);
 	if (!is_sorted(a))
 		algo(a, b);
 	else

@@ -28,7 +28,7 @@ typedef struct s_stack
 }	t_stack;
 
 // Stack initialization
-void	init_stack(t_stack **stack, char **argv);
+void	init_stack(t_stack **stack, char **argv, bool flag);
 void	append_node(t_stack **stack, int n);
 
 // Nodes initialization
@@ -69,7 +69,7 @@ void	pb(t_stack **b, t_stack **a);
 int		check_syntax(char *str);
 int		check_duplicate(t_stack *stack, int n);
 void	free_stack(t_stack **stack);
-void	free_errors(t_stack **stack);
+void	free_errors(t_stack **stack, char **argv, bool flag);
 t_stack	*find_last(t_stack *stack);
 t_stack	*find_min(t_stack *stack);
 t_stack	*find_max(t_stack *stack);

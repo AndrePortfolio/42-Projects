@@ -62,8 +62,10 @@ void	free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
-void	free_errors(t_stack **stack)
+void	free_errors(t_stack **stack, char **argv, bool flag)
 {
+	if (flag)
+		ft_free_a_array(argv);
 	free_stack(stack);
 	ft_printf("Error\n");
 	exit(1);
