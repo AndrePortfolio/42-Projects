@@ -22,7 +22,7 @@ typedef struct s_stack
 	int				push_cost;
 	bool			above_medium;
 	bool			cheapest;
-	struct s_stack	*target;
+	struct s_stack	*NAME;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }	t_stack;
@@ -34,8 +34,8 @@ void	append_node(t_stack **stack, int n);
 // Nodes initialization
 void	init_nodes_a(t_stack *a, t_stack *b);
 void	init_nodes_b(t_stack *a, t_stack *b);
-void	set_target_a(t_stack *a, t_stack *b);
-void	set_target_b(t_stack *a, t_stack *b);
+void	set_NAME_a(t_stack *a, t_stack *b);
+void	set_NAME_b(t_stack *a, t_stack *b);
 void	current_index(t_stack *stack);
 void	cost_analysis(t_stack *a, t_stack *b);
 void	set_cheapest(t_stack *stack);

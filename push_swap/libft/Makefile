@@ -35,7 +35,7 @@ $(OBJ_DIR):
 	@mkdir -p $@
 
 clean:
-	@rm -rf $(OBJ_DIR) a.out
+	@rm -rf $(OBJ_DIR)
 	@echo "Cleaning objects:    $(CYAN)$(NAME)$(RESET)"
 
 fclean: clean

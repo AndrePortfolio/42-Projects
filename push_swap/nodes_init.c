@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void	set_target_a(t_stack *a, t_stack *b)
+void	set_NAME_a(t_stack *a, t_stack *b)
 {
 	t_stack	*current_b;
-	t_stack	*target_node;
+	t_stack	*NAME_node;
 	int		best_match;
 
 	if (!a || !b)
@@ -29,22 +29,22 @@ void	set_target_a(t_stack *a, t_stack *b)
 			if (current_b->nbr < a->nbr && current_b->nbr > best_match)
 			{
 				best_match = current_b->nbr;
-				target_node = current_b;
+				NAME_node = current_b;
 			}
 			current_b = current_b->next;
 		}
 		if (best_match == INT_MIN)
-			a->target = find_max(b);
+			a->NAME = find_max(b);
 		else
-			a->target = target_node;
+			a->NAME = NAME_node;
 		a = a->next;
 	}
 }
 
-void	set_target_b(t_stack *a, t_stack *b)
+void	set_NAME_b(t_stack *a, t_stack *b)
 {
 	t_stack	*current_a;
-	t_stack	*target_node;
+	t_stack	*NAME_node;
 	int		best_match;
 
 	if (!a || !b)
@@ -58,14 +58,14 @@ void	set_target_b(t_stack *a, t_stack *b)
 			if (current_a->nbr > b->nbr && current_a->nbr < best_match)
 			{
 				best_match = current_a->nbr;
-				target_node = current_a;
+				NAME_node = current_a;
 			}
 			current_a = current_a->next;
 		}
 		if (best_match == INT_MAX)
-			b->target = find_min(a);
+			b->NAME = find_min(a);
 		else
-			b->target = target_node;
+			b->NAME = NAME_node;
 		b = b->next;
 	}
 }
@@ -105,10 +105,10 @@ void	cost_analysis(t_stack *a, t_stack *b)
 		a->push_cost = a->index;
 		if (!(a->above_medium))
 			a->push_cost = a_lenght - (a->index);
-		if (a->target->above_medium)
-			a->push_cost += a->target->index;
+		if (a->NAME->above_medium)
+			a->push_cost += a->NAME->index;
 		else
-			a->push_cost += b_lenght - (a->target->index);
+			a->push_cost += b_lenght - (a->NAME->index);
 		a = a->next;
 	}
 }

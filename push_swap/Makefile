@@ -1,5 +1,6 @@
-TARGET = push_swap
+NAME = push_swap
 CC = gcc
+COMPRESS = ar rcs
 CFLAGS = -Wall -Wextra -Werror -g
 FILES = make_push.c make_r_rotate.c make_rotate.c make_swap.c nodes_find.c nodes_init.c \
 		push_swap.c stack_init.c stack_move.c stack_sort.c utils_errors.c utils_sort.c
@@ -13,7 +14,7 @@ NBRS = numbers.txt
 READ_NBRS = $(shell cat $(NBRS))
 NUM = $(if $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)),$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS)),5)
 COMMAND= $(shell seq -999999 999999 | shuf -n $(NUM) > $(NBRS))
-RUN = ./push_swap $(READ_NBRS)
+RUN = ./$(NAME) $(READ_NBRS)
 
 # Colours
 GREEN = \033[1;32m
@@ -21,48 +22,47 @@ RED = \033[1;31m
 CYAN = \033[1;36m
 RESET = \033[0m
 
-all: $(TARGET)
+all: $(NAME)
 
-$(TARGET): $(OBJ_DIR) $(OBJ)
-	@ar rcs $@ $(OBJ)
-	@make -C ./libft
-	@$(CC) $(CFLAGS) $(FILES) $(LIBFT) -o $(TARGET)
-	@echo "Creating library:    $(GREEN)$@.a$(RESET)"
-	@echo "Creating objects:    $(GREEN)$@.a$(RESET)"
+$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@echo "Creating library:    $(GREEN)$@$(RESET)"
+	@echo "Creating objects:    $(GREEN)$@$(RESET)"
 	@echo "Creating executable: $(RED)./$@$(RESET)"
+
+$(LIBFT):
+	@$(MAKE) -C ./libft
 
 $(OBJ_DIR):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.o: ../$(TARGET)/%.c
+$(OBJ_DIR)/%.o: ../$(NAME)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@make clean -C ./libft
-	@echo "Cleaning objects:    $(GREEN)$(TARGET).a$(RESET)"
-	@echo "Cleaning executable: $(RED)./$(TARGET).a$(RESET)"
+	@$(MAKE) -C ./libft clean
+	@echo "Cleaning objects:    $(GREEN)$(NAME)$(RESET)"
+	@echo "Cleaning executable: $(RED)./$(NAME)$(RESET)"
 
-fclean:
-	@make fclean -C ./libft
-	@$(RM) $(TARGET)
-	@echo "Cleaning objects:    $(GREEN)$(TARGET).a$(RESET)"
-	@echo "Cleaning library:    $(GREEN)$(TARGET).a$(RESET)"
-	@echo "Cleaning executable: $(RED)./$(TARGET)$(RESET)"
+fclean: clean
+	@$(RM) $(NAME)
+	@$(MAKE) -C ./libft fclean
+	@echo "Cleaning library:    $(GREEN)$(NAME)$(RESET)"
 
 re: fclean all
 
 test: re
 	@$(COMMAND)
-	@echo "\n$(RED)./$(TARGET)$(RESET)" $(READ_NBRS)
+	@echo "\n$(RED)./$(NAME)$(RESET)" $(READ_NBRS)
 	@$(RUN)
-	@printf "$(GREEN)Number of operations: $(RESET)%s\n" `$(RUN) | wc -l`
-	$(RM) $(NBRS)
+	@printf "\n$(GREEN)Number of operations: $(RESET)%s\n" `$(RUN) | wc -l`
+	@$(RM) $(NBRS)
 
 valgrind: re
 	@$(COMMAND)
 	@echo "\n"
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET) $(READ_NBRS)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(READ_NBRS)
 	$(RM) $(NBRS)
 
 tester: re

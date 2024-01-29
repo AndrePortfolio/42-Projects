@@ -61,17 +61,17 @@ void	move_a_to_b(t_stack **a, t_stack **b)
 	t_stack	*cheapest;
 
 	cheapest = get_cheapest(*a);
-	if (cheapest->above_medium && cheapest->target->above_medium)
+	if (cheapest->above_medium && cheapest->NAME->above_medium)
 		rotate_both(a, b, cheapest);
-	else if (!(cheapest->above_medium) && !(cheapest->target->above_medium))
+	else if (!(cheapest->above_medium) && !(cheapest->NAME->above_medium))
 		rev_rotate_both(a, b, cheapest);
 	prep_for_push(a, cheapest, 'a');
-	prep_for_push(b, cheapest->target, 'b');
+	prep_for_push(b, cheapest->NAME, 'b');
 	pb(b, a);
 }
 
 void	move_b_to_a(t_stack **a, t_stack **b)
 {
-	prep_for_push(a, (*b)->target, 'a');
+	prep_for_push(a, (*b)->NAME, 'a');
 	pa(a, b);
 }

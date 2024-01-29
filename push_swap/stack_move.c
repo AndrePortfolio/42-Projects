@@ -16,7 +16,7 @@ void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
 	if (!*a || !*b || !cheapest_node)
 		return ;
-	while (*a != cheapest_node && *b != cheapest_node->target)
+	while (*a != cheapest_node && *b != cheapest_node->NAME)
 		rr(a, b);
 	current_index(*a);
 	current_index(*b);
@@ -26,7 +26,7 @@ void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
 	if (!*a || !*b || !cheapest_node)
 		return ;
-	while (*a != cheapest_node && *b != cheapest_node->target)
+	while (*a != cheapest_node && *b != cheapest_node->NAME)
 		rrr(a, b);
 	current_index(*a);
 	current_index(*b);

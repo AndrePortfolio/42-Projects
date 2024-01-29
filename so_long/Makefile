@@ -41,7 +41,6 @@ fclean:
 re: fclean all
 
 test: re
-	clear
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET) test_map_big.ber
 
 run: all
