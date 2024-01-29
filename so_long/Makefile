@@ -21,7 +21,7 @@ $(TARGET): $(MLX) $(OBJ) $(LIBFT)
 		@echo "Creating objects:    $(GREEN)$@.a$(RESET)"
 		@echo "Creating executable: $(RED)./$@$(RESET)"
 
-$(OBJ_DIR)/%.o: ../so_long/%.c
+$(OBJ_DIR)/%.o: ../$(TARGET)/%.c
 	@mkdir -p $@
 	@$(CC) $(CFLAGS) -Iheaders/ -ILibft/ -Iminilibx-linux -c $< -o $@
 
