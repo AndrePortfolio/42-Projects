@@ -1,6 +1,6 @@
 NAME = libft
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
 FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 			ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
 			ft_memset.c ft_strchr.c ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strncmp.c \
@@ -12,6 +12,7 @@ FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c 
 			ft_lstmap.c ft_atol.c ft_free_a_array.c
 OBJ_DIR = objects
 OBJ = $(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
+RM = rm -rf
 
 # Colours
 CYAN = \033[1;36m
@@ -23,20 +24,20 @@ RESET = \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@ar rcs $@ $(OBJ)
+	@ar rcs $@.a $(OBJ)
 
-$(OBJ_DIR)/%.o: ../libft/%.c
+$(OBJ_DIR)/%.o: ../$(NAME)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $@
 
 clean:
-	@rm -rf $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 	@echo "$(ORANGE)$@$(RESET)  $(NAME)     $(GREEN)[OK]$(RESET)"
 
 fclean:
-	@rm -rf $(NAME)
+	@$(RM) $(NAME).a
 	@echo "$(RED)$@$(RESET) $(NAME)     $(GREEN)[OK]$(RESET)"
 
 re: fclean all

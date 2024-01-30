@@ -1,12 +1,12 @@
 NAME = push_swap
 CC = gcc
-COMPRESS = ar rcs
 CFLAGS = -Wall -Wextra -Werror -g
 FILES = make_push.c make_r_rotate.c make_rotate.c make_swap.c nodes_find.c nodes_init.c \
 		push_swap.c stack_init.c stack_move.c stack_sort.c utils_errors.c utils_sort.c
 LIBFT = libft/libft.a
 OBJ_DIR = objects
 OBJ = $(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
+COMPRESS = ar rcs
 RM = rm -rf
 
 # Test
