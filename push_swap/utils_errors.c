@@ -67,6 +67,6 @@ void	free_errors(t_stack **stack, char **argv, bool flag)
 	if (flag)
 		ft_free_a_array(argv);
 	free_stack(stack);
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	exit(1);
 }
