@@ -1,5 +1,5 @@
 NAME = push_swap
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 FILES = make_push.c make_r_rotate.c make_rotate.c make_swap.c nodes_find.c nodes_init.c \
 		push_swap.c stack_init.c stack_move.c stack_sort.c utils_errors.c utils_sort.c

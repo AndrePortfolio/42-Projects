@@ -12,15 +12,6 @@
 
 #include "push_swap.h"
 
-void print_stack(t_stack *a)
-{
-	while (a)
-	{
-		ft_printf("%d\n", a->nbr);
-		a = a->next;
-	}
-}
-
 void	algo(t_stack *a, t_stack *b)
 {
 	if (!a)
