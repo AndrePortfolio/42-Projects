@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+void print_stack(t_stack *a)
+{
+	while (a)
+	{
+		ft_printf("%d\n", a->nbr);
+		a = a->next;
+	}
+}
+
 void	algo(t_stack *a, t_stack *b)
 {
 	if (!a)
@@ -53,7 +62,7 @@ void	init_nodes_a(t_stack *a, t_stack *b)
 {
 	current_index(a);
 	current_index(b);
-	set_NAME_a(a, b);
+	set_target_a(a, b);
 	cost_analysis(a, b);
 	set_cheapest(a);
 }
@@ -62,5 +71,5 @@ void	init_nodes_b(t_stack *a, t_stack *b)
 {
 	current_index(a);
 	current_index(b);
-	set_NAME_b(a, b);
+	set_target_b(a, b);
 }

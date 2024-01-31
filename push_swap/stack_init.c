@@ -12,6 +12,29 @@
 
 #include "push_swap.h"
 
+static long	ft_atol_upgrd(const char *str)
+{
+	int		i;
+	int		sign;
+	long	nbr;
+
+	i = 0;
+	sign = 1;
+	nbr = 0;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (ft_isdigit(str[i]) && nbr <= INT_MAX)
+	{
+		nbr = nbr * 10 + (str[i] - '0');
+		i++;
+	}
+	return (nbr * sign);
+}
+
 void	init_stack(t_stack **stack, char **argv, bool flag)
 {
 	int		i;
@@ -24,7 +47,7 @@ void	init_stack(t_stack **stack, char **argv, bool flag)
 	{
 		if (check_syntax(argv[i]))
 			free_errors(stack, argv, flag);
-		n = ft_atol(argv[i]);
+		n = ft_atol_upgrd(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
 			free_errors(stack, argv, flag);
 		if (check_duplicate(*stack, (int)n))

@@ -34,7 +34,7 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
 $(LIBFT):
-	@$(MAKE) -C ./libft
+	@$(MAKE) -C ./libft --no-print-directory
 
 $(OBJ_DIR):
 	@mkdir -p $@
@@ -44,12 +44,12 @@ $(OBJ_DIR)/%.o: ../$(NAME)/%.c
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@$(MAKE) -C ./libft clean
+	@$(MAKE) -C ./libft clean --no-print-directory
 	@echo "$(ORANGE)$@$(RESET)  $(NAME) $(GREEN)[OK]$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@$(MAKE) -C ./libft fclean
+	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
 
 re: fclean all
@@ -72,7 +72,7 @@ test_mac: re
 	@$(RUN) | $(CHECKER_MAC)
 	@$(RM) $(NBRS)
 
-valgrind: re
+v: re
 	@$(COMMAND)
 	@echo "\n"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(READ_NBRS)
@@ -85,4 +85,4 @@ tester: re
 %:
 	@true
 
-.PHONY: all clean fclean re test test_mac valgrind tester
+.PHONY: all clean fclean re test test_mac v tester
