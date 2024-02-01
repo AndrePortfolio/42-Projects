@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 15:12:50 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/01 13:08:33 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/02/01 12:24:48 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/02/01 12:27:59 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strchr(const char *s, int c)
+int	main(void)
 {
-	size_t	i;
+	char	block1[] = "Hello my name is";
+	char	block2[] = "and I am";
+	char	block3[] = "years old!";
+	char	name[] = "ndré";
+	int		age = 23;
+	char	c = 'A';
 
-	i = 0;
-	while (i <= ft_strlen(s))
-	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if (c == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
+	printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
+	ft_printf("%s %c%s %s %d %s\n", block1, c, name, block2, age, block3);
 }
-
-/* int	main(void)
-{
-	char	str[] = "teste";
-
-	printf("My Function: %s\n", ft_strchr(str, '\0'));
-	printf("Function:    %s\n", strchr(str, '\0'));
-	return (0);
-} */

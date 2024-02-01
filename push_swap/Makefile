@@ -1,11 +1,10 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-FILES = make_push.c make_r_rotate.c make_rotate.c make_swap.c nodes_find.c nodes_init.c \
-		push_swap.c stack_init.c stack_move.c stack_sort.c utils_errors.c utils_sort.c
+SRC = $(wildcard *.c)
 LIBFT = libft/libft.a
 OBJ_DIR = objects
-OBJ = $(addprefix $(OBJ_DIR)/,$(FILES:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 COMPRESS = ar rcs
 RM = rm -rf
 
@@ -30,7 +29,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	@echo "$(CYAN)make$(RESET)   libft     $(GREEN)[OK]$(RESET)"
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
 $(LIBFT):
@@ -39,7 +37,7 @@ $(LIBFT):
 $(OBJ_DIR):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.o: ../$(NAME)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
