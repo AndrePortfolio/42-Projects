@@ -1,4 +1,5 @@
 #include <mlx.h>
+#include "so_long.h"
 
 typedef struct	s_data {
 	void	*img;
@@ -7,6 +8,18 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
+
+int	close_win(int keycode, t_vars *vars)
+{
+	if (keycode == ESC)
+		mlx_destroy_window(vars->mlx, vars->win);
+	return (0);
+}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -23,13 +36,13 @@ int	create_trgb(int t, int r, int g, int b)
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
 	t_data	img;
+	t_vars	vars;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
+	mlx_hook(vars.win, 2, 1L<<0, close_win, &vars);
+	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 
 	int	white = 0x00FFFFFF;
@@ -41,13 +54,13 @@ int	main(void)
 	{
 		while (y < 1080)
 		{
-			int color = create_trgb(160, 0, 160, 0);
+			int color = create_trgb(0, 255, 0, 0);
 			my_mlx_pixel_put(&img, x, y, color);
 			y++;
 		}
 		y = 0;
 		x++;
 	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_loop(vars.mlx);
 }

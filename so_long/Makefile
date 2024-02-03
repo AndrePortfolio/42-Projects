@@ -2,6 +2,7 @@ NAME = so_long
 CC = cc
 CFLAGS = -g
 SRC = $(wildcard *.c)
+LIBFT = libft/libft.a
 OBJ_DIR = objects
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 COMPRESS = ar rcs
@@ -28,9 +29,12 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(OBJ) $(MLXFLAGS) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
+
+$(LIBFT):
+	@$(MAKE) -C ./libft --no-print-directory
 
 $(OBJ_DIR):
 	@mkdir -p $@
@@ -40,10 +44,12 @@ $(OBJ_DIR)/%.o: %.c
 
 clean:
 	@$(RM) $(OBJ_DIR)
+	@$(MAKE) -C ./libft clean --no-print-directory
 	@echo "$(ORANGE)$@$(RESET)  $(NAME) $(GREEN)[OK]$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
 
 re: fclean all

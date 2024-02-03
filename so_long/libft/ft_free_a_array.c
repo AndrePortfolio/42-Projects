@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_free_a_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/03 12:05:35 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/01/19 12:06:34 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/01/19 12:11:01 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include "minilibx-mac/mlx.h"
-//# include "minilibx-linux/mlx.h"
+void	ft_free_a_array(char **str)
+{
+	int	i;
 
-# define PLAYER 'P'
-# define EXIT 'E'
-# define COLLECTIBLE 'C'
-# define WALL '1'
-# define EMPTY '0'
-
-# define ESC 53
-# define RESTART 114
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define UP 126
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
-
-#endif
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}

@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/03 12:05:35 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/10/18 15:38:16 by andre-da          #+#    #+#             */
+/*   Updated: 2023/10/25 19:45:48 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include "minilibx-mac/mlx.h"
-//# include "minilibx-linux/mlx.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*nbr;
 
-# define PLAYER 'P'
-# define EXIT 'E'
-# define COLLECTIBLE 'C'
-# define WALL '1'
-# define EMPTY '0'
+	nbr = (t_list *)malloc(sizeof(t_list));
+	if (nbr == NULL)
+		return (NULL);
+	nbr->content = content;
+	nbr->next = NULL;
+	return (nbr);
+}
 
-# define ESC 53
-# define RESTART 114
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define UP 126
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
+/* int	main(void)
+{
+	int	data = 42;
 
-#endif
+	t_list *new_node = ft_lstnew(&data);
+	printf("%d\n", *(int *)(new_node->content));
+	free(new_node);
+	return (0);
+} */

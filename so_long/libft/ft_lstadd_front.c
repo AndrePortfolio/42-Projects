@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/03 12:05:35 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2023/10/18 16:47:20 by andre-da          #+#    #+#             */
+/*   Updated: 2023/10/20 12:58:27 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include "minilibx-mac/mlx.h"
-//# include "minilibx-linux/mlx.h"
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (new == NULL)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}
 
-# define PLAYER 'P'
-# define EXIT 'E'
-# define COLLECTIBLE 'C'
-# define WALL '1'
-# define EMPTY '0'
+/* int	main(void)
+{
+	int		data = 42;
+	t_list *new_node = ft_lstnew(&data);
+	t_list *my_list = NULL;
 
-# define ESC 53
-# define RESTART 114
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define UP 126
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
-
-#endif
+	ft_lstadd_front(&my_list, new_node);
+	printf("%d\n", *(int *)(my_list->content));
+	return (0);
+} */
