@@ -1,7 +1,7 @@
-#include <mlx.h>
 #include "so_long.h"
 
-typedef struct	s_data {
+typedef struct	s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -9,7 +9,8 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-typedef struct	s_vars {
+typedef struct	s_vars
+{
 	void	*mlx;
 	void	*win;
 }				t_vars;
@@ -34,6 +35,12 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+int handle_resize(t_vars *vars)
+{
+	printf("Window resized!\n");
+	return (0);
+}
+
 int	main(void)
 {
 	t_data	img;
@@ -42,6 +49,7 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 	mlx_hook(vars.win, 2, 1L<<0, close_win, &vars);
+	mlx_hook(vars.win, 12, 1L<<15, handle_resize, &vars);
 	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 
@@ -54,7 +62,7 @@ int	main(void)
 	{
 		while (y < 1080)
 		{
-			int color = create_trgb(0, 255, 0, 0);
+			int color = create_trgb(0, 0, 0, 100);
 			my_mlx_pixel_put(&img, x, y, color);
 			y++;
 		}
