@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:56:17 by gfontao-          #+#    #+#             */
-/*   Updated: 2024/02/09 11:55:11 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/09 22:59:52 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	mlx_exit(t_mlx_start *par, char *message, int status)
 
 void	create_all(t_mlx_start *par, t_img *img)
 {
-	render_map(par, img);
+	render_map(par, img);			// Pixel by pixel create the map image
 	render_boarder(par, img);
 	render_packman(par, img);
 	put_screen(par, img);
@@ -62,9 +62,9 @@ void	mlx_start(t_map *map)
 
 	mlx_initiazie_var(&par, map);							// Initializes Minilibx and Window
 	initialize_image(&par, &img, par.width, par.height);	// Initilizes Image to fit the whole window
-	packman_init(&par);										
-	map_init(&par);
-	create_all(&par, &img);
+	packman_init(&par);										// Initializes packman
+	map_init(&par);											// Initializes map
+	create_all(&par, &img);									//
 	mlx_loop_hook(par.mlx, const_move, &par);
 	mlx_hook(par.mlx_win, 2, 1L << 0, key_hook, &par);
 	mlx_hook(par.mlx_win, 17, 1L << 17, mlx_exit, &par);

@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:36:37 by gfontao-          #+#    #+#             */
-/*   Updated: 2024/02/09 11:50:17 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/09 22:17:51 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	find_start(t_mlx_start *par)
 
 void	get_addr(t_mlx_start *par)
 {
-	par->packman->img[0].addr = mlx_get_data_addr(par->packman->img[0].img,
+	par->packman->img[0].addr = mlx_get_data_addr(par->packman->img[0].img,		// Get the address of img, bpp, line lenght and endian
 			&par->packman->img[0].bits_per_pixel,
 			&par->packman->img[0].line_length,
 			&par->packman->img[0].endian);
