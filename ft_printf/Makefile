@@ -1,9 +1,10 @@
-NAME = libftprintf
+NAME = printf
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-SRC = $(wildcard *.c)
+SRC_DIR = sources
+SRC = $(wildcard $(SRC_DIR)/*.c)
 OBJ_DIR = objects
-OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
 COMPRESS = ar rcs
 RM = rm -rf
 
@@ -21,9 +22,9 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
 $(OBJ_DIR):
-	@mkdir -p $@
+	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

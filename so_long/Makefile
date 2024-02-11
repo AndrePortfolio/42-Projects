@@ -1,21 +1,22 @@
 NAME = so_long
 CC = cc
-CFLAGS = -g
-SRC = $(wildcard *.c)
+CFLAGS = -Wall -Wextra -Werror -g
+SRC_DIR = sources
+SRC = $(wildcard $(SRC_DIR)/*.c)
 LIBFT = libft/libft.a
 OBJ_DIR = objects
-OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
 COMPRESS = ar rcs
 RM = rm -rf
 
 # Mac
-MLX_DIR = minilibx-mac
+MLX_DIR = minilibx/minilibx-mac
 MLX_LIB = $(MLX_DIR)/libmlx.a
 MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/libmlx
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # Linux
-#MLX_DIR = minilibx-linux
+#MLX_DIR = minilibx/minilibx-linux
 #MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
 #MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/linux
 #MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
@@ -39,7 +40,7 @@ $(LIBFT):
 $(OBJ_DIR):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
 
 clean:

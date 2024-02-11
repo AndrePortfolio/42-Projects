@@ -1,10 +1,11 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-SRC = $(wildcard *.c)
+SRC_DIR = sources
+SRC = $(wildcard $(SRC_DIR)/*.c)
 LIBFT = libft/libft.a
 OBJ_DIR = objects
-OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
 COMPRESS = ar rcs
 RM = rm -rf
 
@@ -34,10 +35,8 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 $(LIBFT):
 	@$(MAKE) -C ./libft --no-print-directory
 
-$(OBJ_DIR):
-	@mkdir -p $@
-
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
