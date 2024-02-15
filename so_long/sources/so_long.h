@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/10 15:32:30 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/15 19:06:47 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,55 @@
 # define RIGHT 124
 # define DOWN 125
 
-typedef struct s_img
+typedef struct s_game
 {
-	void *img;
-
-
-}			t_img;
+	void		*mlx;
+	void		*win;
+	t_map		map;
+	t_img		load_img;
+	t_player	player;
+	int			width;
+	int			height;
+}				t_game;
 
 typedef struct s_map
 {
-	char	**map;
-	t_img	wall;
-	t_img	floor;
-	t_img	collectible;
-	t_img	exit;
-	t_img	boarder_vertical;
-	t_img	boarder_horizontal;
-	int		rows;
-	int		cols;
-	int		collectible_count;
-}			t_map;
+	char		**map;
+	t_img		wall;
+	t_img		floor;
+	t_img		collectible;
+	t_img		exit;
+	int			rows;
+	int			cols;
+	int			collectible_count;
+	t_check		check;
+}				t_map;
+
+typedef struct s_check
+{
+	int			player;
+	int			exit;
+	int			collectibles;
+}				t_check;
+
+typedef struct s_img
+{
+	void		*img;
+	char		*addr;
+	int			endian;
+	int			line_lenght;
+	int			bits_per_pixel;
+	int			width;
+	int			height;
+}				t_img;
+
+typedef struct s_player
+{
+	t_img		img[10];
+	int			x;
+	int			y;
+	int			moves;
+	char		dir;
+}				t_player;
 
 #endif

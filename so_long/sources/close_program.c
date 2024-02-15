@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/10 11:51:56 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/10 11:55:09 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/02/14 16:40:01 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/02/14 16:42:40 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+void	error_message(char *str)
 {
-	t_map map;
-
-	read_input();
-	mlx_start();
-	free_map();
+	ft_putendl_fd(str, 2);
+	exit(1);
 }
