@@ -1,0 +1,17 @@
+// ler mapa
+// verificar se mapa e retangular
+// verificar se mapa e circundado por paredes
+// verificar
+// verificar se mapa tem apenas 1 player e 1 exit e pelo menos 1 coletavel
+// verificar se todos os coletaveis e a exit sao possiveis de alcansar pelo player (flood fill algorithem)
+
+readmap(char *str)
+{
+	
+}
+
+parsing()
+{
+	readmap();
+	verrify_map();
+}
