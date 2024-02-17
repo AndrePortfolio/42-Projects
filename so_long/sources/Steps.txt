@@ -1,0 +1,37 @@
+
+// Parsing:
+
+- Program takes 1 argument, otherwise error.
+
+Map:
+- A map must be a .ber file
+- Read map into my matrix
+- Map must be retangular (if not return error)
+- Map must be surrounded by walls.
+
+
+
+- The map can have 5 characters:
+0 empty space  // don't forget to check if it exists.
+1 wall
+C collectible
+E exit
+P player starting position
+- A valid map must contain walls, free space, 1 exit, 1 player and at leat 1 collectible.
+- Player must be able to acess all collectibles and exit
+- If any misconfiguration is encontered in the file the program must exit and return Error with a message error of my choice.
+
+
+// Setup:
+
+Game: (2D view)
+- W, A, S, D must be used to move the player (and/or equivalent)
+- Player can't move into walls
+- A exit só é possivel de acessar após os coletaveis serem apanhados
+- Numero de moves tem que aparecer no terminal
+
+Graphic:
+- The program has to display the image in a window
+- The management of the window must be smooth (minimizing, changing window etc)
+- Pressing ESC or clicking the cross must close the window and quit the program in a clean way
+- You must use imaged of MINILIBx
