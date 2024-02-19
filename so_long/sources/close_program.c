@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:16:50 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/17 16:17:01 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/18 14:34:50 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error_message(char *str)
 
 void	free_map(t_map *map, char *str, int status)
 {
-	int row;
+	int	row;
 
 	row = 0;
 	while (map->map[row])

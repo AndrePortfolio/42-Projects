@@ -6,17 +6,17 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:18:53 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/17 17:39:46 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/18 21:41:28 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void read_map(t_map *map, int fd, int rows)
+void	read_map(t_map *map, int fd, int rows)
 {
-	char *line;
-	char *trimmed_line;
-	int length;
+	char	*line;
+	char	*trimmed_line;
+	int		length;
 
 	line = get_next_line(fd);
 	if (!line && rows == 0)
@@ -54,45 +54,16 @@ bool	is_ber(char *str)
 	return (false);
 }
 
-bool	is_rectangular(t_map	*map)
+void	validate_map(t_map *map)
 {
-	int	row = 0;
-	int	coll;
-	int	length = 0;
-
-	while (map->map[row])
-	{
-		coll = 0;
-		while (map->map[row][coll])
-			coll++;
-		if (length != coll && length != 0)
-			return (false);
-		length = coll;
-		row++;
-	}
-	map->cols = coll;
-	map->rows = row;
-	return (true);
-}
-
-bool	around_walls(t_map	*map)
-{
-	int row = 0;
-	int	coll = 0;
-
-	while (map->cols > coll)
-	{
-		if (map->map[0][coll] != '1' || map->map[map->rows - 1][coll] != '1')
-			return (false);
-		coll++;
-	}
-	while (map->rows > row)
-	{
-		if (map->map[row][0] != '1' || map->map[row][map->cols - 1] != '1')
-			return (false);
-		row++;
-	}
-	return (true);
+	if (!is_rectangular(map))
+		error_message("Map must be rectangular");
+	if (!around_walls(map))
+		error_message("Map must be surrounded by walls");
+	if (!check_characters(map, 0, 0, 0))
+		error_message("Invalid map metrics");
+	// if (!player_access(map, map->player.x, map->player.y))
+	// 	error_message("Player can't access all collectibles and/or exit");
 }
 
 void	read_input(t_map *map, int argc, char **argv)
@@ -108,10 +79,5 @@ void	read_input(t_map *map, int argc, char **argv)
 		error_message("Failed to open map");
 	read_map(map, fd, 0);
 	close(fd);
-	if (!is_rectangular(map))
-		error_message("Map must be rectangular");
-	if (!around_walls(map))
-		error_message("Map must be surrounded by walls");
-
-
+	validate_map(map);
 }

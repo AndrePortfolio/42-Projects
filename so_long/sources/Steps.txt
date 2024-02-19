@@ -8,18 +8,19 @@ Map:
 - Read map into my matrix
 - Map must be retangular (if not return error)
 - Map must be surrounded by walls.
-
-
-
 - The map can have 5 characters:
-0 empty space  // don't forget to check if it exists.
+0 empty space
 1 wall
 C collectible
 E exit
 P player starting position
 - A valid map must contain walls, free space, 1 exit, 1 player and at leat 1 collectible.
+
+
+
+
 - Player must be able to acess all collectibles and exit
-- If any misconfiguration is encontered in the file the program must exit and return Error with a message error of my choice.
+NOTE: If any misconfiguration is encontered in the file the program must exit and return Error with a message error of my choice.
 
 
 // Setup:

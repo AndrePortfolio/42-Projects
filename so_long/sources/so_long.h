@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/17 17:22:15 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/18 21:41:33 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,29 @@
 # define RIGHT 124
 # define DOWN 125
 
+typedef struct s_xy
+{
+	int		x;
+	int		y;
+}			t_xy;
+
 typedef struct s_map
 {
 	char	**map;
-	int		collectibles;
-	int		exit;
-	int		player;
+	int		collect_nbr;
 	int		rows;
 	int		cols;
+	t_xy	player;
 }			t_map;
 
 void	error_message(char *str);
 void	free_map(t_map *map, char *str, int status);
 void	read_input(t_map *map, int argc, char **argv);
+void	read_map(t_map *map, int fd, int rows);
 bool	is_ber(char *str);
 void	free_map(t_map *map, char *str, int status);
+bool	is_rectangular(t_map	*map);
+bool	around_walls(t_map	*map);
+bool	check_characters(t_map *map, int exit, int collect, int space);
 
 #endif
