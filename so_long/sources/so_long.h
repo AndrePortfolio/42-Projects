@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/18 21:41:33 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/02/19 16:10:18 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,21 @@ typedef struct s_map
 	int		rows;
 	int		cols;
 	t_xy	player;
+	int		exit;
 }			t_map;
 
-void	error_message(char *str);
-void	free_map(t_map *map, char *str, int status);
-void	read_input(t_map *map, int argc, char **argv);
 void	read_map(t_map *map, int fd, int rows);
 bool	is_ber(char *str);
-void	free_map(t_map *map, char *str, int status);
+void	validate_map(t_map *map);
+void	read_input(t_map *map, int argc, char **argv);
+
 bool	is_rectangular(t_map	*map);
 bool	around_walls(t_map	*map);
 bool	check_characters(t_map *map, int exit, int collect, int space);
+int		count(t_map *map, char chr, int i, int j);
+void	player_access(t_map *map, char **visited, int x, int y);
+
+void	error_message(char *str);
+void	free_map(t_map *map, char *str, int status);
 
 #endif
