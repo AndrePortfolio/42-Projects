@@ -6,13 +6,13 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 15:13:32 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/19 19:21:42 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_map(t_map map)
+static void	print_map(t_map map)
 {
 	int	i;
 	int	j;
@@ -37,4 +37,6 @@ int	main(int argc, char **argv)
 
 	read_input(&map, argc, argv);
 	print_map(map);
+	mlx_start(&map);
+	// free_map(map, "Game over", 0);
 }

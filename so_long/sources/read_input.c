@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 16:27:56 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/19 21:18:53 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	read_map(t_map *map, int fd, int rows)
 		length = ft_strlen(trimmed_line);
 		map->map[rows] = malloc(sizeof(char) * (length + 1));
 		if (!map->map[rows])
-			free_map(map, "Memory allocation error", 1);
+			free_map(map, "Memory allocation failed", 1);
 		ft_strlcpy(map->map[rows], trimmed_line, length + 1);
 		free(line);
 		free(trimmed_line);
@@ -59,7 +59,7 @@ char	**copy_map(t_map *map, char **original, int rows, int cols)
 	char	**copy;
 	int		i;
 
-	copy = malloc(sizeof(char*) * rows);
+	copy = malloc(sizeof(char *) * rows);
 	if (!copy)
 		free_map(map, "Memory allocation failed", 1);
 	i = 0;
@@ -79,7 +79,7 @@ char	**copy_map(t_map *map, char **original, int rows, int cols)
 
 void	validate_map(t_map *map)
 {
-	char **visited;
+	char	**visited;
 
 	if (!is_rectangular(map))
 		error_message("Map must be rectangular");
@@ -89,7 +89,7 @@ void	validate_map(t_map *map)
 		error_message("Invalid map metrics");
 	visited = copy_map(map, map->map, map->rows, map->cols);
 	player_access(map, visited, map->player.x, map->player.y);
-	if (map->collect_nbr != 0 || map->exit != 0)
+	if (map->collect_nbr != 0 || map->exit_nbr != 0)
 		error_message("Player can't access all collectibles and/or exit");
 }
 

@@ -1,8 +1,9 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-SRC_DIR = sources
-SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC_DIR1 = sources
+SRC_DIR2 = sources/graphics
+SRC = $(wildcard $(SRC_DIR1)/*.c) $(wildcard $(SRC_DIR2)/*.c)
 LIBFT = libft/libft.a
 OBJ_DIR = objects
 OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
@@ -40,7 +41,10 @@ $(LIBFT):
 $(OBJ_DIR):
 	@mkdir -p $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR1)/%.c
+	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR2)/%.c
 	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:33 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 16:09:07 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/19 21:18:42 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	count(t_map *map, char chr, int i, int j)
 	count = 0;
 	if (chr == PLAYER)
 	{
-		map->player.x = j;
-		map->player.y = i;
+		map->player.x = i;
+		map->player.y = j;
 	}
 	count += 1;
 	return (count);
@@ -99,19 +99,19 @@ bool	check_characters(t_map *map, int exit, int collect, int space)
 	map->collect_nbr = collect;
 	if (player != 1 || exit != 1 || space == 0 || collect == 0)
 		return (false);
-	map->exit = 1;
+	map->exit_nbr = 1;
 	return (true);
 }
 
 void	player_access(t_map *map, char **visited, int x, int y)
 {
-	if (visited[x][y] == '\0' || visited[x][y] == WALL)
-		return;
+	if (visited[x][y] == VISITED || visited[x][y] == WALL)
+		return ;
 	if (visited[x][y] == COLLECTIBLE)
 		map->collect_nbr -= 1;
 	else if (visited[x][y] == EXIT)
-		map->exit -= 1;
-	visited[x][y] = '\0';
+		map->exit_nbr -= 1;
+	visited[x][y] = VISITED;
 	player_access(map, visited, x + 1, y);
 	player_access(map, visited, x - 1, y);
 	player_access(map, visited, x, y + 1);

@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/17 00:09:20 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/19 18:11:48 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 
 typedef struct s_img
 {
-	void			*img;
-	char			*addr;
+	void			*addr;
+	char			*img;
 	int				endian;
 	int				ln_lenght;
 	int				bits_pp;
