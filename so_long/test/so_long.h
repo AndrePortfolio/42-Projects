@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 18:11:48 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/20 16:33:04 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
-# include "../minilibx-mac/mlx.h"
-//# include "../minilibx/minilibx-linux/mlx.h"
+// # include "../minilibx-mac/mlx.h"
+# include "../minilibx/minilibx-linux/mlx.h"
 
 # define PLAYER 'P'
 # define EXIT 'E'
@@ -24,28 +24,28 @@
 # define EMPTY '0'
 
 // Linux
-// # define ESC 65307
-// # define RESTART 114
-// # define W 119
-// # define A 97
-// # define S 115
-// # define D 100
-// # define UP 65362
-// # define LEFT 65361
-// # define RIGHT 65363
-// # define DOWN 65364
+# define ESC 65307
+# define RESTART 114
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define UP 65362
+# define LEFT 65361
+# define RIGHT 65363
+# define DOWN 65364
 
 // Mac
-# define ESC 53
-# define RESTART 114
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define UP 126
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
+// # define ESC 53
+// # define RESTART 114
+// # define W 13
+// # define A 0
+// # define S 1
+// # define D 2
+// # define UP 126
+// # define LEFT 123
+// # define RIGHT 124
+// # define DOWN 125
 
 typedef struct s_img
 {

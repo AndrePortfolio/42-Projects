@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/20 00:10:27 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/20 22:08:15 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
-# include "../minilibx-mac/mlx.h"
-//# include "../minilibx/minilibx-linux/mlx.h"
+// # include "../minilibx-mac/mlx.h"
+# include "../minilibx/minilibx-linux/mlx.h"
 
 # define PLAYER 'P'
 # define EXIT 'E'
@@ -25,28 +25,30 @@
 # define VISITED 'V'
 # define SCALE 50
 # define BOARDER 50
+# define TRANSPARENT 0xFF000000
 
 // Linux
-// # define ESC 65307
-// # define W 119
-// # define A 97
-// # define S 115
-// # define D 100
-// # define UP 65362
-// # define LEFT 65361
-// # define RIGHT 65363
-// # define DOWN 65364
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define UP 65362
+# define LEFT 65361
+# define RIGHT 65363
+# define DOWN 65364
+# define WALL_COLOR 0x1100FE
 
 // Mac
-# define ESC 53
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define UP 126
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
+// # define ESC 53
+// # define W 13
+// # define A 0
+// # define S 1
+// # define D 2
+// # define UP 126
+// # define LEFT 123
+// # define RIGHT 124
+// # define DOWN 125
 
 typedef struct s_img
 {
@@ -59,18 +61,6 @@ typedef struct s_img
 	int			height;
 }				t_img;
 
-typedef struct s_player
-{
-	int			x;
-	int			y;
-}				t_player;
-
-typedef struct s_xy
-{
-	int			x;
-	int			y;
-}				t_xy;
-
 typedef struct s_map
 {
 	char		**map;
@@ -78,26 +68,23 @@ typedef struct s_map
 	int			cols;
 	int			collect_nbr;
 	int			exit_nbr;
-	t_xy		player;
-}				t_map;
-
-typedef struct s_character
-{
+	int			player_x;
+	int			player_y;
+	t_img		player;
 	t_img		wall;
 	t_img		space;
 	t_img		collectible;
 	t_img		exit;
-	t_img		player;
-}				t_character;
+	t_img		boarder_vertical;
+	t_img		boarder_horizontal;
+}				t_map;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_img		*load_img;
-	t_character	*img;
 	t_map		*map;
-	t_player	*player;
 	int			width;
 	int			height;
 }				t_game;
@@ -107,7 +94,7 @@ typedef struct s_game
 // Read input
 void	read_map(t_map *map, int fd, int rows);
 bool	is_ber(char *str);
-char	**copy_map(t_map *map, char **original, int rows, int cols);
+char	**copy_map(t_map *map, char **original, int rows);
 void	validate_map(t_map *map);
 void	read_input(t_map *map, int argc, char **argv);
 
@@ -130,5 +117,8 @@ void	init_exit(t_game *game);
 void	init_player(t_game *game);
 void	init_collectibles(t_game *game);
 void	init_empty_space(t_game *game);
+
+void	create_game_images(t_game *game, t_img *img);
+int		put_screen(t_game *game, t_img *img);
 
 #endif

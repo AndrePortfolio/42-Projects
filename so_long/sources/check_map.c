@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:33 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 21:18:42 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/20 14:46:49 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	count(t_map *map, char chr, int i, int j)
 	count = 0;
 	if (chr == PLAYER)
 	{
-		map->player.x = i;
-		map->player.y = j;
+		map->player_x = i;
+		map->player_y = j;
 	}
 	count += 1;
 	return (count);

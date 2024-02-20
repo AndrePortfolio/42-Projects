@@ -72,7 +72,7 @@ test_mac: re
 v: re
 	@$(COMMAND)
 	@echo "\n"
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(READ_NBRS)
+	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(READ_NBRS)
 	$(RM) $(NBRS)
 
 tester: re

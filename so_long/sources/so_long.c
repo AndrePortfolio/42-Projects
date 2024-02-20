@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 19:21:42 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/20 18:43:23 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	main(int argc, char **argv)
 	read_input(&map, argc, argv);
 	print_map(map);
 	mlx_start(&map);
-	// free_map(map, "Game over", 0);
+	free_map(&map, "Game over", 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 21:18:53 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/20 17:10:54 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	read_map(t_map *map, int fd, int rows)
 {
-	char	*line;
-	char	*trimmed_line;
-	int		length;
+	char *line;
 
 	line = get_next_line(fd);
-	if (!line && rows == 0)
-		error_message("Map is empty");
-	else if (line)
+	if (line)
+		read_map(map, fd, rows + 1);
+	else
 	{
-		trimmed_line = ft_strtrim(line, "\n");
-		length = ft_strlen(trimmed_line);
-		map->map[rows] = malloc(sizeof(char) * (length + 1));
+		if (rows == 0)
+			error_message("Empty file");
+		map->map = ft_calloc((rows + 1), sizeof(char *));
+		if (!map->map)
+			error_message("Memory allocation failed");
+		map->rows = rows;
+	}
+	if (line)
+	{
+		map->map[rows] = ft_strtrim(line, "\n");
 		if (!map->map[rows])
 			free_map(map, "Memory allocation failed", 1);
-		ft_strlcpy(map->map[rows], trimmed_line, length + 1);
 		free(line);
-		free(trimmed_line);
-		read_map(map, fd, rows + 1);
 	}
-	else
-		map->map[rows] = NULL;
 }
 
 bool	is_ber(char *str)
@@ -54,24 +54,23 @@ bool	is_ber(char *str)
 	return (false);
 }
 
-char	**copy_map(t_map *map, char **original, int rows, int cols)
+char	**copy_map(t_map *map, char **original, int rows)
 {
 	char	**copy;
 	int		i;
 
-	copy = malloc(sizeof(char *) * rows);
+	copy = ft_calloc(rows + 1, sizeof(char *));
 	if (!copy)
 		free_map(map, "Memory allocation failed", 1);
 	i = 0;
 	while (i < rows)
 	{
-		copy[i] = malloc(sizeof(char) * cols + 1);
+		copy[i] = ft_strdup(original[i]);
 		if (!copy[i])
 		{
 			ft_free_a_array(copy);
 			free_map(map, "Memory allocation failed", 1);
 		}
-		ft_strlcpy(copy[i], original[i], cols + 1);
 		i++;
 	}
 	return (copy);
@@ -87,8 +86,10 @@ void	validate_map(t_map *map)
 		error_message("Map must be surrounded by walls");
 	if (!check_characters(map, 0, 0, 0))
 		error_message("Invalid map metrics");
-	visited = copy_map(map, map->map, map->rows, map->cols);
-	player_access(map, visited, map->player.x, map->player.y);
+	visited = copy_map(map, map->map, map->rows);
+	player_access(map, visited, map->player_x, map->player_y);
+	if (visited)
+		ft_free_a_array(visited);
 	if (map->collect_nbr != 0 || map->exit_nbr != 0)
 		error_message("Player can't access all collectibles and/or exit");
 }
