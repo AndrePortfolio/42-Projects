@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:18:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 13:52:43 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/21 13:51:58 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 # define LEFT 123
 # define RIGHT 124
 # define DOWN 125
+# define R 15
+# define G 5
+# define B 11
 
 typedef struct s_img
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/20 17:10:54 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:37:28 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	read_map(t_map *map, int fd, int rows)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
 	if (line)

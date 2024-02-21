@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/20 22:31:28 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:21:13 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	create_image(t_img *img, t_img character, int width, int height)
 		while (y < character.height)
 		{
 			color = get_pixel(&character, x, y);
-			//ft_printf("color: %d x: %d y: %d\n", color, x, y);
+			// ft_printf("color: %d x: %d y: %d\n", color, x, y);
 			if (color != TRANSPARENT)
 				put_pixel(img, x + width, y + height, color);
 			y++;

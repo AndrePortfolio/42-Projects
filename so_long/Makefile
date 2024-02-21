@@ -4,6 +4,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRC_DIR1 = sources
 SRC_DIR2 = sources/graphics
 SRC = $(wildcard $(SRC_DIR1)/*.c) $(wildcard $(SRC_DIR2)/*.c)
+#SRC_DIR1 = test
+#SRC = $(wildcard $(SRC_DIR1)/*.c)
 LIBFT = libft/libft.a
 OBJ_DIR = objects
 OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
@@ -11,16 +13,16 @@ COMPRESS = ar rcs
 RM = rm -rf
 
 # Mac
-#MLX_DIR = minilibx/minilibx-mac
-#MLX_LIB = $(MLX_DIR)/libmlx.a
-#MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/libmlx
-#MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = minilibx/minilibx-mac
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/libmlx
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # Linux
-MLX_DIR = minilibx/minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/linux
-MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+#MLX_DIR = minilibx/minilibx-linux
+#MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+#MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/linux
+#MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 
 # Colours
 GREEN = \033[1;32m

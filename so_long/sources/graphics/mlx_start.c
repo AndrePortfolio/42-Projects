@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/20 22:17:07 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:22:29 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	close_win(t_game *game, int status)
 {
 	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
+	// mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	free_map(game->map, "Game over", status);
 	return (0);
@@ -24,7 +24,11 @@ int	close_win(t_game *game, int status)
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == ESC)
+	{
+		ft_printf("\nESC key was pressed\n");
 		close_win(game, 0);
+	}
+	ft_printf("\n%d key was pressed\n", keycode);
 	// else if (keycode == W || keycode == UP)
 	// 	//
 	// else if (keycode == A || keycode == LEFT)
@@ -70,8 +74,8 @@ void	mlx_start(t_map *map)
 	init_mlx_window(&game, map);
 	init_screen(&game, &img);
 	init_game_images(&game);
-	//create_game_images(&game, &img);
-	//put_screen(&game, &img);
+	// create_game_images(&game, &img);
+	// put_screen(&game, &img);
 	mlx_hook(game.win, 2, 1L<<0, key_hook, &game);
 	mlx_hook(game.win, 17, 1L<<17, close_win, &game);
 	mlx_loop(game.mlx);
