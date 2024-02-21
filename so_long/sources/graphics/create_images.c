@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/21 22:19:46 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:32:18 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,14 @@ void	create_game_images(t_game *game)
 				mlx_put_image_to_window(game->mlx, game->win,
 					game->map->collectible.img, x * SCALE, y * SCALE);
 			else if (game->map->map[y][x] == EXIT)
-				mlx_put_image_to_window(game->mlx, game->win,
-					game->map->exit.img, x * SCALE, y * SCALE);
+			{
+				if (!find_collectible(game->map))
+					mlx_put_image_to_window(game->mlx, game->win,
+						game->map->exit.img, x * SCALE, y * SCALE);
+				else
+					mlx_put_image_to_window(game->mlx, game->win,
+						game->map->space.img, x * SCALE, y * SCALE);
+			}
 			x++;
 		}
 		y++;
