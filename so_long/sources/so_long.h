@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 22:15:26 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:28:45 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define COLLECTIBLE 67
 # define WALL 49
 # define EMPTY 48
+# define WON 87
 # define VISITED 86
 # define SCALE 50
 

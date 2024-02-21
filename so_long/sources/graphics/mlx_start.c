@@ -6,13 +6,13 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 22:23:14 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:29:58 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	close_win(t_game *game, int status)
+int	close_win(t_game *game, int status, int exit)
 {
 	mlx_destroy_image(game->mlx, game->map->wall.img);
 	mlx_destroy_image(game->mlx, game->map->collectible.img);
@@ -22,7 +22,10 @@ int	close_win(t_game *game, int status)
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	free_map(game->map, "Game over", status);
+	if (exit == WON)
+		free_map(game->map, "\nYou Won!", status);
+	else
+		free_map(game->map, "\nGame Over!", status);
 	return (0);
 }
 
@@ -50,7 +53,7 @@ int	key_hook(int keycode, t_game *game)
 	static int i = 0;
 
 	if (keycode == ESC)
-		close_win(game, 0);
+		close_win(game, 0, ESC);
 	else if (keycode == W || keycode == UP)
 	{
 		if (game->map->map[game->map->player_y - 1][game->map->player_x] != WALL)
@@ -63,7 +66,7 @@ int	key_hook(int keycode, t_game *game)
 					game->map->map[game->map->player_y - 1][game->map->player_x] = PLAYER;
 					game->map->player_y--;
 					create_game_images(game);
-					close_win(game, 0);
+					close_win(game, 0, WON);
 				}
 			}
 			else if (game->map->map[game->map->player_y - 1][game->map->player_x] != EXIT)
@@ -88,7 +91,7 @@ int	key_hook(int keycode, t_game *game)
 					game->map->map[game->map->player_y][game->map->player_x - 1] = PLAYER;
 					game->map->player_x--;
 					create_game_images(game);
-					close_win(game, 0);
+					close_win(game, 0, WON);
 				}
 			}
 			else if (game->map->map[game->map->player_y][game->map->player_x - 1] != EXIT)
@@ -113,7 +116,7 @@ int	key_hook(int keycode, t_game *game)
 					game->map->map[game->map->player_y + 1][game->map->player_x] = PLAYER;
 					game->map->player_y++;
 					create_game_images(game);
-					close_win(game, 0);
+					close_win(game, 0, WON);
 				}
 			}
 			else if (game->map->map[game->map->player_y + 1][game->map->player_x] != EXIT)
@@ -138,7 +141,7 @@ int	key_hook(int keycode, t_game *game)
 					game->map->map[game->map->player_y][game->map->player_x + 1] = PLAYER;
 					game->map->player_x++;
 					create_game_images(game);
-					close_win(game, 0);
+					close_win(game, 0, WON);
 				}
 			}
 			else if (game->map->map[game->map->player_y][game->map->player_x + 1] != EXIT)
