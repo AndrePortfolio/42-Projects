@@ -32,4 +32,4 @@ Graphic:
 - The program has to display the image in a window
 - The management of the window must be smooth (minimizing, changing window etc)
 - Pressing ESC or clicking the cross must close the window and quit the program in a clean way
-- You must use imaged of MINILIBx
+- You must use images of MINILIBx

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:47:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 19:42:40 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:53:59 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	init_walls(t_game *game)
 			&game->map->wall.width, &game->map->wall.height);
 	if (!game->map->wall.img)
 		error_message("Wall initialization failed");
-	ft_printf("\nwall width:  %d\n", game->map->wall.width);
-	ft_printf("wall height: %d\n", game->map->wall.height);
 }
 
 void	init_exit(t_game *game)
@@ -29,8 +27,6 @@ void	init_exit(t_game *game)
 			&game->map->exit.width, &game->map->exit.height);
 	if (!game->map->exit.img)
 		error_message("Exit initialization failed");
-	ft_printf("\nexit width:  %d\n", game->map->exit.width);
-	ft_printf("exit height: %d\n", game->map->exit.height);
 }
 
 void	init_player(t_game *game)
@@ -40,8 +36,6 @@ void	init_player(t_game *game)
 			&game->map->player.height);
 	if (!game->map->player.img)
 		error_message("Player initialization failed");
-	ft_printf("\nplayer width:  %d\n", game->map->player.width);
-	ft_printf("player height: %d\n", game->map->player.height);
 }
 
 void	init_collectibles(t_game *game)
@@ -51,8 +45,6 @@ void	init_collectibles(t_game *game)
 			&game->map->collectible.height);
 	if (!game->map->collectible.img)
 		error_message("Collectible initialization failed");
-	ft_printf("\ncollect width:  %d\n", game->map->collectible.width);
-	ft_printf("collect height: %d\n", game->map->collectible.height);
 }
 
 void	init_empty_space(t_game *game)
@@ -62,6 +54,4 @@ void	init_empty_space(t_game *game)
 			&game->map->space.height);
 	if (!game->map->space.img)
 		error_message("Empty space initialization failed");
-	ft_printf("\nspace width:  %d\n", game->map->space.width);
-	ft_printf("space height: %d\n", game->map->space.height);
 }

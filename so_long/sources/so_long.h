@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 19:43:44 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:15:26 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 // # include "../minilibx-mac/mlx.h"
 # include "../minilibx/minilibx-linux/mlx.h"
 
-# define PLAYER 'P'
-# define EXIT 'E'
-# define COLLECTIBLE 'C'
-# define WALL '1'
-# define EMPTY '0'
-# define VISITED 'V'
+# define PLAYER 80
+# define EXIT 69
+# define COLLECTIBLE 67
+# define WALL 49
+# define EMPTY 48
+# define VISITED 86
 # define SCALE 50
 
 // Linux
@@ -114,5 +114,6 @@ void	init_player(t_game *game);
 void	init_collectibles(t_game *game);
 void	init_empty_space(t_game *game);
 void	create_game_images(t_game *game);
+bool	find_collectible(t_map *map);
 
 #endif

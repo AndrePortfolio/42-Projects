@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 19:48:10 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:23:14 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,131 @@ int	close_win(t_game *game, int status)
 	return (0);
 }
 
+bool	find_collectible(t_map *map)
+{
+	int	i = 0;
+	int	j;
+
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'C')
+				return (true);
+			j++;
+		}
+		i++;
+	}
+	return (false);
+}
+
 int	key_hook(int keycode, t_game *game)
 {
+	static int i = 0;
+
 	if (keycode == ESC)
 		close_win(game, 0);
-	// else if (keycode == W || keycode == UP)
-	// 	//
-	// else if (keycode == A || keycode == LEFT)
-	// 	//
-	// else if (keycode == S || keycode == DOWN)
-	// 	//
-	// else if (keycode == D || keycode == RIGHT)
-	// 	//
+	else if (keycode == W || keycode == UP)
+	{
+		if (game->map->map[game->map->player_y - 1][game->map->player_x] != WALL)
+		{
+			if (game->map->map[game->map->player_y - 1][game->map->player_x] == EXIT)
+			{
+				if (!find_collectible(game->map))
+				{
+					game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+					game->map->map[game->map->player_y - 1][game->map->player_x] = PLAYER;
+					game->map->player_y--;
+					create_game_images(game);
+					close_win(game, 0);
+				}
+			}
+			else if (game->map->map[game->map->player_y - 1][game->map->player_x] != EXIT)
+			{
+				game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+				game->map->map[game->map->player_y - 1][game->map->player_x] = PLAYER;
+				game->map->player_y--;
+				create_game_images(game);
+				ft_printf("Move: %d\n", ++i);
+			}
+		}
+	}
+	else if (keycode == A || keycode == LEFT)
+	{
+		if (game->map->map[game->map->player_y][game->map->player_x - 1] != WALL)
+		{
+			if (game->map->map[game->map->player_y][game->map->player_x - 1] == EXIT)
+			{
+				if (!find_collectible(game->map))
+				{
+					game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+					game->map->map[game->map->player_y][game->map->player_x - 1] = PLAYER;
+					game->map->player_x--;
+					create_game_images(game);
+					close_win(game, 0);
+				}
+			}
+			else if (game->map->map[game->map->player_y][game->map->player_x - 1] != EXIT)
+			{
+				game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+				game->map->map[game->map->player_y][game->map->player_x - 1] = PLAYER;
+				game->map->player_x--;
+				create_game_images(game);
+				ft_printf("Move: %d\n", ++i);
+			}
+		}
+	}
+	else if (keycode == S || keycode == DOWN)
+	{
+		if (game->map->map[game->map->player_y + 1][game->map->player_x] != WALL)
+		{
+			if (game->map->map[game->map->player_y + 1][game->map->player_x] == EXIT)
+			{
+				if (!find_collectible(game->map))
+				{
+					game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+					game->map->map[game->map->player_y + 1][game->map->player_x] = PLAYER;
+					game->map->player_y++;
+					create_game_images(game);
+					close_win(game, 0);
+				}
+			}
+			else if (game->map->map[game->map->player_y + 1][game->map->player_x] != EXIT)
+			{
+				game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+				game->map->map[game->map->player_y + 1][game->map->player_x] = PLAYER;
+				game->map->player_y++;
+				create_game_images(game);
+				ft_printf("Move: %d\n", ++i);
+			}
+		}
+	}
+	else if (keycode == D || keycode == RIGHT)
+	{
+		if (game->map->map[game->map->player_y][game->map->player_x + 1] != WALL)
+		{
+			if (game->map->map[game->map->player_y][game->map->player_x + 1] == EXIT)
+			{
+				if (!find_collectible(game->map))
+				{
+					game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+					game->map->map[game->map->player_y][game->map->player_x + 1] = PLAYER;
+					game->map->player_x++;
+					create_game_images(game);
+					close_win(game, 0);
+				}
+			}
+			else if (game->map->map[game->map->player_y][game->map->player_x + 1] != EXIT)
+			{
+				game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
+				game->map->map[game->map->player_y][game->map->player_x + 1] = PLAYER;
+				game->map->player_x++;
+				create_game_images(game);
+				ft_printf("Move: %d\n", ++i);
+			}
+		}
+	}
 	return (0);
 }
 

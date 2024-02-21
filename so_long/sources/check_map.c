@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:33 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/20 14:46:49 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:15:33 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ bool	around_walls(t_map	*map)
 	return (true);
 }
 
-int	count(t_map *map, char chr, int i, int j)
+int	count(t_map *map, char chr, int y, int x)
 {
 	int	count;
 
 	count = 0;
 	if (chr == PLAYER)
 	{
-		map->player_x = i;
-		map->player_y = j;
+		map->player_x = x;
+		map->player_y = y;
 	}
 	count += 1;
 	return (count);
@@ -74,25 +74,25 @@ int	count(t_map *map, char chr, int i, int j)
 bool	check_characters(t_map *map, int exit, int collect, int space)
 {
 	int	player;
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = -1;
+	y = -1;
 	player = 0;
-	while (map->map[++i])
+	while (map->map[++y])
 	{
-		j = -1;
-		while (map->map[i][++j])
+		x = -1;
+		while (map->map[y][++x])
 		{
-			if (map->map[i][j] == PLAYER)
-				player += count(map, PLAYER, i, j);
-			else if (map->map[i][j] == EXIT)
-				exit += count(map, EXIT, i, j);
-			else if (map->map[i][j] == COLLECTIBLE)
-				collect += count(map, COLLECTIBLE, i, j);
-			else if (map->map[i][j] == EMPTY)
-				space += count(map, EMPTY, i, j);
-			else if (!ft_strchr("PEC01", map->map[i][j]))
+			if (map->map[y][x] == PLAYER)
+				player += count(map, PLAYER, y, x);
+			else if (map->map[y][x] == EXIT)
+				exit += count(map, EXIT, y, x);
+			else if (map->map[y][x] == COLLECTIBLE)
+				collect += count(map, COLLECTIBLE, y, x);
+			else if (map->map[y][x] == EMPTY)
+				space += count(map, EMPTY, y, x);
+			else if (!ft_strchr("PEC01", map->map[y][x]))
 				return (false);
 		}
 	}
@@ -105,13 +105,13 @@ bool	check_characters(t_map *map, int exit, int collect, int space)
 
 void	player_access(t_map *map, char **visited, int x, int y)
 {
-	if (visited[x][y] == VISITED || visited[x][y] == WALL)
+	if (visited[y][x] == VISITED || visited[y][x] == WALL)
 		return ;
-	if (visited[x][y] == COLLECTIBLE)
+	if (visited[y][x] == COLLECTIBLE)
 		map->collect_nbr -= 1;
-	else if (visited[x][y] == EXIT)
+	else if (visited[y][x] == EXIT)
 		map->exit_nbr -= 1;
-	visited[x][y] = VISITED;
+	visited[y][x] = VISITED;
 	player_access(map, visited, x + 1, y);
 	player_access(map, visited, x - 1, y);
 	player_access(map, visited, x, y + 1);

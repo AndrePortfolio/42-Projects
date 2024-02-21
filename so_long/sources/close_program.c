@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/19 15:13:17 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/21 21:36:28 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ void	free_map(t_map *map, char *str, int status)
 	if (status)
 		error_message(str);
 	else
+	{
+		ft_printf("%s\n", str);
 		exit (0);
+	}
 }

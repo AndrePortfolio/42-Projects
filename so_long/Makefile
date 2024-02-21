@@ -63,7 +63,7 @@ re: fclean all
 
 v: re
 	@echo "\n"
-	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) maps/map1.ber
+	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) maps/map2.ber
 
 v_mac: re
 	@echo "\n"
