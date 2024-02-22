@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 17:15:29 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:46:47 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	close_win(t_game *game, int status, int quit)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 8)
@@ -56,4 +56,3 @@ void	error_message(char *str)
 	ft_putendl_fd(str, 2);
 	exit (1);
 }
-

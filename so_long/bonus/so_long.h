@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 18:40:49 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:52:40 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	move_player(t_game *game, int keycode, int y, int x);
 void	new_images(t_game *game, int keycode, int y, int x);
 void	create_images(t_game *game, int keycode);
 void	put_image(t_game *game, int keycode, int x, int y);
+int		get_trgb(int t, int r, int g, int b);
 
 // Utils
 bool	find_collectible(t_map *map);
