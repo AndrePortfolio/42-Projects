@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:47:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 19:53:59 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 01:21:08 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 void	init_walls(t_game *game)
 {

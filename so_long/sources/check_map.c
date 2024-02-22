@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:33 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 22:15:33 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 01:07:33 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,52 +54,6 @@ bool	around_walls(t_map	*map)
 			return (false);
 		row++;
 	}
-	return (true);
-}
-
-int	count(t_map *map, char chr, int y, int x)
-{
-	int	count;
-
-	count = 0;
-	if (chr == PLAYER)
-	{
-		map->player_x = x;
-		map->player_y = y;
-	}
-	count += 1;
-	return (count);
-}
-
-bool	check_characters(t_map *map, int exit, int collect, int space)
-{
-	int	player;
-	int	y;
-	int	x;
-
-	y = -1;
-	player = 0;
-	while (map->map[++y])
-	{
-		x = -1;
-		while (map->map[y][++x])
-		{
-			if (map->map[y][x] == PLAYER)
-				player += count(map, PLAYER, y, x);
-			else if (map->map[y][x] == EXIT)
-				exit += count(map, EXIT, y, x);
-			else if (map->map[y][x] == COLLECTIBLE)
-				collect += count(map, COLLECTIBLE, y, x);
-			else if (map->map[y][x] == EMPTY)
-				space += count(map, EMPTY, y, x);
-			else if (!ft_strchr("PEC01", map->map[y][x]))
-				return (false);
-		}
-	}
-	map->collect_nbr = collect;
-	if (player != 1 || exit != 1 || space == 0 || collect == 0)
-		return (false);
-	map->exit_nbr = 1;
 	return (true);
 }
 

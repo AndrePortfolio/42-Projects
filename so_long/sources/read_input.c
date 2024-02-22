@@ -6,11 +6,27 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/21 12:37:28 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 01:30:37 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	read_input(t_map *map, int argc, char **argv)
+{
+	int	fd;
+
+	if (argc != 2)
+		error_message("Invalid number of arguments");
+	if (!is_ber(argv[1]))
+		error_message("Invalid file format, must be .ber file");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		error_message("Failed to open map");
+	read_map(map, fd, 0);
+	close(fd);
+	validate_map(map);
+}
 
 void	read_map(t_map *map, int fd, int rows)
 {
@@ -37,21 +53,22 @@ void	read_map(t_map *map, int fd, int rows)
 	}
 }
 
-bool	is_ber(char *str)
+void	validate_map(t_map *map)
 {
-	int	i;
+	char	**visited;
 
-	i = 0;
-	while (str[i] && str[i] != '.')
-		i++;
-	if (!str[i] || ft_strlen(str + i) > 4)
-		return (false);
-	if (str[i] == '.')
-	{
-		if (!ft_strncmp(str + i, ".ber", 4))
-			return (true);
-	}
-	return (false);
+	if (!is_rectangular(map))
+		error_message("Map must be rectangular");
+	if (!around_walls(map))
+		error_message("Map must be surrounded by walls");
+	if (!check_characters(map, 0, 0, 0))
+		error_message("Invalid map metrics");
+	visited = copy_map(map, map->map, map->rows);
+	player_access(map, visited, map->player_x, map->player_y);
+	if (visited)
+		ft_free_a_array(visited);
+	if (map->collect_nbr != 0 || map->exit_nbr != 0)
+		error_message("Player can't access all collectibles and/or exit");
 }
 
 char	**copy_map(t_map *map, char **original, int rows)
@@ -74,38 +91,4 @@ char	**copy_map(t_map *map, char **original, int rows)
 		i++;
 	}
 	return (copy);
-}
-
-void	validate_map(t_map *map)
-{
-	char	**visited;
-
-	if (!is_rectangular(map))
-		error_message("Map must be rectangular");
-	if (!around_walls(map))
-		error_message("Map must be surrounded by walls");
-	if (!check_characters(map, 0, 0, 0))
-		error_message("Invalid map metrics");
-	visited = copy_map(map, map->map, map->rows);
-	player_access(map, visited, map->player_x, map->player_y);
-	if (visited)
-		ft_free_a_array(visited);
-	if (map->collect_nbr != 0 || map->exit_nbr != 0)
-		error_message("Player can't access all collectibles and/or exit");
-}
-
-void	read_input(t_map *map, int argc, char **argv)
-{
-	int	fd;
-
-	if (argc != 2)
-		error_message("Invalid number of arguments");
-	if (!is_ber(argv[1]))
-		error_message("Invalid file format, must be .ber file");
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		error_message("Failed to open map");
-	read_map(map, fd, 0);
-	close(fd);
-	validate_map(map);
 }
