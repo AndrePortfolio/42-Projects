@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 01:41:38 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 11:18:37 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_mlx_window(t_game *game, t_map *map)
 	game->width = map->cols * SCALE;
 	game->height = map->rows * SCALE;
 	game->win = mlx_new_window(game->mlx, game->width, game->height, "so_long");
+	// mlx_get_screen_size();
 }
 
 void	init_game_images(t_game *game)

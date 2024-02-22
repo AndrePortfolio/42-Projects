@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/22 01:41:09 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 12:16:02 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,40 @@ int	key_hook(int key, t_game *g)
 	return (0);
 }
 
-void	move_player(t_game *game, int keycode, int y, int x)
+void move_player(t_game *game, int keycode, int y, int x)
 {
+	static int exit_x = -1;
+	static int exit_y = -1;
+	static int exit_initialized = 0;
+
 	if (game->map->map[y][x] == EXIT)
 	{
+		exit_x = x;
+		exit_y = y;
+		exit_initialized = 1;
 		if (!find_collectible(game->map))
 		{
 			new_images(game, keycode, y, x);
 			close_win(game, 0, WON);
 		}
+		else
+			new_images(game, keycode, y, x);
 	}
 	else
+	{
 		new_images(game, keycode, y, x);
+		if (exit_initialized)
+			game->map->map[exit_y][exit_x] = EXIT;
+	}
+}
+
+int	get_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 void	new_images(t_game *game, int keycode, int y, int x)
 {
-	static int	i = 0;
-
 	game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
 	game->map->map[y][x] = PLAYER;
 	if (keycode == W || keycode == UP)
@@ -67,14 +83,16 @@ void	new_images(t_game *game, int keycode, int y, int x)
 		game->map->player_y++;
 	else if (keycode == D || keycode == RIGHT)
 		game->map->player_x++;
-	ft_printf("Move: %d\n", ++i);
 	create_images(game);
 }
 
 void	create_images(t_game *game)
 {
-	int	x;
-	int	y;
+	int			color;
+	char		*str;
+	int			x;
+	int			y;
+	static int	i = 0;
 
 	y = 0;
 	while (game->map->map[y])
@@ -87,6 +105,10 @@ void	create_images(t_game *game)
 		}
 		y++;
 	}
+	str = ft_itoa(++i);
+	color = get_trgb(0, 0, 0, 0);
+	mlx_string_put(game->mlx, game->win, 43, 15, color, str);
+	free(str);
 }
 
 void	put_image(t_game *game, int x, int y)
