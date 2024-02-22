@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_images.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/22 12:16:02 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 18:19:25 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ void move_player(t_game *game, int keycode, int y, int x)
 	}
 }
 
-int	get_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
 void	new_images(t_game *game, int keycode, int y, int x)
 {
 	game->map->map[game->map->player_y][game->map->player_x] = EMPTY;
@@ -88,8 +83,6 @@ void	new_images(t_game *game, int keycode, int y, int x)
 
 void	create_images(t_game *game)
 {
-	int			color;
-	char		*str;
 	int			x;
 	int			y;
 	static int	i = 0;
@@ -105,10 +98,7 @@ void	create_images(t_game *game)
 		}
 		y++;
 	}
-	str = ft_itoa(++i);
-	color = get_trgb(0, 0, 0, 0);
-	mlx_string_put(game->mlx, game->win, 43, 15, color, str);
-	free(str);
+	ft_printf("moves: %d\n", i++);
 }
 
 void	put_image(t_game *game, int x, int y)
