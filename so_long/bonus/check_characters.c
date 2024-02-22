@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_characters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:07:12 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 11:23:22 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 18:06:55 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,3 @@ void	count_others(char *chr, int *exit, int *collect, int *space)
 	else if (ft_strncmp(chr, "0", 1) == 0)
 		(*space) += 1;
 }
-

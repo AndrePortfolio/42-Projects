@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 11:17:36 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 18:16:16 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	read_map(t_map *map, int fd, int rows)
 	{
 		map->map[rows] = ft_strtrim(line, "\n");
 		if (!map->map[rows])
+		{
+			free(line);
 			free_map(map, "Memory allocation failed", 1);
+		}
 		free(line);
 	}
 }

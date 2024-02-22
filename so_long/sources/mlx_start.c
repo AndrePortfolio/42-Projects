@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_start.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 11:18:37 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 16:18:42 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	init_mlx_window(t_game *game, t_map *map)
 	game->width = map->cols * SCALE;
 	game->height = map->rows * SCALE;
 	game->win = mlx_new_window(game->mlx, game->width, game->height, "so_long");
-	// mlx_get_screen_size();
 }
 
 void	init_game_images(t_game *game)

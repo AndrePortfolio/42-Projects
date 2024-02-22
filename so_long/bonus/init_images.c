@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:47:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 13:22:00 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 17:11:40 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	init_player(t_game *game)
 	i = 0;
 	game->map->player.img = malloc(8 * sizeof(void *));
 	if (!game->map->player.img)
-	{
-		free_player(game->map);
 		free_map(game->map, "Memory allocation failed", 1);
-	}
 	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
 			"./assets/npcfront.xpm", &game->map->player.width,
 			&game->map->player.height);
