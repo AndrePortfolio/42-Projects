@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 18:16:16 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:27:16 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ void	validate_map(t_map *map)
 	char	**visited;
 
 	if (!is_rectangular(map))
-		error_message("Map must be rectangular");
+		free_map(map, "Map must be rectangular", 1);
 	if (!around_walls(map))
-		error_message("Map must be surrounded by walls");
+		free_map(map, "Map must be surrounded by walls", 1);
 	if (!check_characters(map, 0, 0, 0))
-		error_message("Invalid map metrics");
+		free_map(map, "Invalid map metrics", 1);
 	visited = copy_map(map, map->map, map->rows);
 	player_access(map, visited, map->player_x, map->player_y);
 	if (visited)
 		ft_free_a_array(visited);
 	if (map->collect_nbr != 0 || map->exit_nbr != 0)
-		error_message("Player can't access all collectibles and/or exit");
+		free_map(map, "Player can't access all collectibles and/or exit", 1);
 }
 
 char	**copy_map(t_map *map, char **original, int rows)
