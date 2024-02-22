@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:47:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 13:30:43 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/22 13:22:00 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,44 @@ void	init_exit(t_game *game)
 
 void	init_player(t_game *game)
 {
-	game->map->player.img = mlx_xpm_file_to_image(game->mlx,
+	int	i;
+
+	i = 0;
+	game->map->player.img = malloc(8 * sizeof(void *));
+	if (!game->map->player.img)
+	{
+		free_player(game->map);
+		free_map(game->map, "Memory allocation failed", 1);
+	}
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
 			"./assets/npcfront.xpm", &game->map->player.width,
 			&game->map->player.height);
-	if (!game->map->player.img)
-		error_message("Player initialization failed");
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcfrontmv.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcback.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcbackmv.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcleft.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcleftmv.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcright.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcrightmv.xpm", &game->map->player.width,
+			&game->map->player.height);
+	while (--i >= 0)
+	{
+		if (!game->map->player.img[i])
+			error_message("Player initialization failed");
+	}
 }
 
 void	init_collectibles(t_game *game)
