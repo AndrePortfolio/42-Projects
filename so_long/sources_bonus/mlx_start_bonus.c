@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_start.c                                        :+:      :+:    :+:   */
+/*   mlx_start_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 18:41:25 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:59:13 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	mlx_start(t_map *map)
 {
@@ -26,18 +26,10 @@ void	mlx_start(t_map *map)
 
 void	init_mlx_window(t_game *game, t_map *map)
 {
-	int	screen_width;
-	int	screen_height;
-
 	game->map = map;
 	game->mlx = mlx_init();
 	game->width = map->cols * SCALE;
 	game->height = map->rows * SCALE;
-	mlx_get_screen_size(game->mlx, &screen_width, &screen_height);
-	if (game->width > screen_width)
-		game->width = screen_width;
-	if (game->height > screen_height)
-		game->height = screen_height;
 	game->win = mlx_new_window(game->mlx, game->width, game->height, "so_long");
 }
 

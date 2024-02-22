@@ -1,11 +1,26 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-SRC_DIR = bonus
-SRC = $(wildcard $(SRC_DIR)/*.c)
-LIBFT = libft/libft.a
+
+SRC_DIR = sources
+SRC_BONUS_DIR = sources_bonus
+
+SRC = $(addprefix $(SRC_DIR)/,$(addsuffix .c, $(S)))
+
+S = check_characters check_map close_program create_images init_images mlx_start \
+	read_input so_long utils
+
+SRC_BONUS = $(addprefix $(SRC_BONUS_DIR)/,$(addsuffix _bonus.c, $(B)))
+
+B = check_characters check_map close_program create_images init_others mlx_start \
+	read_input so_long utils create_images2 init_player
+
 OBJ_DIR = objects
+OBJ_BONUS_DIR = bonus_objects
+
+LIBFT = libft/libft.a
 OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
+OBJ_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(notdir $(SRC_BONUS:.c=.o)))
 COMPRESS = ar rcs
 RM = rm -rf
 
@@ -34,6 +49,12 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
+bonus: $(NAME)_bonus
+
+$(NAME)_bonus: $(OBJ_BONUS_DIR) $(OBJ_BONUS) all
+	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)_bonus
+	@echo "$(CYAN)make$(RESET)   bonus   $(GREEN)[OK]$(RESET)"
+
 $(LIBFT):
 	@$(MAKE) -C ./libft --no-print-directory
 
@@ -43,17 +64,26 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
 
+$(OBJ_BONUS_DIR):
+	@mkdir -p $@
+
+$(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
+	@$(CC) $(CFLAGS) $(MLX_INC) -c $< -o $@
+
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR) $(OBJ_BONUS_DIR)
 	@$(MAKE) -C ./libft clean --no-print-directory
 	@echo "$(ORANGE)$@$(RESET)  $(NAME) $(GREEN)[OK]$(RESET)"
+	@echo "$(ORANGE)$@$(RESET)  bonus   $(GREEN)[OK]$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(NAME)_bonus
 	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
+	@echo "$(RED)$@$(RESET) bonus   $(GREEN)[OK]$(RESET)"
 
-re: fclean all
+re: fclean all bonus
 
 v: re
 	@echo "\n"
@@ -63,4 +93,4 @@ v_mac: re
 	@echo "\n"
 	leaks -atExit -- ./$(NAME) maps/map2.ber
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

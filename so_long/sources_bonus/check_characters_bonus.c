@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_characters.c                                 :+:      :+:    :+:   */
+/*   check_characters_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:07:12 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 18:06:55 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:59:31 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 bool	check_characters(t_map *map, int exit, int collect, int space)
 {

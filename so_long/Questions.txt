@@ -1,7 +1,0 @@
-Como centro o jogar?
-Malloc no init player
-Malloc nas structs
-
-Tasks:
-- Create enemy
-- Create Boarder

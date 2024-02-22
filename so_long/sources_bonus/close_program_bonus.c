@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_program.c                                    :+:      :+:    :+:   */
+/*   close_program_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 18:46:47 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:59:26 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	close_win(t_game *game, int status, int quit)
 {

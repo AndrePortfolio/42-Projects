@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_images2.c                                   :+:      :+:    :+:   */
+/*   create_images2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:48:20 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/22 18:52:03 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:30:51 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	put_player_image_aux(t_game *game, int img, int x, int y)
 {
@@ -28,7 +28,7 @@ void	put_player_image_aux(t_game *game, int img, int x, int y)
 void	put_player_image(t_game *game, int keycode, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win,
-		game->map->player.img[3], x * SCALE, y * SCALE);
+		game->map->player.img[1], x * SCALE, y * SCALE);
 	if (keycode == W || keycode == UP)
 		put_player_image_aux(game, 2, x, y);
 	else if (keycode == A || keycode == LEFT)
