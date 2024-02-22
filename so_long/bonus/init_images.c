@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:47:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 17:11:40 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:40:08 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_exit(t_game *game)
 		error_message("Exit initialization failed");
 }
 
-void	init_player(t_game *game)
+void	init_front_back_player(t_game *game)
 {
 	int	i;
 
@@ -49,23 +49,28 @@ void	init_player(t_game *game)
 	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
 			"./assets/npcbackmv.xpm", &game->map->player.width,
 			&game->map->player.height);
-	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
-			"./assets/npcleft.xpm", &game->map->player.width,
-			&game->map->player.height);
-	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
-			"./assets/npcleftmv.xpm", &game->map->player.width,
-			&game->map->player.height);
-	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
-			"./assets/npcright.xpm", &game->map->player.width,
-			&game->map->player.height);
-	game->map->player.img[i++] = mlx_xpm_file_to_image(game->mlx,
-			"./assets/npcrightmv.xpm", &game->map->player.width,
-			&game->map->player.height);
+	init_left_right_player(game, &i);
 	while (--i >= 0)
 	{
 		if (!game->map->player.img[i])
 			error_message("Player initialization failed");
 	}
+}
+
+void	init_left_right_player(t_game *game, int *i)
+{
+	game->map->player.img[(*i)++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcleft.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[(*i)++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcleftmv.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[(*i)++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcright.xpm", &game->map->player.width,
+			&game->map->player.height);
+	game->map->player.img[(*i)++] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/npcrightmv.xpm", &game->map->player.width,
+			&game->map->player.height);
 }
 
 void	init_collectibles(t_game *game)

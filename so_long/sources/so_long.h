@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 15:46:15 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:45:41 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define LEFT 65361
 # define RIGHT 65363
 # define DOWN 65364
-# define WALL_COLOR 0x1100FE
 
 // Mac
 // # define ESC 53

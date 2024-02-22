@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 17:16:25 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:41:25 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_game_images(t_game *game)
 {
 	init_walls(game);
 	init_exit(game);
-	init_player(game);
+	init_front_back_player(game);
 	init_collectibles(game);
 	init_empty_space(game);
 }

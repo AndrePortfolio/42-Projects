@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/22 18:19:25 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:45:17 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	key_hook(int key, t_game *g)
 	return (0);
 }
 
-void move_player(t_game *game, int keycode, int y, int x)
+void	move_player(t_game *game, int keycode, int y, int x)
 {
-	static int exit_x = -1;
-	static int exit_y = -1;
-	static int exit_initialized = 0;
+	static int	exit_x = -1;
+	static int	exit_y = -1;
+	static int	exit_initialized = 0;
 
 	if (game->map->map[y][x] == EXIT)
 	{
@@ -125,7 +125,3 @@ void	put_image(t_game *game, int x, int y)
 				game->map->space.img, x * SCALE, y * SCALE);
 	}
 }
-
-
-
-

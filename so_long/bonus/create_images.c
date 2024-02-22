@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/22 16:42:13 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:36:01 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,49 +111,31 @@ void	create_images(t_game *game, int keycode)
 	free(str);
 }
 
-void	put_player_image(t_game *game, int keycode, int x, int y)
+void	put_player_image_aux(t_game *game, int img, int x, int y)
 {
 	static int i = 0;
 
+	if (i % 2 == 0)
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->map->player.img[img], x * SCALE, y * SCALE);
+	else
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->map->player.img[img + 1], x * SCALE, y * SCALE);
+	i++;
+}
+
+void	put_player_image(t_game *game, int keycode, int x, int y)
+{
 	mlx_put_image_to_window(game->mlx, game->win,
 		game->map->player.img[3], x * SCALE, y * SCALE);
 	if (keycode == W || keycode == UP)
-	{
-		if (i % 2 == 0)
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[2], x * SCALE, y * SCALE);
-		else
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[3], x * SCALE, y * SCALE);
-	}
+		put_player_image_aux(game, 2, x, y);
 	else if (keycode == A || keycode == LEFT)
-	{
-		if (i % 2 == 0)
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[4], x * SCALE, y * SCALE);
-		else
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[5], x * SCALE, y * SCALE);
-	}
+		put_player_image_aux(game, 4, x, y);
 	else if (keycode == S || keycode == DOWN)
-	{
-		if (i % 2 == 0)
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[0], x * SCALE, y * SCALE);
-		else
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[1], x * SCALE, y * SCALE);
-	}
+		put_player_image_aux(game, 0, x, y);
 	else if (keycode == D || keycode == RIGHT)
-	{
-		if (i % 2 == 0)
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[6], x * SCALE, y * SCALE);
-		else
-			mlx_put_image_to_window(game->mlx, game->win,
-				game->map->player.img[7], x * SCALE, y * SCALE);
-	}
-	i++;
+		put_player_image_aux(game, 6, x, y);
 }
 
 void	put_image(t_game *game, int keycode, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 15:33:59 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:44:21 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ void	error_message(char *str)
 	ft_putendl_fd(str, 2);
 	exit (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 17:16:13 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:40:49 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,10 @@ void	init_game_images(t_game *game);
 // Init images
 void	init_walls(t_game *game);
 void	init_exit(t_game *game);
-void	init_player(t_game *game);
 void	init_collectibles(t_game *game);
 void	init_empty_space(t_game *game);
+void	init_left_right_player(t_game *game, int *i);
+void	init_front_back_player(t_game *game);
 
 // Create images
 int		key_hook(int key, t_game *g);
