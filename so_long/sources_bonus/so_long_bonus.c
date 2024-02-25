@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:09 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:52:06 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-int	main(int argc, char **argv)
-{
-	t_map	map;
-
-	read_input(&map, argc, argv);
-	mlx_start(&map);
-	free_map(&map, "Game over", 0);
-}
 
 /* static void	print_map(t_map map)
 {
@@ -39,3 +30,12 @@ int	main(int argc, char **argv)
 		i++;
 	}
 } */
+
+int	main(int argc, char **argv)
+{
+	t_map	map;
+
+	read_input(&map, argc, argv);
+	mlx_start(&map);
+	free_map(&map, "Game over", 0);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_others_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 23:47:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:18 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:25:05 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ void	init_empty_space(t_game *game)
 			&game->map->space.height);
 	if (!game->map->space.img)
 		error_message("Empty space initialization failed");
+}
+
+void	init_enemy(t_game *game)
+{
+	game->map->enemy.img = malloc(2 * sizeof(void *));
+	if (!game->map->enemy.img)
+		free_map(game->map, "Memory allocation failed", 1);
+	game->map->enemy.img[0] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/enemy.xpm", &game->map->enemy.width,
+			&game->map->enemy.height);
+	if (!game->map->enemy.img)
+		error_message("Enemy initialization failed");
+	game->map->enemy.img[1] = mlx_xpm_file_to_image(game->mlx,
+			"./assets/enemymv.xpm", &game->map->enemy.width,
+			&game->map->enemy.height);
+	if (!game->map->enemy.img)
+		error_message("Enemy initialization failed");
 }

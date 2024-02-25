@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:41 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:44 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:17:39 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,40 @@
 # define SO_LONG_BONUS_H
 
 # include "../libft/libft.h"
-// # include "../minilibx-mac/mlx.h"
-# include "../minilibx/minilibx-linux/mlx.h"
+# include "../minilibx-mac/mlx.h"
+// # include "../minilibx/minilibx-linux/mlx.h"
 
 # define PLAYER 80
 # define EXIT 69
 # define COLLECTIBLE 67
 # define WALL 49
+# define ENEMY 88
 # define EMPTY 48
 # define WON 87
 # define VISITED 86
 # define SCALE 50
 
 // Linux
-# define ESC 65307
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define UP 65362
-# define LEFT 65361
-# define RIGHT 65363
-# define DOWN 65364
+// # define ESC 65307
+// # define W 119
+// # define A 97
+// # define S 115
+// # define D 100
+// # define UP 65362
+// # define LEFT 65361
+// # define RIGHT 65363
+// # define DOWN 65364
 
 // Mac
-// # define ESC 53
-// # define W 13
-// # define A 0
-// # define S 1
-// # define D 2
-// # define UP 126
-// # define LEFT 123
-// # define RIGHT 124
-// # define DOWN 125
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define UP 126
+# define LEFT 123
+# define RIGHT 124
+# define DOWN 125
 
 typedef struct s_img
 {
@@ -69,6 +70,7 @@ typedef struct s_map
 	t_img		space;
 	t_img		collectible;
 	t_img		exit;
+	t_img		enemy;
 }				t_map;
 
 typedef struct s_game
@@ -107,6 +109,7 @@ void	init_walls(t_game *game);
 void	init_exit(t_game *game);
 void	init_collectibles(t_game *game);
 void	init_empty_space(t_game *game);
+void	init_enemy(t_game *game);
 void	init_left_right_player(t_game *game, int *i);
 void	init_front_back_player(t_game *game);
 
@@ -117,6 +120,8 @@ void	new_images(t_game *game, int keycode, int y, int x);
 void	create_images(t_game *game, int keycode);
 void	put_image(t_game *game, int keycode, int x, int y);
 int		get_trgb(int t, int r, int g, int b);
+void	put_player_image(t_game *game, int keycode, int x, int y);
+void	put_enemy_image(t_game *game, int x, int y);
 
 // Utils
 bool	find_collectible(t_map *map);

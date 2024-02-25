@@ -3,43 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   create_images_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 20:48:44 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:24 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:55:37 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	key_hook(int key, t_game *g)
+void	key_hook_aux(t_game *g, int keycode, int x, int y)
 {
-	if (key == ESC)
-		close_win(g, 0, ESC);
-	else if (key == W || key == UP)
+	if (g->map->map[g->map->player_y + y][g->map->player_x + x] == ENEMY)
 	{
-		if (g->map->map[g->map->player_y - 1][g->map->player_x] != WALL)
-			move_player(g, key, g->map->player_y - 1, g->map->player_x);
+		if (keycode == W)
+			put_player_image(g, W, g->map->player_x, g->map->player_y);
+		else if (keycode == S)
+			put_player_image(g, S, g->map->player_x, g->map->player_y);
+		else if (keycode == A)
+			put_player_image(g, A, g->map->player_x, g->map->player_y);
+		else if (keycode == D)
+			put_player_image(g, D, g->map->player_x, g->map->player_y);
+		put_enemy_image(g, g->map->player_x + x, g->map->player_y + y);
 	}
-	else if (key == A || key == LEFT)
+	else if (g->map->map[g->map->player_y + y][g->map->player_x + x] != WALL)
+		move_player(g, keycode, g->map->player_x + x, g->map->player_y + y);
+	else if (g->map->map[g->map->player_y + y][g->map->player_x + x] == WALL)
 	{
-		if (g->map->map[g->map->player_y][g->map->player_x - 1] != WALL)
-			move_player(g, key, g->map->player_y, g->map->player_x - 1);
+		if (keycode == W)
+			put_player_image(g, W, g->map->player_x, g->map->player_y);
+		else if (keycode == S)
+			put_player_image(g, S, g->map->player_x, g->map->player_y);
+		else if (keycode == A)
+			put_player_image(g, A, g->map->player_x, g->map->player_y);
+		else if (keycode == D)
+			put_player_image(g, D, g->map->player_x, g->map->player_y);
 	}
-	else if (key == S || key == DOWN)
-	{
-		if (g->map->map[g->map->player_y + 1][g->map->player_x] != WALL)
-			move_player(g, key, g->map->player_y + 1, g->map->player_x);
-	}
-	else if (key == D || key == RIGHT)
-	{
-		if (g->map->map[g->map->player_y][g->map->player_x + 1] != WALL)
-			move_player(g, key, g->map->player_y, g->map->player_x + 1);
-	}
+}
+
+int	key_hook(int keycode, t_game *game)
+{
+	if (keycode == ESC)
+		close_win(game, 0, ESC);
+	else if (keycode == W || keycode == UP)
+		key_hook_aux(game, W, 0, -1);
+	else if (keycode == A || keycode == LEFT)
+		key_hook_aux(game, A, -1, 0);
+	else if (keycode == S || keycode == DOWN)
+		key_hook_aux(game, S, 0, +1);
+	else if (keycode == D || keycode == RIGHT)
+		key_hook_aux(game, D, +1, 0);
 	return (0);
 }
 
-void	move_player(t_game *game, int keycode, int y, int x)
+void	move_player(t_game *game, int keycode, int x, int y)
 {
 	static int	exit_x = -1;
 	static int	exit_y = -1;
@@ -104,9 +121,4 @@ void	create_images(t_game *game, int keycode)
 	color = get_trgb(0, 0, 0, 0);
 	mlx_string_put(game->mlx, game->win, 43, 15, color, str);
 	free(str);
-}
-
-int	get_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
 }

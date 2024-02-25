@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_start_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:53:03 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:13 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:47:02 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	init_game_images(t_game *game)
 	init_front_back_player(game);
 	init_collectibles(game);
 	init_empty_space(game);
+	init_enemy(game);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_program_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:26 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:57:53 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ int	close_win(t_game *game, int status, int quit)
 	mlx_destroy_image(game->mlx, game->map->space.img);
 	mlx_destroy_image(game->mlx, game->map->exit.img);
 	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
+	mlx_destroy_image(game->mlx, game->map->enemy.img[0]);
+	mlx_destroy_image(game->mlx, game->map->enemy.img[1]);
+	// mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	free(game->map->player.img);
+	free(game->map->enemy.img);
 	if (quit == WON)
 		free_map(game->map, "You Won!", status);
 	else

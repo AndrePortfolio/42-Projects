@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:33 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:29 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/25 00:56:30 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ bool	around_walls(t_map	*map)
 
 void	player_access(t_map *map, char **visited, int x, int y)
 {
-	if (visited[y][x] == VISITED || visited[y][x] == WALL)
+	if (visited[y][x] == VISITED || visited[y][x] == WALL
+		|| visited[y][x] == ENEMY)
 		return ;
 	if (visited[y][x] == COLLECTIBLE)
 		map->collect_nbr -= 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_characters_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:07:12 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/22 20:59:31 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/02/24 22:55:47 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	check_characters(t_map *map, int exit, int collect, int space)
 			else if (ft_strchr("EC0", map->map[y][x]))
 				count_others(ft_strchr("EC0", map->map[y][x]),
 					&exit, &collect, &space);
-			else if (!ft_strchr("PEC01", map->map[y][x]))
+			else if (!ft_strchr("PEC01X", map->map[y][x]))
 				return (false);
 		}
 	}
