@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_a_array.c                                  :+:      :+:    :+:   */
+/*   ft_freematrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:06:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/01/19 12:11:01 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/02/26 17:07:49 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_a_array(char **str)
+void	ft_freematrix(char **str)
 {
 	int	i;
 
