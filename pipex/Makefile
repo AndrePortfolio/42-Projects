@@ -43,4 +43,17 @@ fclean: clean
 
 re: fclean all
 
+test: re
+	@echo "\n"
+	< Makefile sort | uniq > test_1
+	./pipex Makefile "sort" "uniq" test_2
+
+v: re
+	@echo "\n"
+	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) Makefile "sort" "uniq" test_1
+
+v_mac: re
+	@echo "\n"
+	leaks -atExit -- ./$(NAME) Makefile "sort" "uniq" test_1
+
 .PHONY: all clean fclean re

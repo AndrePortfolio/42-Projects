@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 18:13:05 by andre-da          #+#    #+#             */
-/*   Updated: 2024/02/26 17:08:03 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/06 15:47:40 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <limits.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
