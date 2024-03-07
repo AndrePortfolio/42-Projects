@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/07 21:19:17 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/07 23:45:07 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,92 +132,3 @@ int main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-// USING EXECVE FUNCTION
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	(void)argc;
-// 	(void)argv;
-
-// 	int	i = -1;
-// 	static int flag = 0;
-
-// 	while (envp[++i])
-// 		ft_putendl_fd(envp[i], 1);
-// 	if (flag)
-// 		return 0;
-// 	write(1, "\n", 1);
-// 	if (execve("./pipex_test", argv, envp))
-// 		flag++;
-// 	perror("execve");
-// 	return (1);
-// }
-
-
-// USING THE DUP FUNCTION
-// int	main(int argc, char **argv)
-// {
-// 	int fd;
-
-// 	(void)argc;
-// 	fd = open(argv[1], O_WRONLY | O_CREAT, 0x777);
-// 	if (fd < 0)
-// 		perror("Error opening file\n");
-// 	if (dup2(fd, 1) == -1)
-// 		perror("Error setting file to STDOUT\n");
-// 	write(1, "hello\n", 6);
-// 	close(fd);
-// }
-
-// USING PIPES AND FORK
-// int main(void)
-// {
-// 	int	id;
-// 	int	pipe1[2]; // P -> C
-// 	int	pipe2[2]; // C -> P
-
-// 	if (pipe(pipe1) == -1 || pipe(pipe2) == -1)
-// 	{
-// 		perror("Error creating pipe(s)");
-// 		return (1);
-// 	}
-// 	id = fork();
-// 	if (id == -1)
-// 		return (1);
-// 	if (id == 0)
-// 	{
-// 		int y;
-
-// 		close(pipe1[1]);
-// 		close(pipe2[0]);
-
-// 		if (read(pipe1[0], &y, sizeof(y)) == -1)
-// 			perror("Error reading from pipe1");
-// 		ft_printf("Child read %d\n", y);
-// 		y *= 2;
-// 		if (write(pipe2[1], &y, sizeof(y)) == -1)
-// 			perror("Error writting to pipe2");
-// 		ft_printf("Child wrote %d\n", y);
-
-// 		close(pipe1[0]);
-// 		close(pipe2[1]);
-// 	}
-// 	else
-// 	{
-// 		int x = 10;
-
-// 		close(pipe1[0]);
-// 		close(pipe2[1]);
-
-// 		if (write(pipe1[1], &x, sizeof(x)) == -1)
-// 			perror("Error writting to pipe1");
-// 		ft_printf("Parent wrote %d\n", x);
-// 		if (read(pipe2[0], &x, sizeof(x)) == -1)
-// 			perror("Error reading from pipe2");
-// 		ft_printf("Parent read %d\n", x);
-
-// 		close(pipe1[1]);
-// 		close(pipe2[0]);
-// 	}
-// 	return (0);
-// }
