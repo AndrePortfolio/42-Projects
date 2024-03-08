@@ -37,20 +37,34 @@ clean:
 	@echo "$(ORANGE)$@$(RESET)  $(NAME) $(GREEN)[OK]$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) test_1 test_2
 	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
 
 re: fclean all
 
-test: re
+test1: re
 	@echo "\n"
 	< Makefile sort | uniq > test_1
 	./pipex Makefile "sort" "uniq" test_2
 
-v: re
+test2: re
 	@echo "\n"
-	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) Makefile "sort" "uniq" test_1
+	./pipex Makefile "ls -l" "wc -l" test_1
+	< Makefile ls -l | wc -l > test_2
+
+
+v1: re
+	@echo "\n"
+	valgrind -s --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME) Makefile sort uniq test_1
+
+v2: re
+	@echo "\n"
+	valgrind -s --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME) Makefile "ls -l" "wc -l" test_1
+
+env: re
+	@echo "\n"
+	env -i ./pipex Makefile sort uniq test_1
 
 v_mac: re
 	@echo "\n"

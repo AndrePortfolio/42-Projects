@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/07 23:45:07 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/08 17:24:04 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ char	*get_path(char *cmd, char **envp)
 	int j;
 	int fd;
 
-	i = 0;
-	j = 0;
-	while (envp[i])
+	i = -1;
+	j = -1;
+	while (envp[++i])
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			paths = ft_split(envp[i] + 5, ':');
-			while (paths[j])
+			while (paths[++j])
 			{
 				path = ft_strjoin(paths[j], "/");
 				path_cmd = ft_strjoin(path, cmd);
@@ -51,17 +51,15 @@ char	*get_path(char *cmd, char **envp)
 					return (path_cmd);
 				}
 				free(path_cmd);
-				j++;
 			}
 		}
-		i++;
 	}
 	close(fd);
 	ft_freematrix(paths);
 	return (NULL);
 }
 
-void	child_process(int *fd, char **argv, char **envp)
+void	child_start_process(int *fd, char **argv, char **envp)
 {
 	int		infile;
 	char	**cmd;
@@ -87,14 +85,14 @@ void	child_process(int *fd, char **argv, char **envp)
 	}
 }
 
-void	parent_process(int *fd, char **argv, char **envp)
+void	child_end_process(int *fd, char **argv, char **envp)
 {
 	int		outfile;
 	char	**cmd;
 	char	*path;
 
 	close(fd[WRITE_END]);
-	outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0x777);
+	outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (outfile < 0)
 		error_message("Failed to open outfile", NULL);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
@@ -120,15 +118,24 @@ int main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		error_message("Invalid number of arguments", NULL);
+	if (envp[0] == NULL)
+		error_message("No environmental variables", NULL);
 	if (pipe(fd) == -1)
 		error_message("Failed to create the pipe(s)", NULL);
 	id = fork();
 	if (id == 0)
-		child_process(fd, argv, envp);
+		child_start_process(fd, argv, envp);
 	else
 	{
+		id = fork();
 		wait(NULL);
-		parent_process(fd, argv, envp);
+		if (id == 0)
+			child_end_process(fd, argv, envp);
+		else
+		{
+			close(fd[READ_END]);
+			close(fd[WRITE_END]);
+		}
 	}
 	return (0);
 }
