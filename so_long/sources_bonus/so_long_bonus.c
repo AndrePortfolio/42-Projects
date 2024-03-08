@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:38 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/25 12:34:02 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/08 20:16:27 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   read_input_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:12:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/02/25 12:26:15 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/08 19:48:22 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	read_input(t_map *map, int argc, char **argv)
+void read_input(t_map *map, int argc, char **argv)
 {
-	int	fd;
+	int fd;
 
 	if (argc != 2)
 		error_message("Invalid number of arguments");
@@ -28,9 +28,9 @@ void	read_input(t_map *map, int argc, char **argv)
 	validate_map(map);
 }
 
-void	read_map(t_map *map, int fd, int rows)
+void read_map(t_map *map, int fd, int rows)
 {
-	char	*line;
+	char *line;
 
 	line = get_next_line(fd);
 	if (line)
@@ -56,9 +56,9 @@ void	read_map(t_map *map, int fd, int rows)
 	}
 }
 
-void	validate_map(t_map *map)
+void validate_map(t_map *map)
 {
-	char	**visited;
+	char **visited;
 
 	if (!is_rectangular(map))
 		free_map(map, "Map must be rectangular", 1);
@@ -74,10 +74,10 @@ void	validate_map(t_map *map)
 		free_map(map, "Player can't access all collectibles and/or exit", 1);
 }
 
-char	**copy_map(t_map *map, char **original, int rows)
+char **copy_map(t_map *map, char **original, int rows)
 {
-	char	**copy;
-	int		i;
+	char **copy;
+	int i;
 
 	copy = ft_calloc(rows + 1, sizeof(char *));
 	if (!copy)

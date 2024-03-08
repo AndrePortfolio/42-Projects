@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/08 17:24:04 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:00:29 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ void	error_message(char *str, char *cmd)
 	else
 		ft_putchar_fd('\n', 2);
 	exit (1);
+}
+
+void free_and_close(int fd, char **paths, char *path, char *path_cmd)
+{
+	if (!path_cmd)
+	{
+		if (path)
+			free(path);
+		close(fd);
+		ft_freematrix(paths);
+	}
+	else
+	{
+		free(path);
+		free(path_cmd);
+	}
 }
 
 char	*get_path(char *cmd, char **envp)
@@ -42,20 +58,17 @@ char	*get_path(char *cmd, char **envp)
 			{
 				path = ft_strjoin(paths[j], "/");
 				path_cmd = ft_strjoin(path, cmd);
-				free(path);
 				fd = open(path_cmd, O_RDONLY);
 				if (fd >= 0)
 				{
-					close(fd);
-					ft_freematrix(paths);
+					free_and_close(fd, paths, path, NULL);
 					return (path_cmd);
 				}
-				free(path_cmd);
+				free_and_close(fd, paths, path, path_cmd);
 			}
 		}
 	}
-	close(fd);
-	ft_freematrix(paths);
+	free_and_close(fd, paths, NULL, NULL);
 	return (NULL);
 }
 
