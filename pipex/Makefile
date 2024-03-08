@@ -53,7 +53,6 @@ test2: re
 	./pipex Makefile "ls -l" "wc -l" test_1
 	< Makefile ls -l | wc -l > test_2
 
-
 v1: re
 	@echo "\n"
 	valgrind -s --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes ./$(NAME) Makefile sort uniq test_1
