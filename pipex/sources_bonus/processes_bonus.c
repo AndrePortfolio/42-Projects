@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/10 22:11:52 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/10 23:36:00 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,10 @@ void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 	if (argc > 5)
 		child_next_process(fd, argc - 1, argv, envp);
 	id = fork();
-	if (id == 0)
+	if (id == -1)
+		error_message("Failed to execute the fork", NULL);
+	else if (id == 0)
 		execute_next_process(fd, argc, argv, envp);
-	else
-	{
-		close(fd[1][WRITE_END]);
-		close(fd[0][READ_END]);
-		close(fd[0][READ_END]);
-		close(fd[1][WRITE_END]);
-	}
 }
 
 void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
@@ -104,4 +99,3 @@ void	child_end_process(int *fd, int argc, char **argv, char **envp)
 		error_message("pipex: command not found: ", argv[argc - 2]);
 	}
 }
-

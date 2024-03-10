@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/10 21:17:47 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/10 23:27:05 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 		free(path);
 		free(path_cmd);
 	}
+}
+
+void	child_last_process(int (*fd)[2], int argc, char **argv, char **envp)
+{
+	if (argc > 5)
+		child_end_process(fd[1], argc, argv, envp);
 }
 
 void	close_fds(int (*fd)[2])
