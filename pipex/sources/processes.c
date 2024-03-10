@@ -6,39 +6,11 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/08 22:53:06 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/10 21:21:23 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	get_path(char *cmd, char **envp, char **path)
-{
-	char	**paths;
-	char	*single_path;
-	char	*path_cmd;
-	int		fd;
-	int		i;
-
-	get_path_index(envp, &i);
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		single_path = ft_strjoin(paths[i], "/");
-		path_cmd = ft_strjoin(single_path, cmd);
-		fd = open(path_cmd, O_RDONLY);
-		if (fd >= 0)
-		{
-			*path = path_cmd;
-			free_and_close(fd, paths, single_path, NULL);
-			return ;
-		}
-		free_and_close(fd, paths, single_path, path_cmd);
-		i++;
-	}
-	free_and_close(fd, paths, NULL, NULL);
-}
 
 void	child_start_process(int *fd, char **argv, char **envp)
 {

@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/10 20:39:13 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/10 21:48:31 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	main(int argc, char **argv, char **envp)
 			child_end_process(fd[1], argc, argv, envp);
 		else
 		{
-			close(fd[0][READ_END]);
-			close(fd[1][WRITE_END]);
 			wait(NULL);
 			id = fork();
 			if (argc > 5)
@@ -42,10 +40,7 @@ int	main(int argc, char **argv, char **envp)
 				if (id == 0)
 					child_end_process(fd[1], argc, argv, envp);
 				else
-				{
-					close(fd[1][READ_END]);
-					close(fd[0][WRITE_END]);
-				}
+					close_fds(fd);
 			}
 		}
 	}
