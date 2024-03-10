@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   processes.c                                        :+:      :+:    :+:   */
+/*   processes_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/08 22:59:40 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/10 20:29:28 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-void	get_path(char *cmd, char **envp, char **path)
-{
-	char	**paths;
-	char	*single_path;
-	char	*path_cmd;
-	int		fd;
-	int		i;
-
-	get_path_index(envp, &i);
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		single_path = ft_strjoin(paths[i], "/");
-		path_cmd = ft_strjoin(single_path, cmd);
-		fd = open(path_cmd, O_RDONLY);
-		if (fd >= 0)
-		{
-			*path = path_cmd;
-			free_and_close(fd, paths, single_path, NULL);
-			return ;
-		}
-		free_and_close(fd, paths, single_path, path_cmd);
-		i++;
-	}
-	free_and_close(fd, paths, NULL, NULL);
-}
 
 void	child_start_process(int *fd, char **argv, char **envp)
 {
@@ -66,14 +38,41 @@ void	child_start_process(int *fd, char **argv, char **envp)
 	}
 }
 
-void	child_end_process(int *fd, char **argv, char **envp)
+void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp)
+{
+	char	**cmd;
+	char	*path;
+	int		cmd_nbr;
+
+	cmd_nbr = 3;
+
+	close(fd[1][WRITE_END]);
+	close(fd[0][READ_END]);
+	if (dup2(fd[1][READ_END], STDIN_FILENO) == -1)
+		error_message("Error setting pipe read end to STDIN", NULL);
+	if (dup2(fd[0][WRITE_END], STDOUT_FILENO) == -1)
+		error_message("Error setting pipe write end to STDOUT", NULL);
+	close(fd[0][READ_END]);
+	close(fd[1][WRITE_END]);
+
+	cmd = ft_split(argv[cmd_nbr], ' ');
+	get_path(cmd[0], envp, &path);
+	if (execve(path, cmd, envp) == -1)
+	{
+		free(path);
+		ft_freematrix(cmd);
+		error_message("pipex: command not found: ", argv[argc - 2]);
+	}
+}
+
+void	child_end_process(int *fd, int argc, char **argv, char **envp)
 {
 	int		outfile;
 	char	**cmd;
 	char	*path;
 
 	close(fd[WRITE_END]);
-	outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (outfile < 0)
 		error_message("Failed to open outfile", NULL);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
@@ -82,12 +81,13 @@ void	child_end_process(int *fd, char **argv, char **envp)
 	if (dup2(fd[READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL);
 	close(fd[READ_END]);
-	cmd = ft_split(argv[3], ' ');
+	cmd = ft_split(argv[argc - 2], ' ');
 	get_path(cmd[0], envp, &path);
 	if (execve(path, cmd, envp) == -1)
 	{
 		free(path);
 		ft_freematrix(cmd);
-		error_message("pipex: command not found: ", argv[3]);
+		error_message("pipex: command not found: ", argv[argc - 2]);
 	}
 }
+

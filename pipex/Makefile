@@ -1,13 +1,19 @@
 NAME = pipex
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-SRC_DIR = sources
-SRC = $(wildcard $(SRC_DIR)/*.c)
 LIBFT = libft/libft.a
-OBJ_DIR = objects
-OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
+CFLAGS = -Wall -Wextra -Werror -g
+CC = cc
 COMPRESS = ar rcs
 RM = rm -rf
+
+SRC_DIR = sources
+OBJ_DIR = objects
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
+
+SRC_BONUS_DIR = sources_bonus
+OBJ_BONUS_DIR = bonus_objects
+SRC_BONUS = $(wildcard $(SRC_BONUS_DIR)/*.c)
+OBJ_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(notdir $(SRC_BONUS:.c=.o)))
 
 # Colours
 GREEN = \033[1;32m
@@ -22,6 +28,12 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
+bonus: $(NAME)_bonus
+
+$(NAME)_bonus: $(OBJ_BONUS_DIR) $(OBJ_BONUS) all
+	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)_bonus
+	@echo "$(CYAN)make$(RESET)   bonus $(GREEN)[OK]$(RESET)"
+
 $(LIBFT):
 	@$(MAKE) -C ./libft --no-print-directory
 
@@ -31,17 +43,25 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_BONUS_DIR):
+	@mkdir -p $@
+
+$(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR) $(OBJ_BONUS_DIR)
 	@$(MAKE) -C ./libft clean --no-print-directory
 	@echo "$(ORANGE)$@$(RESET)  $(NAME) $(GREEN)[OK]$(RESET)"
+	@echo "$(ORANGE)$@$(RESET)  bonus $(GREEN)[OK]$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME) test_1 test_2
+	@$(RM) $(NAME) $(NAME)_bonus test_1 test_2
 	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
+	@echo "$(RED)$@$(RESET) bonus $(GREEN)[OK]$(RESET)"
 
-re: fclean all
+re: fclean all bonus
 
 test1: re
 	@echo "\n"

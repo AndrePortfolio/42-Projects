@@ -1,40 +1,35 @@
 NAME = so_long
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-
-SRC_DIR = sources
-SRC_BONUS_DIR = sources_bonus
-
-SRC = $(addprefix $(SRC_DIR)/,$(addsuffix .c, $(S)))
-
-S = check_characters check_map close_program create_images init_images mlx_start \
-	read_input so_long utils
-
-SRC_BONUS = $(addprefix $(SRC_BONUS_DIR)/,$(addsuffix _bonus.c, $(B)))
-
-B = check_characters check_map close_program create_images init_others mlx_start \
-	read_input so_long utils create_images2 init_player
-
-OBJ_DIR = objects
-OBJ_BONUS_DIR = bonus_objects
-
 LIBFT = libft/libft.a
-OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
-OBJ_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(notdir $(SRC_BONUS:.c=.o)))
+CFLAGS = -Wall -Wextra -Werror -g
+CC = cc
 COMPRESS = ar rcs
 RM = rm -rf
 
+SRC_DIR = sources
+OBJ_DIR = objects
+SRC = $(addprefix $(SRC_DIR)/,$(addsuffix .c, $(S)))
+S = check_characters check_map close_program create_images init_images mlx_start \
+	read_input so_long utils
+OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
+
+SRC_BONUS_DIR = sources_bonus
+OBJ_BONUS_DIR = bonus_objects
+SRC_BONUS = $(addprefix $(SRC_BONUS_DIR)/,$(addsuffix _bonus.c, $(B)))
+B = check_characters check_map close_program create_images init_others mlx_start \
+	read_input so_long utils create_images2 init_player
+OBJ_BONUS = $(addprefix $(OBJ_BONUS_DIR)/,$(notdir $(SRC_BONUS:.c=.o)))
+
 # Mac
-#MLX_DIR = minilibx/minilibx-mac
-#MLX_LIB = $(MLX_DIR)/libmlx.a
-#MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/libmlx
-#MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = minilibx/minilibx-mac
+MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/libmlx
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # Linux
-MLX_DIR = minilibx/minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/linux
-MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+#MLX_DIR = minilibx/minilibx-linux
+#MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+#MLX_INC = -I$(MLX_DIR) -I$(MLX_DIR)/linux
+#MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 
 # Colours
 GREEN = \033[1;32m
@@ -49,7 +44,7 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
-b: $(NAME)_bonus
+bonus: $(NAME)_bonus
 
 $(NAME)_bonus: $(OBJ_BONUS_DIR) $(OBJ_BONUS) all
 	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)_bonus
@@ -77,8 +72,7 @@ clean:
 	@echo "$(ORANGE)$@$(RESET)  bonus   $(GREEN)[OK]$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
-	@$(RM) $(NAME)_bonus
+	@$(RM) $(NAME) $(NAME)_bonus
 	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
 	@echo "$(RED)$@$(RESET) bonus   $(GREEN)[OK]$(RESET)"
