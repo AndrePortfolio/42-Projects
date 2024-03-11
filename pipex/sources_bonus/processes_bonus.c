@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 00:21:30 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 00:45:53 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,29 @@ void	child_end_process(int *fd, char **argv, char **envp)
 		free(path);
 		ft_freematrix(cmd);
 		error_message("pipex: command not found: ", argv[argc - 2]);
+	}
+}
+
+void	parent_process(int id, int (*fd)[2], char **argv, char **envp)
+{
+	int	argc;
+
+	argc = get_argc(argv);
+	id = fork();
+	if (id == -1)
+		error_message("Failed to execute the fork", NULL);
+	else if (id == 0 && argc > 5)
+		child_next_process(fd, 0, argv, envp);
+	else if (id == 0)
+		child_end_process(fd[1], argv, envp);
+	else
+	{
+		id = fork();
+		if (id == -1)
+			error_message("Failed to execute the fork", NULL);
+		else if (id == 0)
+			child_last_process(fd, argv, envp);
+		else
+			close_fds(fd);
 	}
 }
