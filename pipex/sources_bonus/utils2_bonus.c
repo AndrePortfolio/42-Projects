@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 00:33:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 00:33:52 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 20:10:11 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

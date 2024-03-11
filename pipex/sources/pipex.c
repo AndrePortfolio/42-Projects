@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/11 16:41:44 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:54:47 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 	int		fd[2];
 
 	read_input(argc, envp);
+	status = 0;
 	if (pipe(fd) == -1)
 		error_message("Failed to create the pipe(s)", NULL, 1);
 	id = fork();

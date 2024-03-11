@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/11 18:13:11 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:10:30 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	pid_t	id;
 	int		fd[2][2];
+	int		status;
 
 	read_input(argc, envp);
+	status = 0;
 	if (pipe(fd[0]) == -1 || pipe(fd[1]) == -1)
 		error_message("Failed to create the pipe(s)", NULL, 1);
 	id = fork();
@@ -25,8 +27,7 @@ int	main(int argc, char **argv, char **envp)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if (id == 0)
 		child_start_process(fd[1], argv, envp);
-	else
-		parent_process(id, fd, argv, envp);
+	parent_process(fd, argv, envp, &status);
 	waitpid(id, NULL, 0);
-	return (0);
+	return (WEXITSTATUS(status));
 }

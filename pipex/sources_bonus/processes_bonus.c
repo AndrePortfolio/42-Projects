@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 18:36:56 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:06:31 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,11 @@ void	child_end_process(int *fd, char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	parent_process(int id, int (*fd)[2], char **argv, char **envp)
+void	parent_process(int (*fd)[2], char **argv, char **envp, int *status)
 {
-	int	argc;
+	int		argc;
+	pid_t	id;
+	pid_t	id2;
 
 	argc = get_argc(argv);
 	id = fork();
@@ -127,14 +129,12 @@ void	parent_process(int id, int (*fd)[2], char **argv, char **envp)
 		child_next_process(fd, 0, argv, envp);
 	else if (id == 0)
 		child_end_process(fd[1], argv, envp);
-	else
-	{
-		id = fork();
-		if (id == -1)
-			error_message("Failed to execute the fork", NULL, 1);
-		else if (id == 0)
-			child_last_process(fd, argv, envp);
-		else
-			close_fds(fd);
-	}
+	id2 = fork();
+	if (id2 == -1)
+		error_message("Failed to execute the fork", NULL, 1);
+	else if (id2 == 0)
+		child_last_process(fd, argv, envp);
+	close_fds(fd);
+	waitpid(id, NULL, 0);
+	waitpid(id2, status, 0);
 }

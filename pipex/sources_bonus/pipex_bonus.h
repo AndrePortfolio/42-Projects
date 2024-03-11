@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/11 18:13:18 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:53:23 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	child_start_process(int *fd, char **argv, char **envp);
 void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp);
 void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp);
 void	child_end_process(int *fd, char **argv, char **envp);
-void	parent_process(int id, int (*fd)[2], char **argv, char **envp);
+void	parent_process(int (*fd)[2], char **argv, char **envp, int *status);
 
 // Path
 void	get_path(char *cmd, char **envp, char **path);
