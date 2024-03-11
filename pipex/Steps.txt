@@ -46,7 +46,7 @@ Should behave like:
 cmd << LIMITER | cmd1 >> file
 
 FIXES:
-Not handling incorrect commands properly
+Not handling incorrect commands properly on start and next
 Makefile problems
 Not closing all the fds
 ./pipex Makefile "sleep 5" "sleep 2" out

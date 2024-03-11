@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 20:06:31 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:45:39 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	child_start_process(int *fd, char **argv, char **envp)
 {
 	int		infile;
-	char	**cmd;
+	char	**cmd_arg;
+	char	*cmd;
 	char	*path;
 
 	path = NULL;
@@ -29,16 +30,17 @@ void	child_start_process(int *fd, char **argv, char **envp)
 	if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
 	close(fd[WRITE_END]);
-	cmd = ft_split(argv[2], ' ');
-	get_path(cmd[0], envp, &path);
+	cmd_arg = ft_split(argv[2], ' ');
+	cmd = ft_strdup(cmd_arg[0]);
+	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
-		ft_freematrix(cmd);
-		error_message("pipex: command not found: ", argv[2], 127);
+		ft_freematrix(cmd_arg);
+		error_message("pipex: command not found: ", cmd, 127);
 	}
-	execve(path, cmd, envp);
+	execve(path, cmd_arg, envp);
 	free(path);
-	ft_freematrix(cmd);
+	ft_freematrix(cmd_arg);
 }
 
 void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp)
@@ -58,7 +60,8 @@ void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 
 void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 {
-	char	**cmd;
+	char	**cmd_arg;
+	char	*cmd;
 	char	*path;
 
 	path = NULL;
@@ -70,16 +73,17 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
 	close(fd[0][READ_END]);
 	close(fd[1][WRITE_END]);
-	cmd = ft_split(argv[argc - 3], ' ');
-	get_path(cmd[0], envp, &path);
+	cmd_arg = ft_split(argv[argc - 3], ' ');
+	cmd = ft_strdup(cmd_arg[0]);
+	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
-		ft_freematrix(cmd);
-		error_message("pipex: command not found: ", argv[argc - 3], 127);
+		ft_freematrix(cmd_arg);
+		error_message("pipex: command not found: ", cmd, 127);
 	}
-	execve(path, cmd, envp);
+	execve(path, cmd_arg, envp);
 	free(path);
-	ft_freematrix(cmd);
+	ft_freematrix(cmd_arg);
 }
 
 void	child_end_process(int *fd, char **argv, char **envp)
@@ -119,7 +123,6 @@ void	parent_process(int (*fd)[2], char **argv, char **envp, int *status)
 {
 	int		argc;
 	pid_t	id;
-	pid_t	id2;
 
 	argc = get_argc(argv);
 	id = fork();
@@ -129,12 +132,8 @@ void	parent_process(int (*fd)[2], char **argv, char **envp, int *status)
 		child_next_process(fd, 0, argv, envp);
 	else if (id == 0)
 		child_end_process(fd[1], argv, envp);
-	id2 = fork();
-	if (id2 == -1)
-		error_message("Failed to execute the fork", NULL, 1);
-	else if (id2 == 0)
-		child_last_process(fd, argv, envp);
+	else
+		child_last_process(fd, argv, envp, status);
 	close_fds(fd);
 	waitpid(id, NULL, 0);
-	waitpid(id2, status, 0);
 }

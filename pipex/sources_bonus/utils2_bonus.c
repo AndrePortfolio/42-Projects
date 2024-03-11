@@ -6,19 +6,25 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 00:33:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 20:10:11 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:18:22 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	child_last_process(int (*fd)[2], char **argv, char **envp)
+void	child_last_process(int (*fd)[2], char **argv, char **envp, int *status)
 {
 	int		argc;
+	pid_t	id;
 
 	argc = get_argc(argv);
-	if (argc > 5)
-		child_end_process(fd[1], argv, envp);
+	id = fork();
+	if (id == -1)
+		error_message("Failed to execute the fork", NULL, 1);
+	else if (id == 0)
+		if (argc > 5)
+			child_end_process(fd[1], argv, envp);
+	waitpid(id, status, 0);
 }
 
 void	close_fds(int (*fd)[2])
