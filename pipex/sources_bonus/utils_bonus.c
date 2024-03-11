@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 18:13:05 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 21:09:48 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	error_message(char *str, char *cmd, int code)
 		ft_putendl_fd(cmd, 2);
 	else
 		ft_putchar_fd('\n', 2);
+	free(cmd);
 	exit (code);
 }
 

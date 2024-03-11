@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 00:33:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 20:18:22 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 21:05:33 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,25 @@ void	child_last_process(int (*fd)[2], char **argv, char **envp, int *status)
 	if (id == -1)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if (id == 0)
+	{
 		if (argc > 5)
+		{
+			close(fd[0][READ_END]);
+			close(fd[0][WRITE_END]);
 			child_end_process(fd[1], argv, envp);
+		}
+	}
 	waitpid(id, status, 0);
 }
 
-void	close_fds(int (*fd)[2])
+void	close_fds(int (*fd)[2], bool all)
 {
+	if (all)
+	{
+		close(fd[1][WRITE_END]);
+		close(fd[1][READ_END]);
+	}
 	close(fd[0][READ_END]);
-	close(fd[1][WRITE_END]);
-	close(fd[1][READ_END]);
 	close(fd[0][WRITE_END]);
 }
 

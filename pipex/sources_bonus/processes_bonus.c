@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 20:45:39 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 21:05:58 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,11 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 	char	*path;
 
 	path = NULL;
-	close(fd[1][WRITE_END]);
-	close(fd[0][READ_END]);
 	if (dup2(fd[1][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
 	if (dup2(fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	close(fd[0][READ_END]);
-	close(fd[1][WRITE_END]);
+	close_fds(fd, true);
 	cmd_arg = ft_split(argv[argc - 3], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
@@ -131,9 +128,12 @@ void	parent_process(int (*fd)[2], char **argv, char **envp, int *status)
 	else if (id == 0 && argc > 5)
 		child_next_process(fd, 0, argv, envp);
 	else if (id == 0)
+	{
+		close_fds(fd, false);
 		child_end_process(fd[1], argv, envp);
+	}
 	else
 		child_last_process(fd, argv, envp, status);
-	close_fds(fd);
+	close_fds(fd, true);
 	waitpid(id, NULL, 0);
 }
