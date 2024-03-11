@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/11 00:30:18 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 18:13:18 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	get_path_index(char **envp, int *index);
 
 // Utils
 void	read_input(int argc, char **envp);
-void	error_message(char *str, char *cmd);
+void	error_message(char *str, char *cmd, int code);
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd);
 void	close_fds(int (*fd)[2]);
 void	child_last_process(int (*fd)[2], char **argv, char **envp);

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 15:43:52 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:13:05 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void	read_input(int argc, char **envp)
 {
 	if (argc < 5)
-		error_message("Invalid number of arguments", NULL);
+		error_message("Invalid number of arguments", NULL, 1);
 	if (!envp)
-		error_message("No environmental variables", NULL);
+		error_message("No environmental variables", NULL, 1);
 }
 
-void	error_message(char *str, char *cmd)
+void	error_message(char *str, char *cmd, int code)
 {
 	ft_putstr_fd(str, 2);
 	if (cmd)
 		ft_putendl_fd(cmd, 2);
 	else
 		ft_putchar_fd('\n', 2);
-	exit (1);
+	exit (code);
 }
 
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
