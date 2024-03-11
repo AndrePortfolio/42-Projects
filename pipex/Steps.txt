@@ -1,5 +1,11 @@
-Parsing:
+allowed functions:
+open, close, read, write,
+malloc, free, perror,
+strerror, access, dup, dup2,
+execve, exit, fork, pipe,
+unlink, wait, waitpid
 
+Project
 It must take 4 arguments:
 - file1 must have content
 - commands must be valid
@@ -20,10 +26,6 @@ Should behave like: < infile grep a1 | wc -w > outfile
 "ls -l" lists the files in the current directory in long format (details about permitions etc)
 "| wc -l" takes the output of "ls -l" and counts the number of lines.
 
-
-
-
-
 Bonus part
 Part 1
 You will get extra points if you:
@@ -34,6 +36,7 @@ Should behave like:
 < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
 
 
+
 Part 2
 - Support « and » when the first parameter is "here_doc".
 
@@ -42,10 +45,8 @@ $> ./pipex here_doc LIMITER cmd cmd1 file
 Should behave like:
 cmd << LIMITER | cmd1 >> file
 
-
-allowed functions:
-open, close, read, write,
-malloc, free, perror,
-strerror, access, dup, dup2,
-execve, exit, fork, pipe,
-unlink, wait, waitpid
+FIXES:
+Not handling incorrect commands properly
+Makefile problems
+Not closing all the fds
+./pipex Makefile "sleep 5" "sleep 2" out

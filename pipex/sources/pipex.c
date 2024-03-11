@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/08 22:52:45 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 16:41:44 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	id;
-	int	fd[2];
+	pid_t	id;
+	pid_t	id2;
+	int		status;
+	int		fd[2];
 
 	read_input(argc, envp);
 	if (pipe(fd) == -1)
-		error_message("Failed to create the pipe(s)", NULL);
+		error_message("Failed to create the pipe(s)", NULL, 1);
 	id = fork();
 	if (id == 0)
 		child_start_process(fd, argv, envp);
-	else
-	{
-		id = fork();
-		wait(NULL);
-		if (id == 0)
-			child_end_process(fd, argv, envp);
-		else
-		{
-			close(fd[READ_END]);
-			close(fd[WRITE_END]);
-		}
-	}
-	return (0);
+	id2 = fork();
+	if (id2 == 0)
+		child_end_process(fd, argv, envp);
+	close(fd[READ_END]);
+	close(fd[WRITE_END]);
+	waitpid(id, NULL, 0);
+	waitpid(id2, &status, 0);
+	return (WEXITSTATUS(status));
 }

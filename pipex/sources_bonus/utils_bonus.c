@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 00:33:50 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 15:43:52 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	read_input(int argc, char **envp)
 {
 	if (argc < 5)
 		error_message("Invalid number of arguments", NULL);
-	if (envp[0] == NULL)
+	if (!envp)
 		error_message("No environmental variables", NULL);
 }
 
