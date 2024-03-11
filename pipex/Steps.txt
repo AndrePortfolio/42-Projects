@@ -25,16 +25,27 @@ Should behave like: < infile grep a1 | wc -w > outfile
 
 
 Bonus part
+Part 1
 You will get extra points if you:
 - Handle multiple pipes.
-- Support « and » when the first parameter is "here_doc".
-
 This:
 $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
 Should behave like:
 < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
 
+
+Part 2
+- Support « and » when the first parameter is "here_doc".
+
 This:
 $> ./pipex here_doc LIMITER cmd cmd1 file
 Should behave like:
 cmd << LIMITER | cmd1 >> file
+
+
+allowed functions:
+open, close, read, write,
+malloc, free, perror,
+strerror, access, dup, dup2,
+execve, exit, fork, pipe,
+unlink, wait, waitpid
