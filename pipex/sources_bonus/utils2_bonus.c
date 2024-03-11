@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 00:33:34 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 21:05:33 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/11 21:46:15 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	child_last_process(int (*fd)[2], char **argv, char **envp, int *status)
 			child_end_process(fd[1], argv, envp);
 		}
 	}
+	(void)status;
 	waitpid(id, status, 0);
 }
 
