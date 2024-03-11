@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/10 23:38:50 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 00:18:33 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ int	main(int argc, char **argv, char **envp)
 	{
 		wait(NULL);
 		id = fork();
-		if (id == -1)
-			error_message("Failed to execute the fork", NULL);
-		else if (id == 0 && argc > 5)
-			child_next_process(fd, argc, argv, envp);
+		if (id == 0 && argc > 5)
+			child_next_process(fd, 0, argv, envp);
 		else if (id == 0)
-			child_end_process(fd[1], argc, argv, envp);
+			child_end_process(fd[1], argv, envp);
 		else
 		{
 			wait(NULL);
 			id = fork();
 			if (id == 0)
-				child_last_process(fd, argc, argv, envp);
+				child_last_process(fd, argv, envp);
 			else
 				close_fds(fd);
 		}

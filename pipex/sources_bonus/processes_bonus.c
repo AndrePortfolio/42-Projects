@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/10 23:36:00 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/11 00:21:30 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 {
 	int		id;
 
+	if (argc == 0)
+		argc = get_argc(argv);
 	if (argc > 5)
 		child_next_process(fd, argc - 1, argv, envp);
 	id = fork();
@@ -56,6 +58,7 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 	char	**cmd;
 	char	*path;
 
+	argc = get_argc(argv);
 	close(fd[1][WRITE_END]);
 	close(fd[0][READ_END]);
 	if (dup2(fd[1][READ_END], STDIN_FILENO) == -1)
@@ -74,12 +77,14 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 	}
 }
 
-void	child_end_process(int *fd, int argc, char **argv, char **envp)
+void	child_end_process(int *fd, char **argv, char **envp)
 {
 	int		outfile;
 	char	**cmd;
 	char	*path;
+	int		argc;
 
+	argc = get_argc(argv);
 	close(fd[WRITE_END]);
 	outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (outfile < 0)
