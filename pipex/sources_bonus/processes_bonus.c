@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 03:10:37 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 12:52:36 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	child_next_process(char **argv, char **envp, int argc, info_t **use)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if ((*use)->id[n] == 0)
 		execute_next_process((*use)->fd, argc, argv, envp);
+	close_fds((*use)->fd);
+	free((*use)->id);
+	exit (1);
 }
 
 void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
@@ -123,17 +126,17 @@ void	parent_process(char **argv, char **envp, info_t *use)
 	use->id[1] = fork();
 	if (use->id[1] == -1)
 		error_message("Failed to execute the fork", NULL, 1);
-	else if (use->id[1] == 0 && argc > 5)
-		child_next_process(argv, envp, 0, &use);
 	else if (use->id[1] == 0)
-		child_end_process(use->fd, argv, envp);
-	else
 	{
-		use->id[2] = fork();
-		if (use->id[2] == -1)
-			error_message("Failed to execute the fork", NULL, 1);
-		else if (use->id[2] == 0)
-			if (argc > 5)
-				child_end_process(use->fd, argv, envp);
+		if (argc > 5)
+			child_next_process(argv, envp, 0, &use);
+		else
+			child_end_process(use->fd, argv, envp);
 	}
+	use->id[2] = fork();
+	if (use->id[2] == -1)
+		error_message("Failed to execute the fork", NULL, 1);
+	else if (use->id[2] == 0)
+		if (argc > 5)
+			child_end_process(use->fd, argv, envp);
 }

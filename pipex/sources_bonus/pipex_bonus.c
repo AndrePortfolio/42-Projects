@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/12 03:14:08 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 12:47:31 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ int	main(int argc, char **argv, char **envp)
 	else if (use.id[0] == 0)
 		child_start_process(use.fd, argv, envp);
 	parent_process(argv, envp, &use);
-
-	// fprintf(stderr, "use.id[0]: %d\n", use.id[0]);
-	// fprintf(stderr, "use.id[1]: %d\n", use.id[1]);
-	// fprintf(stderr, "use.id[2]: %d\n", use.id[2]);
 	waitpid(use.id[0], NULL, 0);
 	waitpid(use.id[1], NULL, 0);
 	waitpid(use.id[2], &status, 0);
@@ -42,5 +38,6 @@ int	main(int argc, char **argv, char **envp)
 		argc--;
 	}
 	close_fds(use.fd);
+	free(use.id);
 	return (WEXITSTATUS(status));
 }
