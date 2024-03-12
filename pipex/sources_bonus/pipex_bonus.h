@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/12 13:23:52 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 20:49:17 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ typedef struct s_info
 }			t_info;
 
 // Processes
+void	start_processes(int argc, char **argv, char **envp, t_info *use);
 void	child_start_process(int (*fd)[2], char **argv, char **envp);
-void	child_next_process(char **argv, char **envp, int argc, t_info **use);
-void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp);
+void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp);
 void	child_end_process(int (*fd)[2], char **argv, char **envp);
-void	parent_process(char **argv, char **envp, t_info *use);
 
 // Path
 void	get_path(char *cmd, char **envp, char **path);
