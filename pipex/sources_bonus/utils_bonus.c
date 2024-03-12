@@ -6,13 +6,13 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 01:56:01 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 13:24:27 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	read_input(int argc, char **envp, info_t *use)
+void	read_input(int argc, char **envp, t_info *use)
 {
 	if (argc < 5)
 		error_message("Invalid number of arguments", NULL, 1);

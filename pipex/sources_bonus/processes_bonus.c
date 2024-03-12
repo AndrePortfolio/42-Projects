@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 12:52:36 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 13:24:21 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	child_start_process(int (*fd)[2], char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	child_next_process(char **argv, char **envp, int argc, info_t **use)
+void	child_next_process(char **argv, char **envp, int argc, t_info **use)
 {
 	int	n;
 
@@ -118,7 +118,7 @@ void	child_end_process(int (*fd)[2], char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	parent_process(char **argv, char **envp, info_t *use)
+void	parent_process(char **argv, char **envp, t_info *use)
 {
 	int		argc;
 
