@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 13:24:27 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 21:23:10 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	read_input(int argc, char **envp, t_info *use)
 		error_message("No environmental variables", NULL, 1);
 	use->id = malloc(sizeof(pid_t) * (argc - 2));
 	if (!use->id)
+		error_message("Memory allocation failed", NULL, 1);
+	use->fd[0] = malloc(sizeof(int) * (argc - 4));
+	use->fd[1] = malloc(sizeof(int) * (argc - 4));
+	if (!use->fd[0] || !use->fd[1])
 		error_message("Memory allocation failed", NULL, 1);
 }
 
@@ -50,7 +54,7 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 	}
 }
 
-void	close_fds(int (*fd)[2])
+void	close_fds(int *fd[2])
 {
 	if (fd[0][WRITE_END] >= 0)
 		close(fd[1][WRITE_END]);
