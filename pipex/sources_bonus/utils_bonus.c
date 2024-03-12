@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 21:09:48 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/12 01:34:39 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,26 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 		free(path);
 		free(path_cmd);
 	}
+}
+
+void	close_fds(int (*fd)[2])
+{
+	if (fd[0][WRITE_END] >= 0)
+		close(fd[1][WRITE_END]);
+	if (fd[0][READ_END] >= 0)
+		close(fd[1][READ_END]);
+	if (fd[1][WRITE_END] >= 0)
+		close(fd[1][WRITE_END]);
+	if (fd[1][READ_END] >= 0)
+		close(fd[1][READ_END]);
+}
+
+int	get_argc(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	return (i);
 }

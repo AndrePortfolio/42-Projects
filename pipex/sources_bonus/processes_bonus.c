@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   processes_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 21:05:58 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/12 01:33:35 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	child_start_process(int *fd, char **argv, char **envp)
+void	child_start_process(int (*fd)[2], char **argv, char **envp)
 {
 	int		infile;
 	char	**cmd_arg;
@@ -20,16 +20,15 @@ void	child_start_process(int *fd, char **argv, char **envp)
 	char	*path;
 
 	path = NULL;
-	close(fd[READ_END]);
 	infile = open(argv[1], O_RDONLY);
 	if (infile < 0)
 		error_message("Failed to open infile", NULL, 1);
 	if (dup2(infile, STDIN_FILENO) == -1)
 		error_message("Error setting infile to STDIN", NULL, 1);
 	close(infile);
-	if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
+	if (dup2(fd[1][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	close(fd[WRITE_END]);
+	close_fds(fd);
 	cmd_arg = ft_split(argv[2], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
@@ -69,7 +68,7 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
 	if (dup2(fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	close_fds(fd, true);
+	close_fds(fd);
 	cmd_arg = ft_split(argv[argc - 3], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
@@ -83,7 +82,7 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	child_end_process(int *fd, char **argv, char **envp)
+void	child_end_process(int (*fd)[2], char **argv, char **envp)
 {
 	int		outfile;
 	char	**cmd_arg;
@@ -93,16 +92,15 @@ void	child_end_process(int *fd, char **argv, char **envp)
 
 	path = NULL;
 	argc = get_argc(argv);
-	close(fd[WRITE_END]);
 	outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (outfile < 0)
 		error_message("Failed to open outfile", NULL, 1);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 		error_message("Error setting outfile to STDOUT", NULL, 1);
 	close(outfile);
-	if (dup2(fd[READ_END], STDIN_FILENO) == -1)
+	if (dup2(fd[1][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
-	close(fd[READ_END]);
+	close_fds(fd);
 	cmd_arg = ft_split(argv[argc - 2], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
@@ -120,6 +118,7 @@ void	parent_process(int (*fd)[2], char **argv, char **envp, int *status)
 {
 	int		argc;
 	pid_t	id;
+	pid_t	id2;
 
 	argc = get_argc(argv);
 	id = fork();
@@ -128,12 +127,14 @@ void	parent_process(int (*fd)[2], char **argv, char **envp, int *status)
 	else if (id == 0 && argc > 5)
 		child_next_process(fd, 0, argv, envp);
 	else if (id == 0)
-	{
-		close_fds(fd, false);
-		child_end_process(fd[1], argv, envp);
-	}
-	else
-		child_last_process(fd, argv, envp, status);
-	close_fds(fd, true);
+		child_end_process(fd, argv, envp);
+	id2 = fork();
+	if (id2 == -1)
+		error_message("Failed to execute the fork", NULL, 1);
+	else if (id2 == 0)
+		if (argc > 5)
+			child_end_process(fd, argv, envp);
+	close_fds(fd);
 	waitpid(id, NULL, 0);
+	waitpid(id2, status, 0);
 }

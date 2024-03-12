@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/11 21:05:44 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/12 01:39:00 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # define READ_END 0
 
 // Processes
-void	child_start_process(int *fd, char **argv, char **envp);
+void	child_start_process(int (*fd)[2], char **argv, char **envp);
 void	child_next_process(int (*fd)[2], int argc, char **argv, char **envp);
 void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp);
-void	child_end_process(int *fd, char **argv, char **envp);
+void	child_end_process(int (*fd)[2], char **argv, char **envp);
 void	parent_process(int (*fd)[2], char **argv, char **envp, int *status);
 
 // Path
@@ -33,8 +33,7 @@ void	get_path_index(char **envp, int *index);
 void	read_input(int argc, char **envp);
 void	error_message(char *str, char *cmd, int code);
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd);
-void	close_fds(int (*fd)[2], bool all);
-void	child_last_process(int (*fd)[2], char **argv, char **envp, int *status);
+void	close_fds(int (*fd)[2]);
 int		get_argc(char **argv);
 
 #endif
