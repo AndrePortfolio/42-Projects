@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 13:24:21 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/12 20:14:27 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	child_start_process(int (*fd)[2], char **argv, char **envp)
 	if (dup2(fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
 	close_fds(fd);
+	if (!argv[2][0])
+		error_message("pipex: permission denied: ", NULL, 1);
 	cmd_arg = ft_split(argv[2], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
@@ -73,13 +75,15 @@ void	execute_next_process(int (*fd)[2], int argc, char **argv, char **envp)
 	if (dup2(fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
 	close_fds(fd);
+	if (!argv[argc - 3][0])
+		error_message("pipex: permission denied: ", NULL, 1);
 	cmd_arg = ft_split(argv[argc - 3], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
-		error_message("pipex: command not found: ", cmd, 127);
+		error_message("pipex: command not found: ", cmd, 1);
 	}
 	execve(path, cmd_arg, envp);
 	free(path);
@@ -105,6 +109,8 @@ void	child_end_process(int (*fd)[2], char **argv, char **envp)
 	if (dup2(fd[0][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
 	close_fds(fd);
+	if (!argv[argc - 2][0])
+		error_message("pipex: permission denied: ", NULL, 127);
 	cmd_arg = ft_split(argv[argc - 2], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);

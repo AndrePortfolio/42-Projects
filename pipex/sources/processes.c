@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 16:43:28 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:05:33 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	child_start_process(int *fd, char **argv, char **envp)
 	if (dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
 	close(fd[WRITE_END]);
+	if (!argv[2][0])
+		error_message("pipex: permission denied: ", NULL, 1);
 	cmd = ft_split(argv[2], ' ');
 	get_path(cmd[0], envp, &path);
 	if (!path)
@@ -58,6 +60,8 @@ void	child_end_process(int *fd, char **argv, char **envp)
 	if (dup2(fd[READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
 	close(fd[READ_END]);
+	if (!argv[3][0])
+		error_message("pipex: permission denied: ", NULL, 127);
 	cmd = ft_split(argv[3], ' ');
 	get_path(cmd[0], envp, &path);
 	if (!path)

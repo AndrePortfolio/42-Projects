@@ -48,5 +48,7 @@ cmd << LIMITER | cmd1 >> file
 FIXES:
 problems with ids (not waiting for the next processes)
 porblems with cat in the end process
+No defaults path
+leaks with empty string in bonus
 
 Makefile problems
