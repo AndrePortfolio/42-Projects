@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 15:03:00 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:05:15 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	read_input(int argc, char **envp, t_info *use)
 		error_message("Invalid number of arguments", NULL, 1);
 	if (!envp)
 		error_message("No environmental variables", NULL, 1);
+	use->cmd_nbr = argc - 3;
 	use->id = malloc(sizeof(pid_t) * (argc - 2));
 	if (!use->id)
 		error_message("Memory allocation failed", NULL, 1);
-	use->cmd_nbr = argc - 3;
 	use->fd = malloc(sizeof(int *) * (use->cmd_nbr - 1));
 	if (!(use->fd))
 		error_message("Memory allocation failed", NULL, 1);

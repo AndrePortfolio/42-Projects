@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 14:47:15 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:13:52 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 
 void	start_processes(int argc, char **argv, char **envp, t_info *use)
 {
+	int	cmds;
 	int i;
 
 	i = 1;
-
+	cmds = use->cmd_nbr;
 	use->id[0] = fork();
 	if (use->id[0] == -1)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if (use->id[0] == 0)
 		child_start_process(use->fd, argv, envp);
-	while (argc > 5)
+	while (cmds > 2)
 	{
 		use->id[i] = fork();
 		if (use->id[i] == -1)
 			error_message("Failed to execute the fork", NULL, 1);
 		else if (use->id[i] == 0)
 			child_next_process(use->fd, argc, argv, envp);
-		argc--;
+		cmds--;
 		i++;
 	}
 	use->id[i] = fork();
