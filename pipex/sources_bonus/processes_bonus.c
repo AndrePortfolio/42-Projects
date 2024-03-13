@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 18:27:59 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:30:52 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	start_processes(char **argv, char **envp, t_info *use)
 		child_start_process(use, argv, envp);
 	while (cmds > 2)
 	{
+		printf("I middle: %d\n", i);
 		use->id[i] = fork();
 		if (use->id[i] == -1)
 			error_message("Failed to execute the fork", NULL, 1);
@@ -34,6 +35,7 @@ void	start_processes(char **argv, char **envp, t_info *use)
 		cmds--;
 		i++;
 	}
+	printf("I last: %d\n", i);
 	use->id[i] = fork();
 	if (use->id[i] == -1)
 		error_message("Failed to execute the fork", NULL, 1);
@@ -116,6 +118,7 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 		error_message("Failed to open outfile", NULL, 1);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 		error_message("Error setting outfile to STDOUT", NULL, 1);
+	fprintf(stderr, "Last process pipe: %d", i);
 	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
 	if (!argv[2 + i][0])

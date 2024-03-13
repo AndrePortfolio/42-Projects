@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 19:43:12 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:44:02 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	read_input(int argc, char **envp, t_info *use)
 {
 	int i;
 
-	i = 0;
 	if (argc < 5)
 		error_message("Invalid number of arguments", NULL, 1);
 	if (!envp)
@@ -28,6 +27,7 @@ void	read_input(int argc, char **envp, t_info *use)
 	use->fd = malloc(sizeof(int *) * (use->cmd_nbr - 1));
 	if (!(use->fd))
 		error_message("Memory allocation failed", NULL, 1);
+	i = 0;
 	while (i < use->cmd_nbr - 1)
 	{
 		use->fd[i] = malloc(sizeof(int) * 2);
@@ -73,6 +73,8 @@ void	close_all_fds(t_info *use)
 
 	i = 0;
 	pipes = use->cmd_nbr - 1;
+	close(STDIN_FILENO);
+	
 	while (i < pipes)
 	{
 		if (use->fd[i][WRITE_END] >= 0)
@@ -90,7 +92,7 @@ void	close_unused_fds(t_info *use, int child_num)
 	i = -1;
 	while (++i < use->cmd_nbr - 1)
 	{
-		if (i == child_num)  					// if this is the child
+		if (i == child_num)  					// if this is the id of this child
 		{
 			if (child_num != use->cmd_nbr - 1)	// if this is not the last child close read end
 				close(use->fd[i][0]);
