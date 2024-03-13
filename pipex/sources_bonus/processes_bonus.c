@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 14:43:22 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:47:15 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	start_processes(int argc, char **argv, char **envp, t_info *use)
 		child_end_process(use->fd, argc, argv, envp);
 }
 
-void	child_start_process(int *fd[2], char **argv, char **envp)
+void	child_start_process(int **fd, char **argv, char **envp)
 {
 	int		infile;
 	char	**cmd_arg;
@@ -72,7 +72,7 @@ void	child_start_process(int *fd[2], char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	child_next_process(int *fd[2], int argc, char **argv, char **envp)
+void	child_next_process(int **fd, int argc, char **argv, char **envp)
 {
 	char	**cmd_arg;
 	char	*cmd;
@@ -99,7 +99,7 @@ void	child_next_process(int *fd[2], int argc, char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	child_end_process(int *fd[2], int argc, char **argv, char **envp)
+void	child_end_process(int **fd, int argc, char **argv, char **envp)
 {
 	int		outfile;
 	char	**cmd_arg;

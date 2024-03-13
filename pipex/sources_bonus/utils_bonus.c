@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 14:33:25 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:03:00 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	read_input(int argc, char **envp, t_info *use)
 {
+	int i;
+
+	i = 0;
 	if (argc < 5)
 		error_message("Invalid number of arguments", NULL, 1);
 	if (!envp)
@@ -21,10 +24,19 @@ void	read_input(int argc, char **envp, t_info *use)
 	use->id = malloc(sizeof(pid_t) * (argc - 2));
 	if (!use->id)
 		error_message("Memory allocation failed", NULL, 1);
-	use->fd[0] = malloc(sizeof(int) * (argc - 4));
-	use->fd[1] = malloc(sizeof(int) * (argc - 4));
-	if (!use->fd[0] || !use->fd[1])
+	use->cmd_nbr = argc - 3;
+	use->fd = malloc(sizeof(int *) * (use->cmd_nbr - 1));
+	if (!(use->fd))
 		error_message("Memory allocation failed", NULL, 1);
+	while (i < 2)
+	{
+		use->fd[i] = malloc(sizeof(int) * 2);
+		if (!(use->fd[i]))
+			error_message("Memory allocation failed", NULL, 1);
+		if (pipe(use->fd[i]) == -1)
+			error_message("Failed to create the pipe(s)", NULL, 1);
+		i++;
+	}
 }
 
 void	error_message(char *str, char *cmd, int code)
@@ -54,7 +66,7 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 	}
 }
 
-void	close_fds(int *fd[2])
+void	close_fds(int **fd)
 {
 	if (fd[0][WRITE_END] >= 0)
 		close(fd[1][WRITE_END]);

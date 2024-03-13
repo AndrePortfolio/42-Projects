@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/12 21:18:17 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:56:31 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 
 	read_input(argc, envp, &use);
-	if (pipe(use.fd[0]) == -1 || pipe(use.fd[1]) == -1)
-		error_message("Failed to create the pipe(s)", NULL, 1);
 	start_processes(argc, argv, envp, &use);
 	status = wait_pids(argc, &use);
 	close_fds(use.fd);
