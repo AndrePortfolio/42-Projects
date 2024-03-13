@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 20:44:02 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 22:32:31 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void	close_all_fds(t_info *use)
 
 	i = 0;
 	pipes = use->cmd_nbr - 1;
-	close(STDIN_FILENO);
-	
 	while (i < pipes)
 	{
 		if (use->fd[i][WRITE_END] >= 0)
@@ -89,22 +87,23 @@ void	close_unused_fds(t_info *use, int child_num)
 {
 	int	i;
 
-	i = -1;
-	while (++i < use->cmd_nbr - 1)
+	i = 0;
+	while (i < use->cmd_nbr - 1)
 	{
-		if (i == child_num)  					// if this is the id of this child
+		if (i == child_num)
 		{
-			if (child_num != use->cmd_nbr - 1)	// if this is not the last child close read end
+			if (child_num != use->cmd_nbr - 1)
 				close(use->fd[i][0]);
-			else								// if this is the last child close write end
+			else
 				close(use->fd[i][1]);
 		}
-		else if (i == child_num - 1)		// if this is the previous child, close write end
-			close(use->fd[i][1]);				// because I want to read from that child
-		else						// If no connection to that child, close both
+		else if (i == child_num - 1)
+			close(use->fd[i][1]);
+		else
 		{
 			close(use->fd[i][0]);
 			close(use->fd[i][1]);
 		}
+		i++;
 	}
 }
