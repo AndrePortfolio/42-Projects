@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 21:29:17 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:43:22 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ void	start_processes(int argc, char **argv, char **envp, t_info *use)
 		use->id[i] = fork();
 		if (use->id[i] == -1)
 			error_message("Failed to execute the fork", NULL, 1);
-		else if (use->id[i++] == 0)
+		else if (use->id[i] == 0)
 			child_next_process(use->fd, argc, argv, envp);
 		argc--;
+		i++;
 	}
 	use->id[i] = fork();
 	if (use->id[i] == -1)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if (use->id[i] == 0)
-		child_end_process(use->fd, argv, envp);
+		child_end_process(use->fd, argc, argv, envp);
 }
 
 void	child_start_process(int *fd[2], char **argv, char **envp)
@@ -98,16 +99,14 @@ void	child_next_process(int *fd[2], int argc, char **argv, char **envp)
 	ft_freematrix(cmd_arg);
 }
 
-void	child_end_process(int *fd[2], char **argv, char **envp)
+void	child_end_process(int *fd[2], int argc, char **argv, char **envp)
 {
 	int		outfile;
 	char	**cmd_arg;
 	char	*path;
-	int		argc;
 	char	*cmd;
 
 	path = NULL;
-	argc = get_argc(argv);
 	outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (outfile < 0)
 		error_message("Failed to open outfile", NULL, 1);

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/12 21:23:10 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:33:25 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,4 @@ void	close_fds(int *fd[2])
 		close(fd[1][WRITE_END]);
 	if (fd[1][READ_END] >= 0)
 		close(fd[1][READ_END]);
-}
-
-int	get_argc(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i])
-		i++;
-	return (i);
 }
