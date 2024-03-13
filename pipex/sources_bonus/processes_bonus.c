@@ -6,13 +6,13 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 15:13:52 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:27:59 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	start_processes(int argc, char **argv, char **envp, t_info *use)
+void	start_processes(char **argv, char **envp, t_info *use)
 {
 	int	cmds;
 	int i;
@@ -23,14 +23,14 @@ void	start_processes(int argc, char **argv, char **envp, t_info *use)
 	if (use->id[0] == -1)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if (use->id[0] == 0)
-		child_start_process(use->fd, argv, envp);
+		child_start_process(use, argv, envp);
 	while (cmds > 2)
 	{
 		use->id[i] = fork();
 		if (use->id[i] == -1)
 			error_message("Failed to execute the fork", NULL, 1);
 		else if (use->id[i] == 0)
-			child_next_process(use->fd, argc, argv, envp);
+			child_next_process(use, argv, envp, i);
 		cmds--;
 		i++;
 	}
@@ -38,10 +38,10 @@ void	start_processes(int argc, char **argv, char **envp, t_info *use)
 	if (use->id[i] == -1)
 		error_message("Failed to execute the fork", NULL, 1);
 	else if (use->id[i] == 0)
-		child_end_process(use->fd, argc, argv, envp);
+		child_end_process(use, argv, envp, i);
 }
 
-void	child_start_process(int **fd, char **argv, char **envp)
+void	child_start_process(t_info *use, char **argv, char **envp)
 {
 	int		infile;
 	char	**cmd_arg;
@@ -49,15 +49,14 @@ void	child_start_process(int **fd, char **argv, char **envp)
 	char	*path;
 
 	path = NULL;
+	close_unused_fds(use, 0);
 	infile = open(argv[1], O_RDONLY);
 	if (infile < 0)
 		error_message("Failed to open infile", NULL, 1);
 	if (dup2(infile, STDIN_FILENO) == -1)
 		error_message("Error setting infile to STDIN", NULL, 1);
-	close(infile);
-	if (dup2(fd[0][WRITE_END], STDOUT_FILENO) == -1)
+	if (dup2(use->fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	close_fds(fd);
 	if (!argv[2][0])
 		error_message("pipex: permission denied: ", NULL, 1);
 	cmd_arg = ft_split(argv[2], ' ');
@@ -68,26 +67,28 @@ void	child_start_process(int **fd, char **argv, char **envp)
 		ft_freematrix(cmd_arg);
 		error_message("pipex: command not found: ", cmd, 127);
 	}
+	close(infile);
+	close_all_fds(use);
 	execve(path, cmd_arg, envp);
 	free(path);
 	ft_freematrix(cmd_arg);
 }
 
-void	child_next_process(int **fd, int argc, char **argv, char **envp)
+void	child_next_process(t_info *use, char **argv, char **envp, int i)
 {
 	char	**cmd_arg;
 	char	*cmd;
 	char	*path;
 
 	path = NULL;
-	if (dup2(fd[0][READ_END], STDIN_FILENO) == -1)
+	close_unused_fds(use, i);
+	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
-	if (dup2(fd[1][WRITE_END], STDOUT_FILENO) == -1)
+	if (dup2(use->fd[i][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	close_fds(fd);
-	if (!argv[argc - 3][0])
+	if (!argv[2 + i][0])
 		error_message("pipex: permission denied: ", NULL, 1);
-	cmd_arg = ft_split(argv[argc - 3], ' ');
+	cmd_arg = ft_split(argv[2 + i], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -95,12 +96,13 @@ void	child_next_process(int **fd, int argc, char **argv, char **envp)
 		ft_freematrix(cmd_arg);
 		error_message("pipex: command not found: ", cmd, 1);
 	}
+	close_all_fds(use);
 	execve(path, cmd_arg, envp);
 	free(path);
 	ft_freematrix(cmd_arg);
 }
 
-void	child_end_process(int **fd, int argc, char **argv, char **envp)
+void	child_end_process(t_info *use, char **argv, char **envp, int i)
 {
 	int		outfile;
 	char	**cmd_arg;
@@ -108,18 +110,17 @@ void	child_end_process(int **fd, int argc, char **argv, char **envp)
 	char	*cmd;
 
 	path = NULL;
-	outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	close_unused_fds(use, i);
+	outfile = open(argv[3 + i], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (outfile < 0)
 		error_message("Failed to open outfile", NULL, 1);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 		error_message("Error setting outfile to STDOUT", NULL, 1);
-	close(outfile);
-	if (dup2(fd[0][READ_END], STDIN_FILENO) == -1)
+	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
-	close_fds(fd);
-	if (!argv[argc - 2][0])
+	if (!argv[2 + i][0])
 		error_message("pipex: permission denied: ", NULL, 127);
-	cmd_arg = ft_split(argv[argc - 2], ' ');
+	cmd_arg = ft_split(argv[2 + i], ' ');
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -127,6 +128,8 @@ void	child_end_process(int **fd, int argc, char **argv, char **envp)
 		ft_freematrix(cmd_arg);
 		error_message("pipex: command not found: ", cmd, 127);
 	}
+	close(outfile);
+	close_all_fds(use);
 	execve(path, cmd_arg, envp);
 	free(path);
 	ft_freematrix(cmd_arg);

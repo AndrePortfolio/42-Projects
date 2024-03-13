@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/13 14:56:31 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:19:39 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 
 	read_input(argc, envp, &use);
-	start_processes(argc, argv, envp, &use);
+	start_processes(argv, envp, &use);
 	status = wait_pids(argc, &use);
-	close_fds(use.fd);
+	close_all_fds(&use);
 	free(use.id);
 	return (WEXITSTATUS(status));
 }

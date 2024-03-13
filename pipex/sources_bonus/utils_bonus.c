@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/13 15:05:15 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:43:12 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	read_input(int argc, char **envp, t_info *use)
 	if (!envp)
 		error_message("No environmental variables", NULL, 1);
 	use->cmd_nbr = argc - 3;
-	use->id = malloc(sizeof(pid_t) * (argc - 2));
-	if (!use->id)
+	use->id = malloc(sizeof(pid_t) * use->cmd_nbr);
+	if (!(use->id))
 		error_message("Memory allocation failed", NULL, 1);
 	use->fd = malloc(sizeof(int *) * (use->cmd_nbr - 1));
 	if (!(use->fd))
 		error_message("Memory allocation failed", NULL, 1);
-	while (i < 2)
+	while (i < use->cmd_nbr - 1)
 	{
 		use->fd[i] = malloc(sizeof(int) * 2);
 		if (!(use->fd[i]))
@@ -66,14 +66,43 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 	}
 }
 
-void	close_fds(int **fd)
+void	close_all_fds(t_info *use)
 {
-	if (fd[0][WRITE_END] >= 0)
-		close(fd[1][WRITE_END]);
-	if (fd[0][READ_END] >= 0)
-		close(fd[1][READ_END]);
-	if (fd[1][WRITE_END] >= 0)
-		close(fd[1][WRITE_END]);
-	if (fd[1][READ_END] >= 0)
-		close(fd[1][READ_END]);
+	int	pipes;
+	int	i;
+
+	i = 0;
+	pipes = use->cmd_nbr - 1;
+	while (i < pipes)
+	{
+		if (use->fd[i][WRITE_END] >= 0)
+			close(use->fd[i][WRITE_END]);
+		if (use->fd[i][READ_END] >= 0)
+			close(use->fd[i][READ_END]);
+		i++;
+	}
+}
+
+void	close_unused_fds(t_info *use, int child_num)
+{
+	int	i;
+
+	i = -1;
+	while (++i < use->cmd_nbr - 1)
+	{
+		if (i == child_num)  					// if this is the child
+		{
+			if (child_num != use->cmd_nbr - 1)	// if this is not the last child close read end
+				close(use->fd[i][0]);
+			else								// if this is the last child close write end
+				close(use->fd[i][1]);
+		}
+		else if (i == child_num - 1)		// if this is the previous child, close write end
+			close(use->fd[i][1]);				// because I want to read from that child
+		else						// If no connection to that child, close both
+		{
+			close(use->fd[i][0]);
+			close(use->fd[i][1]);
+		}
+	}
 }
