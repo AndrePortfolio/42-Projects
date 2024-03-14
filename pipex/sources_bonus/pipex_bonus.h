@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 00:58:12 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 02:37:39 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,22 @@ void	start_processes(char **argv, char **envp, t_info *use);
 void	child_start_process(t_info *use, char **argv, char **envp);
 void	child_next_process(t_info *use, char **argv, char **envp, int i);
 void	child_end_process(t_info *use, char **argv, char **envp, int i);
+
 // Path
 void	get_path(char *cmd, char **envp, char **path);
 void	get_path_index(char **envp, int *index);
 
-// Utils
-void	read_input(int argc, char **argv, char **envp, t_info *use);
+// Close Program
 void	error_message(char *str, char *cmd, int code);
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd);
 void	close_all_fds(t_info *use);
-void	close_unused_fds(t_info *use, int i);
+void	close_unused_fds(t_info *use, int child_num);
+int		wait_pids(int argc, t_info *use);
+
+// Utils
+void	read_input(int argc, char **argv, char **envp, t_info *use);
+void	init_here_doc(char *limiter, t_info *use);
+void	get_files(t_info *use, int argc, char **argv);
+char	**get_cmd_arg(t_info *use, char **argv, int i);
 
 #endif

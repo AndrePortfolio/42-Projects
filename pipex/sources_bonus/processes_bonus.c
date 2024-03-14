@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 01:38:32 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 02:36:59 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	start_processes(char **argv, char **envp, t_info *use)
 {
 	int	cmds;
-	int i;
+	int	i;
 
 	i = 1;
 	cmds = use->cmd_nbr;
@@ -53,18 +53,7 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 		error_message("Error setting infile to STDIN", NULL, 1);
 	if (dup2(use->fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	if (use->here_doc)
-	{
-		if (!argv[3][0])
-			error_message("pipex: permission denied: ", NULL, 1);
-		cmd_arg = ft_split(argv[3], ' ');
-	}
-	else
-	{
-		if (!argv[2][0])
-			error_message("pipex: permission denied: ", NULL, 1);
-		cmd_arg = ft_split(argv[2], ' ');
-	}
+	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -90,24 +79,13 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
 	if (dup2(use->fd[i][WRITE_END], STDOUT_FILENO) == -1)
 		error_message("Error setting pipe write end to STDOUT", NULL, 1);
-	if (use->here_doc)
-	{
-		if (!argv[3 + i][0])
-			error_message("pipex: permission denied: ", NULL, 1);
-		cmd_arg = ft_split(argv[3 + i], ' ');
-	}
-	else
-	{
-		if (!argv[2 + i][0])
-			error_message("pipex: permission denied: ", NULL, 1);
-		cmd_arg = ft_split(argv[2 + i], ' ');
-	}
+	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
-		error_message("pipex: command not found: ", cmd, 1);
+		error_message("pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
 	execve(path, cmd_arg, envp);
@@ -127,18 +105,7 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 		error_message("Error setting outfile to STDOUT", NULL, 1);
 	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
 		error_message("Error setting pipe read end to STDIN", NULL, 1);
-	if (use->here_doc)
-	{
-		if (!argv[3 + i][0])
-			error_message("pipex: permission denied: ", NULL, 127);
-		cmd_arg = ft_split(argv[3 + i], ' ');
-	}
-	else
-	{
-		if (!argv[2 + i][0])
-			error_message("pipex: permission denied: ", NULL, 127);
-		cmd_arg = ft_split(argv[2 + i], ' ');
-	}
+	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
 	get_path(cmd_arg[0], envp, &path);
 	if (!path)

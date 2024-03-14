@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/12 18:16:24 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 02:46:42 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	main(int argc, char **argv, char **envp)
 	id2 = fork();
 	if (id2 == 0)
 		child_end_process(fd, argv, envp);
-	close(fd[READ_END]);
-	close(fd[WRITE_END]);
+	close_fds(fd, 0);
 	waitpid(id, NULL, 0);
 	waitpid(id2, &status, 0);
 	return (WEXITSTATUS(status));
