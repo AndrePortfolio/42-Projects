@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 20:41:15 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:12:53 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 	t_info	use;
 	int		status;
 
-	envp = NULL;
 	read_input(argc, argv, &use);
 	get_files(&use, argc, argv);
 	start_processes(argv, envp, &use);
