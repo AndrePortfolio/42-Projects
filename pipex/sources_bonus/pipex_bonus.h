@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:32 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:20:13 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	close_all_fds(t_info *use);
 void	close_unused_fds(t_info *use, int child_num);
 int		wait_pids(int argc, t_info *use);
 void	free_all(t_info *use);
+void	invalid_arguments(char *str);
 
 // Utils
 void	read_input(int argc, char **argv, t_info *use);

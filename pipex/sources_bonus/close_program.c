@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:24:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:33 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:20:04 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@ void	error_message(t_info *use, char *str, char *cmd, int code)
 {
 	ft_putstr_fd(str, 2);
 	if (cmd)
+	{
 		ft_putendl_fd(cmd, 2);
+		free(cmd);
+	}
 	else
 		ft_putchar_fd('\n', 2);
-	free(cmd);
 	free_all(use);
 	exit (code);
+}
+
+void	invalid_arguments(char *str)
+{
+	ft_putstr_fd(str, 2);
+	ft_putchar_fd('\n', 2);
+	exit (1);
 }
 
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd)

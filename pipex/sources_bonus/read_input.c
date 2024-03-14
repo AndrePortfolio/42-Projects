@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:51:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:30 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:19:46 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	read_input(int argc, char **argv, t_info *use)
 
 void	check_here_doc(int argc, char **argv, t_info *use)
 {
-	if (argv[1] && !ft_strcmp("here_doc", argv[1]))
+	if (argv[1] && ft_strcmp("here_doc", argv[1]) == 0)
 	{
 		if (argc < 6)
-			error_message(use, "Invalid number of arguments", NULL, 1);
+			invalid_arguments("Invalid number of arguments");
 		use->here_doc = true;
 		use->cmd_nbr = argc - 4;
 	}
 	else
 	{
 		if (argc < 5)
-			error_message(use, "Invalid number of arguments", NULL, 1);
+			invalid_arguments("Invalid number of arguments");
 		use->here_doc = false;
 		use->cmd_nbr = argc - 3;
 	}

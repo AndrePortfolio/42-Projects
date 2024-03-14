@@ -50,6 +50,5 @@ normal
 ./pipex envp path given not working
 
 bonus
-seg fault with less than 5 args
 leaks:
 valgrind --trace-children=yes --track-origins=yes env -i ./pipex_bonus Makefile /usr/bin/cat /usr/bin/cat outfile
