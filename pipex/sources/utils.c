@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/11 16:43:53 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:27:20 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ void	get_path_index(char **envp, int *index)
 		}
 		i++;
 	}
-}
-
-void	read_input(int argc, char **envp)
-{
-	if (argc != 5)
-		error_message("Invalid number of arguments", NULL, 1);
-	if (envp[0] == NULL)
-		error_message("No environmental variables", NULL, 1);
 }
 
 void	error_message(char *str, char *cmd, int code)

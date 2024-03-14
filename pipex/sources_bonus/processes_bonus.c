@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 18:03:30 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:31:30 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
-	if (!(*envp))
+	if (!envp)
 	{
 		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
 			path = cmd_arg[0];
@@ -92,7 +92,7 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	if (!(*envp))
+	if (!envp)
 	{
 		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
 			path = cmd_arg[0];
@@ -127,7 +127,7 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "Error setting pipe read end to STDIN", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	if (!(*envp))
+	if (!envp)
 	{
 		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
 			path = cmd_arg[0];

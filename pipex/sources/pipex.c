@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 02:46:42 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 18:27:16 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 	int		fd[2];
 
-	read_input(argc, envp);
+	if (argc != 5)
+		error_message("Invalid number of arguments", NULL, 1);
 	status = 0;
 	if (pipe(fd) == -1)
 		error_message("Failed to create the pipe(s)", NULL, 1);

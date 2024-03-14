@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 02:46:24 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 18:26:18 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ void	child_start_process(int *fd, char **argv, char **envp)
 	if (!argv[2][0])
 		error_message("pipex: permission denied: ", NULL, 1);
 	cmd = ft_split(argv[2], ' ');
-	get_path(cmd[0], envp, &path);
+	if (!(*envp))
+	{
+		if (ft_strncmp("/usr/bin/", cmd[0], 9) == 0)
+			path = cmd[0];
+		else
+			path = ft_strjoin("/usr/bin/", cmd[0]);
+	}
+	else
+		get_path(cmd[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd);
@@ -58,7 +66,15 @@ void	child_end_process(int *fd, char **argv, char **envp)
 	if (!argv[3][0])
 		error_message("pipex: permission denied: ", NULL, 127);
 	cmd = ft_split(argv[3], ' ');
-	get_path(cmd[0], envp, &path);
+	if (!(*envp))
+	{
+		if (ft_strncmp("/usr/bin/", cmd[0], 9) == 0)
+			path = cmd[0];
+		else
+			path = ft_strjoin("/usr/bin/", cmd[0]);
+	}
+	else
+		get_path(cmd[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd);

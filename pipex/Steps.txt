@@ -46,9 +46,9 @@ cmd << LIMITER | cmd1 >> file
 FIXES:
 Makefile ./pipex executable & wildcards
 
-normal
-./pipex envp path given not working
-
 bonus
-leaks:
+leaks when no env
 valgrind --trace-children=yes --track-origins=yes env -i ./pipex_bonus Makefile /usr/bin/cat /usr/bin/cat outfile
+
+normal
+also with leaks when no env
