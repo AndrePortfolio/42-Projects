@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/13 20:31:42 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 00:15:41 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	t_info	use;
 	int		status;
 
-	read_input(argc, envp, &use);
+	read_input(argc, argv, envp, &use);
 	start_processes(argv, envp, &use);
 	close_all_fds(&use);
 	status = wait_pids(argc, &use);

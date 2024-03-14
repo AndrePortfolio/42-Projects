@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/13 19:59:12 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 00:58:12 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@
 
 # define WRITE_END 1
 # define READ_END 0
+# define INPUT 0
 
 typedef struct s_info
 {
 	pid_t	*id;
 	int		**fd;
 	int		cmd_nbr;
+	bool	here_doc;
+	int		infile;
+	int		outfile;
 }			t_info;
 
 // Processes
@@ -35,7 +39,7 @@ void	get_path(char *cmd, char **envp, char **path);
 void	get_path_index(char **envp, int *index);
 
 // Utils
-void	read_input(int argc, char **envp, t_info *use);
+void	read_input(int argc, char **argv, char **envp, t_info *use);
 void	error_message(char *str, char *cmd, int code);
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd);
 void	close_all_fds(t_info *use);
