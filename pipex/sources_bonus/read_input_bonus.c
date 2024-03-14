@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:51:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 21:11:44 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 23:43:23 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	read_input(int argc, char **argv, t_info *use)
+void	read_input(int argc, char **argv, char **envp, t_info *use)
 {
 	int	i;
 
+	if (!*(envp))
+		error_message2("Enviroment variables not found");
 	check_here_doc(argc, argv, use);
 	use->id = malloc(sizeof(pid_t) * use->cmd_nbr);
 	if (!(use->id))
@@ -41,14 +43,14 @@ void	check_here_doc(int argc, char **argv, t_info *use)
 	if (argv[1] && ft_strcmp("here_doc", argv[1]) == 0)
 	{
 		if (argc < 6)
-			invalid_arguments("Invalid number of arguments");
+			error_message2("Invalid number of arguments");
 		use->here_doc = true;
 		use->cmd_nbr = argc - 4;
 	}
 	else
 	{
 		if (argc < 5)
-			invalid_arguments("Invalid number of arguments");
+			error_message2("Invalid number of arguments");
 		use->here_doc = false;
 		use->cmd_nbr = argc - 3;
 	}

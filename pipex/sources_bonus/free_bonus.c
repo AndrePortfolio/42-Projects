@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_program.c                                    :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 02:24:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 19:51:26 by andre-da         ###   ########.fr       */
+/*   Created: 2024/03/14 23:45:25 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/03/14 23:45:50 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-void	error_message(t_info *use, char *str, char *cmd, int code)
-{
-	ft_putstr_fd(str, 2);
-	if (cmd)
-	{
-		ft_putendl_fd(cmd, 2);
-		free(cmd);
-	}
-	else
-		ft_putchar_fd('\n', 2);
-	free_all(use);
-	exit (code);
-}
-
-void	invalid_arguments(char *str)
-{
-	ft_putstr_fd(str, 2);
-	ft_putchar_fd('\n', 2);
-	exit (1);
-}
 
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 {
@@ -72,6 +51,19 @@ void	close_all_fds(t_info *use)
 		unlink("here_doc");
 }
 
+void	free_all(t_info *use)
+{
+	int	i;
+
+	i = 0;
+	while (use->fd[i])
+		free(use->fd[i++]);
+	if (use->fd)
+		free(use->fd);
+	if (use->id)
+		free(use->id);
+}
+
 void	close_unused_fds(t_info *use, int child_num)
 {
 	int	i;
@@ -95,30 +87,4 @@ void	close_unused_fds(t_info *use, int child_num)
 		}
 		i++;
 	}
-}
-
-int	wait_pids(int argc, t_info *use)
-{
-	int	status;
-	int	i;
-
-	i = 0;
-	if (use->here_doc)
-	{
-		while (argc - 5 > 0)
-		{
-			waitpid(use->id[i++], NULL, 0);
-			argc--;
-		}
-	}
-	else
-	{
-		while (argc - 4 > 0)
-		{
-			waitpid(use->id[i++], NULL, 0);
-			argc--;
-		}
-	}
-	waitpid(use->id[i], &status, 0);
-	return (status);
 }

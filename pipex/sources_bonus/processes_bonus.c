@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 21:27:44 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 23:24:25 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,7 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
-	if ((*envp))
-	{
-		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
-			path = cmd_arg[0];
-		else
-			path = ft_strjoin("/usr/bin/", cmd_arg[0]);
-	}
-	else
-		get_path(cmd_arg[0], envp, &path);
+	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
@@ -92,15 +84,7 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	if ((*envp))
-	{
-		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
-			path = cmd_arg[0];
-		else
-			path = ft_strjoin("/usr/bin/", cmd_arg[0]);
-	}
-	else
-		get_path(cmd_arg[0], envp, &path);
+	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
@@ -127,15 +111,7 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "Error setting pipe read end to STDIN", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	if ((*envp))
-	{
-		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
-			path = cmd_arg[0];
-		else
-			path = ft_strjoin("/usr/bin/", cmd_arg[0]);
-	}
-	else
-		get_path(cmd_arg[0], envp, &path);
+	get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
