@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 02:37:39 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 02:59:15 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	read_input(int argc, char **argv, char **envp, t_info *use);
 void	init_here_doc(char *limiter, t_info *use);
 void	get_files(t_info *use, int argc, char **argv);
 char	**get_cmd_arg(t_info *use, char **argv, int i);
+void	check_here_doc(int argc, char **argv, t_info *use);
 
 #endif

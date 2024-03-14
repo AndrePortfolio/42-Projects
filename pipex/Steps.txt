@@ -46,10 +46,10 @@ Should behave like:
 cmd << LIMITER | cmd1 >> file
 
 FIXES:
-problems with ids (not waiting for the next processes)
-porblems with cat in the end process
 No defaults path
-leaks with empty string in bonus
+Makefile problems
+./pipex_bonus here_doc EOF cat cat lf test_1 is not returning error (with here_doc)
+
 valgrind --leak-check=full --track-fds=yes --trace-children=yes ./pipex_bonus Steps.txt cat "sleep 5" cat no_comm test_1
 valgrind --leak-check=full --track-fds=yes ./pipex_bonus Steps.txt cat "sleep 5" cat no_comm test_1
 valgrind --leak-check=full ./pipex_bonus Steps.txt cat "sleep 5" cat no_comm test_1
@@ -57,4 +57,3 @@ valgrind --leak-check=full ./pipex_bonus Steps.txt cat "sleep 5" cat cat test_1
 valgrind --leak-check=full ./pipex_bonus Steps.txt cat cat cat cat test_1
 valgrind ./pipex_bonus Steps.txt cat cat cat cat test_1
 
-Makefile problems

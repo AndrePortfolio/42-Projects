@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 02:27:28 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 02:50:06 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 
 	read_input(argc, argv, envp, &use);
+	get_files(&use, argc, argv);
 	start_processes(argv, envp, &use);
 	close_all_fds(&use);
 	status = wait_pids(argc, &use);

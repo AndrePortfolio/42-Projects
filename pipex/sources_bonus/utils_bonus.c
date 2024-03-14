@@ -6,48 +6,36 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 02:37:22 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 02:52:24 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	read_input(int argc, char **argv, char **envp, t_info *use)
+void	get_files(t_info *use, int argc, char **argv)
 {
-	int	i;
-
-	if (argv[1] && !ft_strcmp("here_doc", argv[1]))
+	if (use->here_doc)
 	{
-		if (argc < 6)
-			error_message("Invalid number of arguments", NULL, 1);
-		use->here_doc = true;
-		use->cmd_nbr = argc - 4;
+		init_here_doc(argv[2], use);
+		use->infile = open("here_doc", O_RDONLY);
+		if (use->infile < 0)
+		{
+			unlink("here_doc");
+			error_message("Failed to open infile", NULL, 1);
+		}
+		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND,
+				0644);
+		if (use->outfile < 0)
+			error_message("Failed to open outfile", NULL, 1);
 	}
 	else
 	{
-		if (argc < 5)
-			error_message("Invalid number of arguments", NULL, 1);
-		use->here_doc = false;
-		use->cmd_nbr = argc - 3;
-	}
-	get_files(use, argc, argv);
-	if (!envp)
-		error_message("No environmental variables", NULL, 1);
-	use->id = malloc(sizeof(pid_t) * use->cmd_nbr);
-	if (!(use->id))
-		error_message("Memory allocation failed", NULL, 1);
-	use->fd = malloc(sizeof(int *) * (use->cmd_nbr - 1));
-	if (!(use->fd))
-		error_message("Memory allocation failed", NULL, 1);
-	i = 0;
-	while (i < use->cmd_nbr - 1)
-	{
-		use->fd[i] = malloc(sizeof(int) * 2);
-		if (!(use->fd[i]))
-			error_message("Memory allocation failed", NULL, 1);
-		if (pipe(use->fd[i]) == -1)
-			error_message("Failed to create the pipe(s)", NULL, 1);
-		i++;
+		use->infile = open(argv[1], O_RDONLY);
+		if (use->infile < 0)
+			error_message("Failed to open infile", NULL, 1);
+		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (use->outfile < 0)
+			error_message("Failed to open outfile", NULL, 1);
 	}
 }
 
@@ -76,33 +64,6 @@ void	init_here_doc(char *limiter, t_info *use)
 	}
 	free(line);
 	close(fd);
-}
-
-void	get_files(t_info *use, int argc, char **argv)
-{
-	if (use->here_doc)
-	{
-		init_here_doc(argv[2], use);
-		use->infile = open("here_doc", O_RDONLY);
-		if (use->infile < 0)
-		{
-			unlink("here_doc");
-			error_message("Failed to open infile", NULL, 1);
-		}
-		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND,
-				0644);
-		if (use->outfile < 0)
-			error_message("Failed to open outfile", NULL, 1);
-	}
-	else
-	{
-		use->infile = open(argv[1], O_RDONLY);
-		if (use->infile < 0)
-			error_message("Failed to open infile", NULL, 1);
-		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (use->outfile < 0)
-			error_message("Failed to open outfile", NULL, 1);
-	}
 }
 
 char	**get_cmd_arg(t_info *use, char **argv, int i)
