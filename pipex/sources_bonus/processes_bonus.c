@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 17:02:37 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:03:30 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 
 	path = NULL;
 	close_unused_fds(use, 0);
+	if (use->infile < 0)
+		error_message(use, "Failed to open infile", NULL, 1);
 	if (dup2(use->infile, STDIN_FILENO) == -1)
 		error_message(use, "Error setting infile to STDIN", NULL, 1);
 	if (dup2(use->fd[0][WRITE_END], STDOUT_FILENO) == -1)
@@ -56,8 +58,12 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
 	if (!(*envp))
-		path = ft_strjoin("/usr/bin/", cmd_arg[0]);
-		// path = cmd_arg[0];
+	{
+		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
+			path = cmd_arg[0];
+		else
+			path = ft_strjoin("/usr/bin/", cmd_arg[0]);
+	}
 	else
 		get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -87,8 +93,12 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
 	if (!(*envp))
-		path = ft_strjoin("/usr/bin/", cmd_arg[0]);
-		// path = cmd_arg[0];
+	{
+		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
+			path = cmd_arg[0];
+		else
+			path = ft_strjoin("/usr/bin/", cmd_arg[0]);
+	}
 	else
 		get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -118,8 +128,12 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
 	if (!(*envp))
-		path = ft_strjoin("/usr/bin/", cmd_arg[0]);
-		// path = cmd_arg[0];
+	{
+		if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
+			path = cmd_arg[0];
+		else
+			path = ft_strjoin("/usr/bin/", cmd_arg[0]);
+	}
 	else
 		get_path(cmd_arg[0], envp, &path);
 	if (!path)

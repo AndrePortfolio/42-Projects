@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:31 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:03:16 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	get_files(t_info *use, int argc, char **argv)
 	else
 	{
 		use->infile = open(argv[1], O_RDONLY);
-		if (use->infile < 0)
-			error_message(use, "Failed to open infile", NULL, 1);
 		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (use->outfile < 0)
 			error_message(use, "Failed to open outfile", NULL, 1);

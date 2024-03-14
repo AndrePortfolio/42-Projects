@@ -31,7 +31,7 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 bonus: $(NAME)_bonus
 
 $(NAME)_bonus: $(OBJ_BONUS_DIR) $(OBJ_BONUS) all
-	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(MLX_FLAGS) $(LIBFT) -o $(NAME)_bonus
 	@echo "$(CYAN)make$(RESET)   bonus $(GREEN)[OK]$(RESET)"
 
 $(LIBFT):
