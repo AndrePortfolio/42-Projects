@@ -35,25 +35,17 @@ $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
 Should behave like:
 < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
 
-
-
 Part 2
-- Support « and » when the first parameter is "here_doc".
-
 This:
 $> ./pipex here_doc LIMITER cmd cmd1 file
 Should behave like:
 cmd << LIMITER | cmd1 >> file
 
+
+
 FIXES:
-No defaults path
-Makefile problems
-./pipex_bonus here_doc EOF cat cat lf test_1 is not returning error (with here_doc)
-
-valgrind --leak-check=full --track-fds=yes --trace-children=yes ./pipex_bonus Steps.txt cat "sleep 5" cat no_comm test_1
-valgrind --leak-check=full --track-fds=yes ./pipex_bonus Steps.txt cat "sleep 5" cat no_comm test_1
-valgrind --leak-check=full ./pipex_bonus Steps.txt cat "sleep 5" cat no_comm test_1
-valgrind --leak-check=full ./pipex_bonus Steps.txt cat "sleep 5" cat cat test_1
-valgrind --leak-check=full ./pipex_bonus Steps.txt cat cat cat cat test_1
-valgrind ./pipex_bonus Steps.txt cat cat cat cat test_1
-
+Makefile ./pipex executable & wildcards
+- Support « and » when the first parameter is "here_doc".
+Here_doc with control c doesnt unlink the here_doc
+pipex mandatory envp
+./pipex /dev/random head cat test_1

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   close_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:24:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 02:27:37 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 16:38:33 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	error_message(char *str, char *cmd, int code)
+void	error_message(t_info *use, char *str, char *cmd, int code)
 {
 	ft_putstr_fd(str, 2);
 	if (cmd)
@@ -20,6 +20,7 @@ void	error_message(char *str, char *cmd, int code)
 	else
 		ft_putchar_fd('\n', 2);
 	free(cmd);
+	free_all(use);
 	exit (code);
 }
 
@@ -93,10 +94,21 @@ int	wait_pids(int argc, t_info *use)
 	int	i;
 
 	i = 0;
-	while (argc - 4 > 0)
+	if (use->here_doc)
 	{
-		waitpid(use->id[i++], NULL, 0);
-		argc--;
+		while (argc - 5 > 0)
+		{
+			waitpid(use->id[i++], NULL, 0);
+			argc--;
+		}
+	}
+	else
+	{
+		while (argc - 4 > 0)
+		{
+			waitpid(use->id[i++], NULL, 0);
+			argc--;
+		}
 	}
 	waitpid(use->id[i], &status, 0);
 	return (status);

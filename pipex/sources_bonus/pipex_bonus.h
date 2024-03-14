@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 02:59:15 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 16:38:32 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ void	get_path(char *cmd, char **envp, char **path);
 void	get_path_index(char **envp, int *index);
 
 // Close Program
-void	error_message(char *str, char *cmd, int code);
+void	error_message(t_info *use, char *str, char *cmd, int code);
 void	free_and_close(int fd, char **paths, char *path, char *path_cmd);
 void	close_all_fds(t_info *use);
 void	close_unused_fds(t_info *use, int child_num);
 int		wait_pids(int argc, t_info *use);
+void	free_all(t_info *use);
 
 // Utils
-void	read_input(int argc, char **argv, char **envp, t_info *use);
+void	read_input(int argc, char **argv, t_info *use);
 void	init_here_doc(char *limiter, t_info *use);
 void	get_files(t_info *use, int argc, char **argv);
 char	**get_cmd_arg(t_info *use, char **argv, int i);

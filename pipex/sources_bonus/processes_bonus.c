@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 02:36:59 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 17:02:37 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	start_processes(char **argv, char **envp, t_info *use)
 	cmds = use->cmd_nbr;
 	use->id[0] = fork();
 	if (use->id[0] == -1)
-		error_message("Failed to execute the fork", NULL, 1);
+		error_message(use, "Failed to execute the fork", NULL, 1);
 	else if (use->id[0] == 0)
 		child_start_process(use, argv, envp);
 	while (cmds > 2)
 	{
 		use->id[i] = fork();
 		if (use->id[i] == -1)
-			error_message("Failed to execute the fork", NULL, 1);
+			error_message(use, "Failed to execute the fork", NULL, 1);
 		else if (use->id[i] == 0)
 			child_next_process(use, argv, envp, i);
 		cmds--;
@@ -36,7 +36,7 @@ void	start_processes(char **argv, char **envp, t_info *use)
 	}
 	use->id[i] = fork();
 	if (use->id[i] == -1)
-		error_message("Failed to execute the fork", NULL, 1);
+		error_message(use, "Failed to execute the fork", NULL, 1);
 	else if (use->id[i] == 0)
 		child_end_process(use, argv, envp, i);
 }
@@ -50,16 +50,21 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 	path = NULL;
 	close_unused_fds(use, 0);
 	if (dup2(use->infile, STDIN_FILENO) == -1)
-		error_message("Error setting infile to STDIN", NULL, 1);
+		error_message(use, "Error setting infile to STDIN", NULL, 1);
 	if (dup2(use->fd[0][WRITE_END], STDOUT_FILENO) == -1)
-		error_message("Error setting pipe write end to STDOUT", NULL, 1);
+		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
-	get_path(cmd_arg[0], envp, &path);
+	if (!(*envp))
+		path = ft_strjoin("/usr/bin/", cmd_arg[0]);
+		// path = cmd_arg[0];
+	else
+		get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
-		error_message("pipex: command not found: ", cmd, 127);
+		close_all_fds(use);
+		error_message(use, "pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
 	execve(path, cmd_arg, envp);
@@ -76,16 +81,21 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 	path = NULL;
 	close_unused_fds(use, i);
 	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
-		error_message("Error setting pipe read end to STDIN", NULL, 1);
+		error_message(use, "Error setting pipe read end to STDIN", NULL, 1);
 	if (dup2(use->fd[i][WRITE_END], STDOUT_FILENO) == -1)
-		error_message("Error setting pipe write end to STDOUT", NULL, 1);
+		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	get_path(cmd_arg[0], envp, &path);
+	if (!(*envp))
+		path = ft_strjoin("/usr/bin/", cmd_arg[0]);
+		// path = cmd_arg[0];
+	else
+		get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
-		error_message("pipex: command not found: ", cmd, 127);
+		close_all_fds(use);
+		error_message(use, "pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
 	execve(path, cmd_arg, envp);
@@ -102,16 +112,21 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 	path = NULL;
 	close_unused_fds(use, i);
 	if (dup2(use->outfile, STDOUT_FILENO) == -1)
-		error_message("Error setting outfile to STDOUT", NULL, 1);
+		error_message(use, "Error setting outfile to STDOUT", NULL, 1);
 	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
-		error_message("Error setting pipe read end to STDIN", NULL, 1);
+		error_message(use, "Error setting pipe read end to STDIN", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	get_path(cmd_arg[0], envp, &path);
+	if (!(*envp))
+		path = ft_strjoin("/usr/bin/", cmd_arg[0]);
+		// path = cmd_arg[0];
+	else
+		get_path(cmd_arg[0], envp, &path);
 	if (!path)
 	{
 		ft_freematrix(cmd_arg);
-		error_message("pipex: command not found: ", cmd, 127);
+		close_all_fds(use);
+		error_message(use, "pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
 	execve(path, cmd_arg, envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 02:52:24 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/14 16:38:31 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void	get_files(t_info *use, int argc, char **argv)
 		if (use->infile < 0)
 		{
 			unlink("here_doc");
-			error_message("Failed to open infile", NULL, 1);
+			error_message(use, "Failed to open infile", NULL, 1);
 		}
 		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND,
 				0644);
 		if (use->outfile < 0)
-			error_message("Failed to open outfile", NULL, 1);
+			error_message(use, "Failed to open outfile", NULL, 1);
 	}
 	else
 	{
 		use->infile = open(argv[1], O_RDONLY);
 		if (use->infile < 0)
-			error_message("Failed to open infile", NULL, 1);
+			error_message(use, "Failed to open infile", NULL, 1);
 		use->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (use->outfile < 0)
-			error_message("Failed to open outfile", NULL, 1);
+			error_message(use, "Failed to open outfile", NULL, 1);
 	}
 }
 
@@ -73,13 +73,13 @@ char	**get_cmd_arg(t_info *use, char **argv, int i)
 	if (use->here_doc)
 	{
 		if (!argv[3 + i][0])
-			error_message("pipex: permission denied: ", NULL, 127);
+			error_message(use, "pipex: permission denied: ", NULL, 127);
 		cmd_arg = ft_split(argv[3 + i], ' ');
 	}
 	else
 	{
 		if (!argv[2 + i][0])
-			error_message("pipex: permission denied: ", NULL, 127);
+			error_message(use, "pipex: permission denied: ", NULL, 127);
 		cmd_arg = ft_split(argv[2 + i], ' ');
 	}
 	return (cmd_arg);
