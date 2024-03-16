@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:17:08 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 20:59:07 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/16 13:33:01 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
