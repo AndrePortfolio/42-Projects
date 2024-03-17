@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   close_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 00:23:54 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/16 23:59:45 by andrealbuqu      ###   ########.fr       */
+/*   Created: 2024/03/16 23:58:44 by andrealbuqu       #+#    #+#             */
+/*   Updated: 2024/03/16 23:58:58 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	error_message(char *str)
 {
-	t_info	philo;
+	int	i;
 
-	read_input(argc, argv, &philo);
-	return (0);
+	i = 0;
+	while (str[i])
+		write(2, &str[i++], 1);
+	write(2, "\n", 1);
+	exit (1);
 }

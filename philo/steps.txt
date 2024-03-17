@@ -18,7 +18,7 @@ GLOBAL RULES:
 	- time_to_eat (ms): The time it takes for a philosopher to eat (needs 2 forks)
 	- time_to_sleep (ms): The time a philosopher will spend sleeping.
 	- nbr_of_t_philo_must_eat (optional argument):
-		if all philosophers ear this amout simulation stops, otherwise only when they die.
+		if all philosophers eat this amout simulation stops, otherwise only when they die.
 	- Each philosopher has a number ranging from 1 to number_of_philosophers.
 	- Philosopher number 1 sits next to philosopher number number_of_philosophers. (N sits between N - 1 & N + 1)
 
@@ -51,3 +51,5 @@ STATE CHANGES:
 
 NOTE: Your program must not have any data races.
 
+FIXES:
+- Not accounting for optional argument
