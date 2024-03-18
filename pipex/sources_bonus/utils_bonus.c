@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 14:40:17 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:53:27 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,13 @@ char	**get_cmd_arg(t_info *use, char **argv, int i)
 	if (use->here_doc)
 	{
 		if (!argv[3 + i][0])
-		{
-			close_all_fds(use);
 			error_message(use, "pipex: permission denied: ", NULL, 127);
-		}
 		cmd_arg = ft_split(argv[3 + i], ' ');
 	}
 	else
 	{
 		if (!argv[2 + i][0])
-		{
-			close_all_fds(use);
 			error_message(use, "pipex: permission denied: ", NULL, 127);
-		}
 		cmd_arg = ft_split(argv[2 + i], ' ');
 	}
 	return (cmd_arg);

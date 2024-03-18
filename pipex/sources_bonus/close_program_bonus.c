@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_program.c                                    :+:      :+:    :+:   */
+/*   close_program_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:24:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 23:45:45 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/18 18:59:04 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	error_message(t_info *use, char *str, char *cmd, int code)
 	}
 	else
 		ft_putchar_fd('\n', 2);
+	close_all_fds(use);
 	free_all(use);
 	exit (code);
 }

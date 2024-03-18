@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 17:03:50 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:02:17 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,40 +46,28 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 	char	**cmd_arg;
 	char	*cmd;
 	char	*path;
-	int		flag = 1;
+	int		flag;
 
+	flag = 1;
 	path = NULL;
 	close_unused_fds(use, 0);
 	if (use->infile < 0)
-	{
-		close_all_fds(use);
 		error_message(use, "Failed to open infile", NULL, 1);
-	}
 	if (dup2(use->infile, STDIN_FILENO) == -1)
 		error_message(use, "Error setting infile to STDIN", NULL, 1);
 	if (dup2(use->fd[0][WRITE_END], STDOUT_FILENO) == -1)
 		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
-	if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
-	{
-		flag = 0;
-		path = cmd_arg[0];
-	}
-	else
-		get_path(cmd_arg[0], envp, &path);
+	path = check_path(cmd_arg[0], &flag, envp);
 	if (!path)
-	{
-		ft_freematrix(cmd_arg);
-		close_all_fds(use);
-		error_message(use, "pipex: command not found: ", cmd, 127);
-	}
+		invalid_path(cmd_arg, use, cmd);
 	close_all_fds(use);
 	free(cmd);
 	execve(path, cmd_arg, envp);
 	if (flag)
 		free(path);
-	ft_freematrix(cmd_arg);
+	error_message(use, "pipex: command not found: ", cmd_arg[0], 127);
 }
 
 void	child_next_process(t_info *use, char **argv, char **envp, int i)
@@ -87,8 +75,9 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 	char	**cmd_arg;
 	char	*cmd;
 	char	*path;
-	int		flag = 1;
+	int		flag;
 
+	flag = 1;
 	path = NULL;
 	close_unused_fds(use, i);
 	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
@@ -97,25 +86,15 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "Error setting pipe write end to STDOUT", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
-	{
-		flag = 0;
-		path = cmd_arg[0];
-	}
-	else
-		get_path(cmd_arg[0], envp, &path);
+	path = check_path(cmd_arg[0], &flag, envp);
 	if (!path)
-	{
-		ft_freematrix(cmd_arg);
-		close_all_fds(use);
-		error_message(use, "pipex: command not found: ", cmd, 127);
-	}
+		invalid_path(cmd_arg, use, cmd);
 	close_all_fds(use);
 	free(cmd);
 	execve(path, cmd_arg, envp);
 	if (flag)
 		free(path);
-	ft_freematrix(cmd_arg);
+	error_message(use, "pipex: command not found: ", cmd_arg[0], 127);
 }
 
 void	child_end_process(t_info *use, char **argv, char **envp, int i)
@@ -123,36 +102,24 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 	char	**cmd_arg;
 	char	*path;
 	char	*cmd;
-	int		flag = 1;
+	int		flag;
 
+	flag = 1;
 	path = NULL;
 	close_unused_fds(use, i);
 	if (dup2(use->outfile, STDOUT_FILENO) == -1)
-	{
-		close_all_fds(use);
 		error_message(use, "Error setting outfile to STDOUT", NULL, 1);
-	}
 	if (dup2(use->fd[i - 1][READ_END], STDIN_FILENO) == -1)
 		error_message(use, "Error setting pipe read end to STDIN", NULL, 1);
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
-	if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
-	{
-		flag = 0;
-		path = cmd_arg[0];
-	}
-	else
-		get_path(cmd_arg[0], envp, &path);
+	path = check_path(cmd_arg[0], &flag, envp);
 	if (!path)
-	{
-		ft_freematrix(cmd_arg);
-		close_all_fds(use);
-		error_message(use, "pipex: command not found: ", cmd, 127);
-	}
+		invalid_path(cmd_arg, use, cmd);
 	close_all_fds(use);
 	free(cmd);
 	execve(path, cmd_arg, envp);
 	if (flag)
 		free(path);
-	ft_freematrix(cmd_arg);
+	error_message(use, "pipex: command not found: ", cmd_arg[0], 127);
 }

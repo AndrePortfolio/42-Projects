@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 23:37:12 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/18 19:00:05 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i);
 // Path
 void	get_path(char *cmd, char **envp, char **path);
 void	get_path_index(char **envp, int *index);
+char	*check_path(char *cmd, int *flag, char **envp);
+void	invalid_path(char **cmd_arg, t_info *use, char *cmd);
 
 // Close Program
 void	error_message(t_info *use, char *str, char *cmd, int code);
