@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 18:27:20 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:48:15 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,18 @@ void	get_path_index(char **envp, int *index)
 	}
 }
 
-void	error_message(char *str, char *cmd, int code)
+void	error_message(char *str, char *cmd, int code, int *fd)
+{
+	ft_putstr_fd(str, 2);
+	if (cmd)
+		ft_putendl_fd(cmd, 2);
+	else
+		ft_putchar_fd('\n', 2);
+	close_fds(fd, 0);
+	exit (code);
+}
+
+void	error_message2(char *str, char *cmd, int code)
 {
 	ft_putstr_fd(str, 2);
 	if (cmd)
@@ -80,4 +91,14 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 		free(path);
 		free(path_cmd);
 	}
+}
+
+void	close_fds(int *fd, int file)
+{
+	if (fd[READ_END])
+		close(fd[READ_END]);
+	if (fd[WRITE_END])
+		close(fd[WRITE_END]);
+	if (file)
+		close(file);
 }

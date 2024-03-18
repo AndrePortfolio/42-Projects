@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   read_input_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:51:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 23:43:23 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/18 13:48:54 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	read_input(int argc, char **argv, char **envp, t_info *use)
 {
 	int	i;
 
-	if (!*(envp))
+	if (!*(envp) || !envp)
 		error_message2("Enviroment variables not found");
 	check_here_doc(argc, argv, use);
 	use->id = malloc(sizeof(pid_t) * use->cmd_nbr);

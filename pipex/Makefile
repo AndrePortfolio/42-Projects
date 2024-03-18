@@ -65,4 +65,6 @@ fclean: clean
 
 re: fclean all bonus
 
+test: valgrind -s --leak-check=full --trace-children=yes --track-fds=yes ./pipex Makefile cat /usr/bin/lf out
+
 .PHONY: all clean fclean re bonus
