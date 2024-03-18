@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:52:26 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 14:38:28 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:03:50 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 	char	**cmd_arg;
 	char	*cmd;
 	char	*path;
+	int		flag = 1;
 
 	path = NULL;
 	close_unused_fds(use, 0);
@@ -61,7 +62,10 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 	cmd_arg = get_cmd_arg(use, argv, 0);
 	cmd = ft_strdup(cmd_arg[0]);
 	if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
+	{
+		flag = 0;
 		path = cmd_arg[0];
+	}
 	else
 		get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -71,8 +75,10 @@ void	child_start_process(t_info *use, char **argv, char **envp)
 		error_message(use, "pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
+	free(cmd);
 	execve(path, cmd_arg, envp);
-	free(path);
+	if (flag)
+		free(path);
 	ft_freematrix(cmd_arg);
 }
 
@@ -81,6 +87,7 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 	char	**cmd_arg;
 	char	*cmd;
 	char	*path;
+	int		flag = 1;
 
 	path = NULL;
 	close_unused_fds(use, i);
@@ -91,7 +98,10 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
 	if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
+	{
+		flag = 0;
 		path = cmd_arg[0];
+	}
 	else
 		get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -101,8 +111,10 @@ void	child_next_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
+	free(cmd);
 	execve(path, cmd_arg, envp);
-	free(path);
+	if (flag)
+		free(path);
 	ft_freematrix(cmd_arg);
 }
 
@@ -111,6 +123,7 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 	char	**cmd_arg;
 	char	*path;
 	char	*cmd;
+	int		flag = 1;
 
 	path = NULL;
 	close_unused_fds(use, i);
@@ -124,7 +137,10 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 	cmd_arg = get_cmd_arg(use, argv, i);
 	cmd = ft_strdup(cmd_arg[0]);
 	if (ft_strncmp("/usr/bin/", cmd_arg[0], 9) == 0)
+	{
+		flag = 0;
 		path = cmd_arg[0];
+	}
 	else
 		get_path(cmd_arg[0], envp, &path);
 	if (!path)
@@ -134,7 +150,9 @@ void	child_end_process(t_info *use, char **argv, char **envp, int i)
 		error_message(use, "pipex: command not found: ", cmd, 127);
 	}
 	close_all_fds(use);
+	free(cmd);
 	execve(path, cmd_arg, envp);
-	free(path);
+	if (flag)
+		free(path);
 	ft_freematrix(cmd_arg);
 }
