@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 14:48:15 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:45:16 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,49 +56,50 @@ void	get_path_index(char **envp, int *index)
 	}
 }
 
-void	error_message(char *str, char *cmd, int code, int *fd)
+char	*check_path(char *cmd, int *flag, char **envp)
 {
-	ft_putstr_fd(str, 2);
-	if (cmd)
-		ft_putendl_fd(cmd, 2);
-	else
-		ft_putchar_fd('\n', 2);
-	close_fds(fd, 0);
-	exit (code);
-}
+	char	*path;
 
-void	error_message2(char *str, char *cmd, int code)
-{
-	ft_putstr_fd(str, 2);
-	if (cmd)
-		ft_putendl_fd(cmd, 2);
-	else
-		ft_putchar_fd('\n', 2);
-	exit (code);
-}
-
-void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
-{
-	if (!path_cmd)
+	path = NULL;
+	if (ft_strncmp("/usr/bin/", cmd, 9) == 0)
 	{
-		if (path)
-			free(path);
-		close(fd);
-		ft_freematrix(paths);
+		*flag = 0;
+		path = cmd;
 	}
 	else
-	{
-		free(path);
-		free(path_cmd);
-	}
+		get_path(cmd, envp, &path);
+	return (path);
 }
 
-void	close_fds(int *fd, int file)
+char	**check_command(char **argv, int file, int *fd, int code)
 {
-	if (fd[READ_END])
-		close(fd[READ_END]);
-	if (fd[WRITE_END])
-		close(fd[WRITE_END]);
-	if (file)
-		close(file);
+	char	**cmd;
+
+	cmd = NULL;
+	if (code == 1)
+	{
+		if (!argv[2][0])
+		{
+			close(file);
+			c_error_message("pipex: permission denied: ", NULL, code, fd);
+		}
+		cmd = ft_split(argv[2], ' ');
+	}
+	else if (code == 127)
+	{
+		if (!argv[3][0])
+		{
+			close(file);
+			c_error_message("pipex: permission denied: ", NULL, code, fd);
+		}
+		cmd = ft_split(argv[3], ' ');
+	}
+	return (cmd);
+}
+
+void	invalid_path(char **cmd, int file, char *argv, int *fd)
+{
+	ft_freematrix(cmd);
+	close(file);
+	c_error_message("pipex: command not found: ", argv, 127, fd);
 }

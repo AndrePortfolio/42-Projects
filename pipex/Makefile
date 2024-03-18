@@ -8,7 +8,7 @@ RM = rm -rf
 SRC_DIR = sources
 OBJ_DIR = objects
 SRC = $(addprefix $(SRC_DIR)/,$(addsuffix .c, $(S)))
-S = pipex processes utils
+S = pipex processes close_program get_path
 OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
 
 SRC_BONUS_DIR = sources_bonus
