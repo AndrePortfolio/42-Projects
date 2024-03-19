@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 23:45:25 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/14 23:45:50 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/18 22:36:38 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 	{
 		if (path)
 			free(path);
-		close(fd);
+		if (fd >= 0)
+			close(fd);
 		ft_freematrix(paths);
 	}
 	else
@@ -73,17 +74,19 @@ void	close_unused_fds(t_info *use, int child_num)
 	{
 		if (i == child_num)
 		{
-			if (child_num != use->cmd_nbr - 1)
+			if (child_num != use->cmd_nbr - 1 && use->fd[i][0] >= 0)
 				close(use->fd[i][0]);
-			else
+			else if (use->fd[i][1] >= 0)
 				close(use->fd[i][1]);
 		}
-		else if (i == child_num - 1)
+		else if (i == child_num - 1 && use->fd[i][1] >= 0)
 			close(use->fd[i][1]);
 		else
 		{
-			close(use->fd[i][0]);
-			close(use->fd[i][1]);
+			if (use->fd[i][0] >= 0)
+				close(use->fd[i][0]);
+			if (use->fd[i][1])
+				close(use->fd[i][1]);
 		}
 		i++;
 	}

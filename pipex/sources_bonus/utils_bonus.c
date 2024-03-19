@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 18:53:27 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 22:38:08 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	init_here_doc(char *limiter, t_info *use)
 		free(line);
 	}
 	free(line);
-	close(fd);
+	if (fd >= 0)
+		close(fd);
 }
 
 char	**get_cmd_arg(t_info *use, char **argv, int i)

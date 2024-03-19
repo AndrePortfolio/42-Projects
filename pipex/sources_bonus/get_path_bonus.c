@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:17:08 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 18:39:21 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:04:07 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	get_path(char *cmd, char **envp, char **path)
+void	get_path(char *cmd, char **envp, char **path, t_info *use)
 {
 	char	**paths;
 	char	*single_path;
@@ -20,7 +20,7 @@ void	get_path(char *cmd, char **envp, char **path)
 	int		fd;
 	int		i;
 
-	get_path_index(envp, &i);
+	get_path_index(envp, &i, use, cmd);
 	paths = ft_split(envp[i] + 5, ':');
 	i = 0;
 	while (paths[i])
@@ -40,7 +40,7 @@ void	get_path(char *cmd, char **envp, char **path)
 	free_and_close(fd, paths, NULL, NULL);
 }
 
-void	get_path_index(char **envp, int *index)
+void	get_path_index(char **envp, int *index, t_info *use, char *cmd)
 {
 	int	i;
 
@@ -54,20 +54,24 @@ void	get_path_index(char **envp, int *index)
 		}
 		i++;
 	}
+	error_message(use, "pipex: command not found: ", cmd, 127);
 }
 
-char	*check_path(char *cmd, int *flag, char **envp)
+char	*check_path(char *cmd, int *flag, char **envp, t_info *use)
 {
 	char	*path;
 
 	path = NULL;
-	if (ft_strncmp("/usr/bin/", cmd, 9) == 0)
+	if (ft_strncmp("/usr/bin/", cmd, 9) == 0
+		|| ft_strncmp("/bin/", cmd, 5) == 0)
 	{
 		*flag = 0;
 		path = cmd;
 	}
+	else if (!*(envp) || !envp)
+		path = ft_strjoin("/usr/bin/", cmd);
 	else
-		get_path(cmd, envp, &path);
+		get_path(cmd, envp, &path, use);
 	return (path);
 }
 

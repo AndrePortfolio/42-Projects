@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/18 16:37:07 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:16:16 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 	int		fd[2];
 
-	if (!*(envp) || !envp)
-		error_message("Enviroment variables not found", NULL, 1);
 	if (argc != 5)
 		error_message("Invalid number of arguments", NULL, 1);
 	status = 0;

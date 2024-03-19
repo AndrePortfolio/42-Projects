@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:39:03 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/18 16:44:56 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 22:30:49 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 	{
 		if (path)
 			free(path);
-		close(fd);
+		if (fd >= 0)
+			close(fd);
 		ft_freematrix(paths);
 	}
 	else
@@ -51,10 +52,10 @@ void	free_and_close(int fd, char **paths, char *path, char *path_cmd)
 
 void	close_fds(int *fd, int file)
 {
-	if (fd[READ_END])
+	if (fd[READ_END] >= 0)
 		close(fd[READ_END]);
-	if (fd[WRITE_END])
+	if (fd[WRITE_END] >= 0)
 		close(fd[WRITE_END]);
-	if (file)
+	if (file >= 0)
 		close(file);
 }

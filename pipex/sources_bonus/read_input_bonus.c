@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   read_input_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 02:51:19 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 13:48:54 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:56:12 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	read_input(int argc, char **argv, char **envp, t_info *use)
+void	read_input(int argc, char **argv, t_info *use)
 {
 	int	i;
 
-	if (!*(envp) || !envp)
-		error_message2("Enviroment variables not found");
 	check_here_doc(argc, argv, use);
 	use->id = malloc(sizeof(pid_t) * use->cmd_nbr);
 	if (!(use->id))

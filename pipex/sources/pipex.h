@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:57:13 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/18 16:43:46 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:17:56 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	child_end_process(int *fd, char **argv, char **envp);
 
 // Path
 void	get_path(char *cmd, char **envp, char **path);
-void	get_path_index(char **envp, int *index);
+void	get_path_index(char **envp, int *index, char *cmd);
 char	*check_path(char *cmd, int *flag, char **envp);
 void	invalid_path(char **cmd, int file, char *argv, int *fd);
 char	**check_command(char **argv, int file, int *fd, int code);

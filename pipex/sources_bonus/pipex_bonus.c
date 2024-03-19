@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:56:54 by andre-da          #+#    #+#             */
-/*   Updated: 2024/03/14 23:44:58 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/18 23:37:36 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_info	use;
 	int		status;
 
-	read_input(argc, argv, envp, &use);
+	read_input(argc, argv, &use);
 	get_files(&use, argc, argv);
 	start_processes(argv, envp, &use);
 	close_all_fds(&use);

@@ -1,4 +1,5 @@
 NAME = pipex
+NAME_BONUS = pipex_bonus
 LIBFT = libft/libft.a
 CFLAGS = -Wall -Wextra -Werror -g
 CC = cc
@@ -30,10 +31,10 @@ $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "$(CYAN)make$(RESET)   $@ $(GREEN)[OK]$(RESET)"
 
-bonus: $(NAME)_bonus
+bonus: $(NAME_BONUS)
 
-$(NAME)_bonus: $(OBJ_BONUS_DIR) $(OBJ_BONUS) all
-	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT) -o $(NAME)
+$(NAME_BONUS): $(OBJ_BONUS_DIR) $(OBJ_BONUS) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT) -o $(NAME_BONUS)
 	@echo "$(CYAN)make$(RESET)   bonus $(GREEN)[OK]$(RESET)"
 
 $(LIBFT):
@@ -58,7 +59,7 @@ clean:
 	@echo "$(ORANGE)$@$(RESET)  bonus $(GREEN)[OK]$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME) $(NAME)_bonus
+	@$(RM) $(NAME) $(NAME_BONUS)
 	@$(MAKE) -C ./libft fclean --no-print-directory
 	@echo "$(RED)$@$(RESET) $(NAME) $(GREEN)[OK]$(RESET)"
 	@echo "$(RED)$@$(RESET) bonus $(GREEN)[OK]$(RESET)"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/18 16:45:16 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:17:45 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_path(char *cmd, char **envp, char **path)
 	int		fd;
 	int		i;
 
-	get_path_index(envp, &i);
+	get_path_index(envp, &i, cmd);
 	paths = ft_split(envp[i] + 5, ':');
 	i = 0;
 	while (paths[i])
@@ -40,7 +40,7 @@ void	get_path(char *cmd, char **envp, char **path)
 	free_and_close(fd, paths, NULL, NULL);
 }
 
-void	get_path_index(char **envp, int *index)
+void	get_path_index(char **envp, int *index, char *cmd)
 {
 	int	i;
 
@@ -54,6 +54,7 @@ void	get_path_index(char **envp, int *index)
 		}
 		i++;
 	}
+	error_message("pipex: command not found: ", cmd, 127);
 }
 
 char	*check_path(char *cmd, int *flag, char **envp)
@@ -61,11 +62,14 @@ char	*check_path(char *cmd, int *flag, char **envp)
 	char	*path;
 
 	path = NULL;
-	if (ft_strncmp("/usr/bin/", cmd, 9) == 0)
+	if (ft_strncmp("/usr/bin/", cmd, 9) == 0
+		|| ft_strncmp("/bin/", cmd, 5) == 0)
 	{
 		*flag = 0;
 		path = cmd;
 	}
+	else if (!*(envp) || !envp)
+		path = ft_strjoin("/usr/bin/", cmd);
 	else
 		get_path(cmd, envp, &path);
 	return (path);
@@ -80,7 +84,8 @@ char	**check_command(char **argv, int file, int *fd, int code)
 	{
 		if (!argv[2][0])
 		{
-			close(file);
+			if (file >= 0)
+				close(file);
 			c_error_message("pipex: permission denied: ", NULL, code, fd);
 		}
 		cmd = ft_split(argv[2], ' ');
@@ -89,7 +94,8 @@ char	**check_command(char **argv, int file, int *fd, int code)
 	{
 		if (!argv[3][0])
 		{
-			close(file);
+			if (file >= 0)
+				close(file);
 			c_error_message("pipex: permission denied: ", NULL, code, fd);
 		}
 		cmd = ft_split(argv[3], ' ');
@@ -100,6 +106,7 @@ char	**check_command(char **argv, int file, int *fd, int code)
 void	invalid_path(char **cmd, int file, char *argv, int *fd)
 {
 	ft_freematrix(cmd);
-	close(file);
+	if (file >= 0)
+		close(file);
 	c_error_message("pipex: command not found: ", argv, 127, fd);
 }
