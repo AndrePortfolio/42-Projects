@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 22:27:11 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/03/19 00:17:45 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/03/20 21:11:11 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char	*check_path(char *cmd, int *flag, char **envp)
 		*flag = 0;
 		path = cmd;
 	}
-	else if (!*(envp) || !envp)
+	else if (!*(envp) || !envp
+		|| ft_strcmp(*envp, "VALGRIND_LIB=/usr/libexec/valgrind") == 0)
 		path = ft_strjoin("/usr/bin/", cmd);
 	else
 		get_path(cmd, envp, &path);
