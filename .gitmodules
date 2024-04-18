@@ -40,3 +40,18 @@
 [submodule "rank01/born2beroot"]
 	path = rank01/born2beroot
 	url = git@github.com:AndrePortfolio/born2beroot.git
+[submodule "rank02/push_swap"]
+	path = rank02/push_swap
+	url = git@github.com:AndrePortfolio/push_swap.git
+[submodule "rank02/so_long"]
+	path = rank02/so_long
+	url = git@github.com:AndrePortfolio/so_long.git
+[submodule "rank02/pipex"]
+	path = rank02/pipex
+	url = git@github.com:AndrePortfolio/pipex.git
+[submodule "rank03/philo"]
+	path = rank03/philo
+	url = git@github.com:AndrePortfolio/philo.git
+[submodule "rank03/minishell"]
+	path = rank03/minishell
+	url = git@github.com:AndrePortfolio/minishell.git
