@@ -34,3 +34,9 @@
 [submodule "rank01/get_next_line"]
 	path = rank01/get_next_line
 	url = git@github.com:AndrePortfolio/get_next_line.git
+[submodule "rank01/ft_printf"]
+	path = rank01/ft_printf
+	url = git@github.com:AndrePortfolio/ft_printf.git
+[submodule "rank01/born2beroot"]
+	path = rank01/born2beroot
+	url = git@github.com:AndrePortfolio/born2beroot.git
