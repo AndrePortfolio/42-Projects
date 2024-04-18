@@ -25,3 +25,6 @@
 [submodule "born2beroot"]
 	path = born2beroot
 	url = git@github.com:AndrePortfolio/born2beroot.git
+[submodule "rank02/philo"]
+	path = rank02/philo
+	url = git@github.com:AndrePortfolio/philo.git
