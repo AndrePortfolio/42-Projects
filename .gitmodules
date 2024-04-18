@@ -28,3 +28,9 @@
 [submodule "rank02/philo"]
 	path = rank02/philo
 	url = git@github.com:AndrePortfolio/philo.git
+[submodule "rank00/libft"]
+	path = rank00/libft
+	url = git@github.com:AndrePortfolio/libft.git
+[submodule "rank01/get_next_line"]
+	path = rank01/get_next_line
+	url = git@github.com:AndrePortfolio/get_next_line.git
