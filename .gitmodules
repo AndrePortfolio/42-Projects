@@ -1,3 +1,27 @@
 [submodule "libft"]
 	path = libft
 	url = git@github.com:AndrePortfolio/libft.git
+[submodule "ft_printf"]
+	path = ft_printf
+	url = git@github.com:AndrePortfolio/ft_printf.git
+[submodule "get_next_line"]
+	path = get_next_line
+	url = git@github.com:AndrePortfolio/get_next_line.git
+[submodule "push_swap"]
+	path = push_swap
+	url = git@github.com:AndrePortfolio/push_swap.git
+[submodule "so_long"]
+	path = so_long
+	url = git@github.com:AndrePortfolio/so_long.git
+[submodule "pipex"]
+	path = pipex
+	url = git@github.com:AndrePortfolio/pipex.git
+[submodule "philo"]
+	path = philo
+	url = git@github.com:AndrePortfolio/philo.git
+[submodule "minishell"]
+	path = minishell
+	url = git@github.com:AndrePortfolio/minishell.git
+[submodule "born2beroot"]
+	path = born2beroot
+	url = git@github.com:AndrePortfolio/born2beroot.git
