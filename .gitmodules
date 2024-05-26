@@ -51,7 +51,7 @@
 	url = git@github.com:AndrePortfolio/pipex.git
 [submodule "rank03/philo"]
 	path = rank03/philo
-	url = git@github.com:AndrePortfolio/philo.git
+	url = git@github.com:AndrePortfolio/philosophers.git
 [submodule "rank03/minishell"]
 	path = rank03/minishell
 	url = git@github.com:AndrePortfolio/minishell.git
