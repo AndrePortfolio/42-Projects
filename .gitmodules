@@ -58,3 +58,6 @@
 [submodule "rank04/cub3d"]
 	path = rank04/cub3d
 	url = git@github.com:AndrePortfolio/cub3d.git
+[submodule "rank04/net_practice"]
+	path = rank04/net_practice
+	url = git@github.com:AndrePortfolio/net_practice.git
