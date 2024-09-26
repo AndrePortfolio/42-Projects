@@ -55,3 +55,6 @@
 [submodule "rank03/minishell"]
 	path = rank03/minishell
 	url = git@github.com:AndrePortfolio/minishell.git
+[submodule "rank04/cub3d"]
+	path = rank04/cub3d
+	url = git@github.com:AndrePortfolio/cub3d.git
