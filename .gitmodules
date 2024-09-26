@@ -61,3 +61,6 @@
 [submodule "rank04/net_practice"]
 	path = rank04/net_practice
 	url = git@github.com:AndrePortfolio/net_practice.git
+[submodule "rank04/cppModule00-04"]
+	path = rank04/cppModule00-04
+	url = git@github.com:AndrePortfolio/cppModule00-04.git
